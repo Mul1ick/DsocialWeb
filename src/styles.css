@@ -41,10 +41,9 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 82% 12%, rgb(255 255 255 / 0.5), transparent 28%),
-    linear-gradient(90deg, rgb(75 41 79 / 0.05) 1px, transparent 1px) center / min(100% - 48px, 1280px) 100% no-repeat,
-    var(--bg);
+
+  background: #f7f2f6;
+
   color: var(--primary);
 }
 
@@ -218,47 +217,13 @@ a {
   padding: clamp(28px, 5vw, 62px) 0;
 }
 
-.hero-mark {
-  position: absolute;
-  top: -22px;
-  right: 0;
-  width: clamp(86px, 10vw, 132px);
-  height: clamp(86px, 10vw, 132px);
-  border: 1px solid rgb(75 41 79 / 0.28);
-  border-left: 0;
-  opacity: 0.8;
-  transition:
-    transform 500ms ease,
-    background-color 500ms ease;
-}
+
 
 .hero-inner:hover .hero-mark {
   background: rgb(255 253 251 / 0.28);
   transform: translate(-10px, 8px);
 }
 
-.hero-mark::before,
-.hero-mark::after {
-  content: "";
-  position: absolute;
-  background: var(--purple);
-}
-
-.hero-mark::before {
-  width: 1px;
-  height: 160%;
-  top: -30%;
-  left: 34%;
-  opacity: 0.2;
-}
-
-.hero-mark::after {
-  width: 52%;
-  height: 1px;
-  right: 0;
-  bottom: 31%;
-  opacity: 0.24;
-}
 
 .hero-side-note {
   position: absolute;
@@ -522,6 +487,7 @@ h2 {
   border-top: 1px solid rgb(75 41 79 / 0.18);
 }
 
+/* --- REFINED SERVICE ROW CSS --- */
 .service-row {
   position: relative;
   display: grid;
@@ -530,13 +496,15 @@ h2 {
   align-items: center;
   min-height: 138px;
   border-bottom: 1px solid rgb(75 41 79 / 0.18);
+  background: transparent;
+  /* Smooth, elegant transitions */
   transition:
-    background-color 160ms ease,
-    padding-left 160ms ease,
-    color 160ms ease;
+    background-color 200ms ease,
+    padding-left 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
   overflow: hidden;
 }
 
+/* The elegant side-indicator line */
 .service-row::before {
   content: "";
   position: absolute;
@@ -545,10 +513,11 @@ h2 {
   background: var(--purple);
   transform: scaleY(0);
   transform-origin: bottom;
-  transition: transform 220ms ease;
+  transition: transform 250ms ease;
 }
 
 .service-row:hover {
+  /* A very soft, translucent paper-white instead of a dark block */
   background: rgb(255 253 251 / 0.5);
   padding-left: 18px;
 }
@@ -562,6 +531,13 @@ h2 {
   font-size: clamp(24px, 3vw, 36px);
   line-height: 1.12;
   font-weight: 300;
+  color: var(--primary);
+  transition: color 200ms ease;
+}
+
+/* Subtle color shift on the title, no jarring font-weight changes */
+.service-row:hover span {
+  color: #6d3d73; 
 }
 
 .service-row p {
@@ -585,7 +561,7 @@ h2 {
   transition:
     max-height 260ms ease,
     margin-top 260ms ease,
-    opacity 220ms ease;
+    opacity 200ms ease;
 }
 
 .service-row:hover p small,
@@ -596,11 +572,13 @@ h2 {
 }
 
 .service-row svg {
-  transition: transform 160ms ease;
+  color: var(--primary);
+  transition: transform 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275), color 200ms ease;
 }
 
+/* Keep the snappy arrow rotation, it adds a nice touch of interaction */
 .service-row:hover svg {
-  transform: translateX(6px);
+  transform: translateX(6px) translateY(-6px) rotate(-45deg);
   color: var(--purple);
 }
 

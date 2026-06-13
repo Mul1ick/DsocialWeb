@@ -8,7 +8,7 @@ export default function CTA() {
       <Reveal>
         <h2>Let&apos;s sit with your brand and see what it wants to become.</h2>
         <a className="outline-button" href="mailto:hello@dsocial.studio">
-          Begin a Conversation
+          Let's Talk
           <ArrowUpRight size={18} strokeWidth={1.5} aria-hidden="true" />
         </a>
       </Reveal>
