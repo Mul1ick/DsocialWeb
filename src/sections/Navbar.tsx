@@ -1,5 +1,6 @@
 // src/sections/Navbar.tsx
 import { ArrowUpRight } from "lucide-react";
+import InteractiveLogo from "../components/InteractiveLogo";
 import { useScrollState } from "../hooks/useScrollState";
 
 const navItems = [
@@ -13,11 +14,11 @@ export default function Navbar() {
   const hasScrolled = useScrollState(20);
 
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-200 ${hasScrolled ? "bg-[var(--bg)] border-b-4 border-black py-2" : "bg-transparent py-6"}`}>
+    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${hasScrolled ? "bg-white/70 backdrop-blur-md border-b border-[var(--purple-wash)] py-3 shadow-sm" : "bg-transparent py-6"}`}>
       <div className="max-w-[1280px] mx-auto px-6 lg:px-12 grid grid-cols-2 md:grid-cols-3 items-center">
         
-        {/* We keep your interactive logo, but you might want to style it bolder in its component later! */}
-        <div className="font-bold text-2xl tracking-tighter uppercase text-black">
+        {/* You can replace this text with your InteractiveLogo component if you prefer the animated dot! */}
+        <div className="font-medium text-xl tracking-tight text-[var(--purple-deep)]">
           d.social
         </div>
 
@@ -26,7 +27,7 @@ export default function Navbar() {
             <a 
               key={item.href} 
               href={item.href}
-              className="text-sm font-bold uppercase tracking-widest text-black hover:text-[var(--accent)] transition-colors duration-150"
+              className="text-sm font-medium tracking-wide text-[var(--secondary)] hover:text-[var(--accent)] transition-colors duration-200"
             >
               {item.label}
             </a>
@@ -35,11 +36,11 @@ export default function Navbar() {
 
         <div className="flex justify-end">
           <a 
-            className="flex items-center gap-2 bg-black text-white px-5 py-2 text-sm font-bold uppercase tracking-widest hover:bg-[var(--accent)] hover:text-black transition-colors duration-200 border-2 border-transparent hover:border-black" 
+            className="flex items-center gap-2 bg-[var(--purple-soft)] text-[var(--purple)] px-5 py-2.5 rounded-full text-sm font-medium hover:bg-[var(--purple)] hover:text-white transition-colors duration-300" 
             href="mailto:hello@dsocial.studio"
           >
             Say Hello
-            <ArrowUpRight size={18} strokeWidth={2.5} aria-hidden="true" />
+            <ArrowUpRight size={16} strokeWidth={2} aria-hidden="true" />
           </a>
         </div>
       </div>

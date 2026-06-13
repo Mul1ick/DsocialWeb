@@ -1,76 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 
 :root {
-  /* The Brutalist Palette */
-  --bg: #F4F4F0; /* Warm, raw newsprint off-white */
-  --primary: #0A0A0A; /* Deepest black */
-  --secondary: #4A4A4A;
-  --accent: #FF3300; /* Electric Orange */
+  /* The Soft Boutique Palette */
+  --bg: #Faf7fb; /* Very soft, warm lilac-white */
+  --primary: #251728; /* Deepest plum black */
+  --secondary: #6f5d73; /* Muted mid-purple */
+  --accent: #8b5a96; /* Elegant bright lilac */
   
-  /* Overriding your old purples with hard blacks/grays so legacy classes don't break yet */
-  --purple: #0A0A0A; 
-  --purple-deep: #0A0A0A;
-  --purple-soft: #EAEAE6;
-  --purple-mid: #CCCCCC;
+  --purple: #4b294f;
+  --purple-deep: #2c1732;
+  --purple-soft: #f4ebf7;
+  --purple-mid: #d8c4dd;
   
-  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   color: var(--primary);
   background: var(--bg);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; min-height: 100vh; }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-/* The Film Grain Overlay */
-body::after {
+/* The Lush, Flowing Background Gradient */
+body::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 15% 50%, rgba(216, 196, 221, 0.3), transparent 60%),
+    radial-gradient(circle at 85% 30%, rgba(244, 235, 247, 0.8), transparent 50%);
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
 }
 
-/* The X-Ray Cursor */
+/* Restoring the Soft Glowing Cursor */
 .cursor-aura {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: white;
-  mix-blend-mode: difference;
+  width: 320px;
+  height: 320px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 253, 251, 0.6) 0%, rgba(160, 98, 168, 0.15) 40%, transparent 70%);
+  mix-blend-mode: soft-light;
   pointer-events: none;
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--bg);
+  background: var(--purple-mid);
+  color: var(--primary);
 }
 
-/* Fast, aggressive link hovers */
-a, button {
-  transition: all 150ms cubic-bezier(0.25, 1, 0.5, 1);
+/* The New Premium Interaction Class */
+.soft-lift {
+  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(75, 41, 79, 0.03);
 }
 
-/* Base utility for the hard shadow effect */
-.hard-shadow {
-  box-shadow: 8px 8px 0px 0px var(--primary);
-  border: 2px solid var(--primary);
-  transition: transform 150ms ease, box-shadow 150ms ease;
-}
-
-.hard-shadow:hover {
-  transform: translate(4px, 4px);
-  box-shadow: 4px 4px 0px 0px var(--primary);
+.soft-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(75, 41, 79, 0.08);
 }
