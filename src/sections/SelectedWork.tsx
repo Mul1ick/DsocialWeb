@@ -1,5 +1,4 @@
 // src/sections/SelectedWork.tsx
-import { motion } from "framer-motion";
 import Reveal from "../components/Reveal";
 import SectionShell from "../components/SectionShell";
 import { work } from "../lib/content";
