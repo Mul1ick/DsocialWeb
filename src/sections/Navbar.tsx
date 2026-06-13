@@ -1,6 +1,5 @@
 // src/sections/Navbar.tsx
 import { ArrowUpRight } from "lucide-react";
-import InteractiveLogo from "../components/InteractiveLogo";
 import { useScrollState } from "../hooks/useScrollState";
 
 const navItems = [
