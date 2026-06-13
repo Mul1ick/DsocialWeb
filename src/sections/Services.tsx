@@ -4,55 +4,60 @@ import Reveal from "../components/Reveal";
 import SectionShell from "../components/SectionShell";
 import { services } from "../lib/content"; 
 
-// Mapping an icon to each service to add visual flair
 const icons = [Sparkles, Camera, Smartphone];
 
 export default function Services() {
   return (
-    <SectionShell id="services" className="services pb-32">
-      <Reveal>
-        <div className="section-heading mb-16">
-          <p className="section-kicker">Services</p>
-          <h2>Creative support that feels close, not outsourced.</h2>
+    <SectionShell id="services" className="py-32 bg-white relative z-10 border-t-4 border-black">
+      <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
+        <Reveal>
+          <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <h2 className="text-[clamp(48px,6vw,82px)] leading-none font-bold uppercase tracking-tighter text-black max-w-[800px] m-0">
+              Creative support that hits hard.
+            </h2>
+            <div className="bg-[var(--accent)] text-black px-4 py-2 font-bold uppercase tracking-widest border-2 border-black hard-shadow w-fit">
+              Not Outsourced
+            </div>
+          </div>
+        </Reveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {services.map((service, index) => {
+            const Icon = icons[index];
+            
+            return (
+              <Reveal key={service.name} className="h-full">
+                {/* Applying the .hard-shadow class here. 
+                  On hover, the background snaps to black, and text shifts to off-white & orange.
+                */}
+                <div className="group relative h-full min-h-[420px] p-8 flex flex-col justify-between bg-[var(--bg)] border-2 border-black hard-shadow hover:bg-black transition-colors duration-150 overflow-hidden cursor-pointer">
+                  
+                  <div>
+                    <div className="w-16 h-16 rounded-full border-2 border-black flex items-center justify-center text-black mb-8 group-hover:bg-[var(--accent)] group-hover:text-black group-hover:border-[var(--accent)] transition-all duration-200">
+                      <Icon size={28} strokeWidth={2} />
+                    </div>
+                    <h3 className="text-3xl font-bold uppercase text-black mb-4 group-hover:text-white transition-colors">
+                      {service.name}
+                    </h3>
+                    <p className="text-lg font-medium text-[var(--secondary)] group-hover:text-gray-300 transition-colors">
+                      {service.description}
+                    </p>
+                  </div>
+
+                  <div className="mt-12 pt-6 border-t-2 border-black group-hover:border-gray-800 transition-colors flex items-end justify-between">
+                    <p className="text-sm font-bold uppercase tracking-wider text-black group-hover:text-[var(--accent)] max-w-[70%] transition-colors">
+                      {service.note}
+                    </p>
+                    <div className="w-12 h-12 bg-black flex items-center justify-center text-white group-hover:bg-[var(--accent)] group-hover:text-black transition-colors duration-200">
+                      <ArrowUpRight size={24} strokeWidth={2.5} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    </div>
+                  </div>
+                  
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
-      </Reveal>
-
-      {/* Changed to a 3-column grid on desktop to break the boring horizontal list */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-        {services.map((service, index) => {
-          const Icon = icons[index];
-          
-          return (
-            <Reveal key={service.name} className="h-full">
-              <div className="group relative h-full min-h-[420px] p-8 flex flex-col justify-between border border-[rgb(75_41_79/0.12)] bg-white/30 hover:bg-white/80 transition-all duration-500 overflow-hidden">
-                
-                {/* Top: Animated Icon & Copy */}
-                <div>
-                  <div className="w-12 h-12 rounded-full border border-[var(--purple-mid)] flex items-center justify-center text-[var(--purple)] mb-8 group-hover:bg-[var(--purple)] group-hover:text-white group-hover:border-[var(--purple)] transition-colors duration-500">
-                    <Icon size={20} strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-2xl font-light text-[var(--primary)] mb-4 transition-colors group-hover:text-[#6d3d73]">
-                    {service.name}
-                  </h3>
-                  <p className="text-[var(--secondary)] font-light leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-
-                {/* Bottom: Subtle Note & Interactive Arrow */}
-                <div className="mt-12 pt-6 border-t border-[rgb(75_41_79/0.1)] flex items-end justify-between">
-                  <p className="text-sm text-[var(--purple)] opacity-70 max-w-[80%] leading-relaxed">
-                    {service.note}
-                  </p>
-                  <div className="w-10 h-10 rounded-full bg-[var(--purple-soft)] flex items-center justify-center text-[var(--purple)] group-hover:-translate-y-2 group-hover:translate-x-2 transition-transform duration-300">
-                    <ArrowUpRight size={18} strokeWidth={1.5} />
-                  </div>
-                </div>
-                
-              </div>
-            </Reveal>
-          );
-        })}
       </div>
     </SectionShell>
   );

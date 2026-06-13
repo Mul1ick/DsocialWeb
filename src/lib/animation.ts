@@ -2,22 +2,19 @@
 import type { Transition } from "framer-motion";
 
 export const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 40, clipPath: "inset(0 0 100% 0)" },
+  visible: { opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" },
 };
 
-// Faster, slightly springy transition for a more tactile feel
 export const revealTransition: Transition = {
-  type: "spring",
-  damping: 24,
-  stiffness: 100,
-  mass: 0.8,
+  duration: 0.6,
+  ease: [0.76, 0, 0.24, 1], // Cinematic ease-in-out (fast middle, slow ends)
 };
 
 export const stagger = {
   visible: {
     transition: {
-      staggerChildren: 0.06, // Sped up the stagger slightly
+      staggerChildren: 0.04, // Very fast stagger
     },
   },
 };

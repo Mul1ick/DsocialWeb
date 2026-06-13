@@ -1,82 +1,74 @@
 // src/sections/SelectedWork.tsx
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Reveal from "../components/Reveal";
 import SectionShell from "../components/SectionShell";
-import { work } from "../lib/content"; // Importing from our new data layer
-
-// Extracted a dedicated component for the interactive card
-function WorkCard({ item, index }: { item: typeof work[0], index: number }) {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
-  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["5deg", "-5deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-5deg", "5deg"]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <Reveal className="work-item">
-      <motion.div 
-        className={`work-image ${item.tone}`} 
-        aria-hidden="true"
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          rotateX,
-          rotateY,
-          transformPerspective: 1000,
-        }}
-        whileHover={{ scale: 1.02 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      >
-        <span>{String(index + 1).padStart(2, "0")}</span>
-        <em>{item.note}</em>
-      </motion.div>
-      
-      <div className="work-meta">
-        <h3>{item.title}</h3>
-        <p>{item.detail}</p>
-        <ul>
-          {item.disciplines.map((discipline) => (
-            <li key={discipline}>{discipline}</li>
-          ))}
-        </ul>
-      </div>
-    </Reveal>
-  );
-}
+import { work } from "../lib/content";
 
 export default function SelectedWork() {
   return (
-    <SectionShell id="work" className="selected-work">
-      <Reveal>
-        <div className="section-heading section-heading--wide">
-          <p className="section-kicker">Selected Work</p>
-          <h2>Visual worlds shaped around the people who live inside them.</h2>
+    <SectionShell id="work" className="py-32 bg-[var(--bg)] relative z-10 border-t-4 border-black">
+      <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
+        
+        <Reveal>
+          <div className="mb-20">
+            <h2 className="text-[clamp(60px,10vw,140px)] leading-[0.85] font-bold text-black uppercase tracking-tighter m-0">
+              The <br className="md:hidden"/> <span className="text-[var(--accent)]">Proof.</span>
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="flex flex-col gap-24 md:gap-40">
+          {work.map((item, index) => (
+            // We removed `gap-8` here so explicit column overlaps are perfectly calculated
+            <Reveal key={item.id} className="group relative grid grid-cols-1 md:grid-cols-12 items-center cursor-pointer">
+              
+              {/* Massive Background Number */}
+              <div className="hidden md:block absolute -left-12 -top-20 text-[240px] font-bold text-black/5 z-0 pointer-events-none group-hover:text-[var(--accent)]/10 transition-colors duration-500">
+                0{index + 1}
+              </div>
+
+              {/* The Visual Block - explicitly spans columns 1 through 8 and locks to Row 1 */}
+              <div className="md:col-start-1 md:col-span-8 md:row-start-1 relative aspect-[4/3] bg-black border-4 border-black hard-shadow overflow-hidden z-10">
+                 <div className="absolute inset-0 bg-zinc-800 group-hover:scale-105 transition-transform duration-700"></div>
+                 
+                 {/* Glitchy Hover Overlay */}
+                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/60 backdrop-blur-sm z-20">
+                    <span className="bg-[var(--accent)] text-black px-8 py-3 text-lg font-bold uppercase tracking-widest border-2 border-black hard-shadow">
+                      View Project
+                    </span>
+                 </div>
+              </div>
+
+              {/* The Meta Block - explicitly spans columns 7 through 12 and locks to Row 1, creating a 2-column overlap */}
+              <div className="md:col-start-7 md:col-span-6 md:row-start-1 flex flex-col items-start z-20 mt-8 md:mt-0">
+                <div className="bg-white border-4 border-black p-8 md:p-12 hard-shadow group-hover:-translate-y-2 group-hover:translate-x-2 transition-transform duration-200 w-full">
+                  <p className="text-[var(--accent)] font-bold uppercase tracking-widest mb-4">
+                    {item.note}
+                  </p>
+                  <h3 className="text-[clamp(32px,4vw,56px)] font-bold text-black uppercase leading-none mb-6">
+                    {item.title}
+                  </h3>
+                  <p className="text-xl font-medium text-[var(--secondary)] mb-8">
+                    {item.detail}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-3">
+                    {item.disciplines.map((discipline) => (
+                      <span 
+                        key={discipline} 
+                        className="border-2 border-black px-4 py-1 text-sm font-bold uppercase text-black bg-[var(--bg)]"
+                      >
+                        {discipline}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+            </Reveal>
+          ))}
         </div>
-      </Reveal>
-      <div className="work-list">
-        {work.map((item, index) => (
-          <WorkCard key={item.id} item={item} index={index} />
-        ))}
+
       </div>
     </SectionShell>
   );
