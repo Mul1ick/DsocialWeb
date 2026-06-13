@@ -4,14 +4,16 @@
 import dkLogo from "../assets/Client Logos/D&K_logo.JPG";
 import divineSpaceDesignLogo from "../assets/Client Logos/DivineSpaceDesign_logo.jpeg";
 import gildedLogo from "../assets/Client Logos/Gilded_logo.jpeg";
-import aquellaLogo from "../assets/Client Logos/aquella_logo.JPG"
-import NJPLogo from "../assets/Client Logos/NJP_logo.jpeg"
-import PistyleLogo from "../assets/Client Logos/Pistyle_logo.JPG"
-import PolkaLogo from "../assets/Client Logos/Polka_logo.JPG"
-import rearrangeKidsLogo from "../assets/Client Logos/rearrange_kids_logo.JPG"
-import rearrangeLogo from "../assets/Client Logos/rearrange_logo.jpeg"
+import aquellaLogo from "../assets/Client Logos/aquella_logo.JPG";
+import NJPLogo from "../assets/Client Logos/NJP_logo.jpeg";
+import PistyleLogo from "../assets/Client Logos/Pistyle_logo.JPG";
+import PolkaLogo from "../assets/Client Logos/Polka_logo.JPG";
+import rearrangeKidsLogo from "../assets/Client Logos/rearrange_kids_logo.JPG";
+import rearrangeLogo from "../assets/Client Logos/rearrange_logo.jpeg";
+import shagunLogo from "../assets/Client Logos/shagun_logo.JPG";
+import SPLogo from "../assets/Client Logos/SP_logo.JPG";
+import TOLogo from "../assets/Client Logos/TO_logo.jpeg";
 
-// ... (import the rest of your logos here)
 
 export const principles = [
   "Listen first",
@@ -75,5 +77,13 @@ export const clients = [
   { name: "D&K", logo: dkLogo },
   { name: "Divine Space Design", logo: divineSpaceDesignLogo },
   { name: "Gilded", logo: gildedLogo },
-  { name: "aquella", logo: aquellaLogo },
+  { name: "Aquella", logo: aquellaLogo },
+  { name: "NJP", logo: NJPLogo },
+  { name: "Pistyle", logo: PistyleLogo },
+  { name: "Polka", logo: PolkaLogo },
+  { name: "Rearrange Kids", logo: rearrangeKidsLogo },
+  { name: "Rearrange", logo: rearrangeLogo },
+  { name: "Shagun", logo: shagunLogo },
+  { name: "Speciality", logo: SPLogo},
+  { name: "Treasured", logo: TOLogo },
 ];
