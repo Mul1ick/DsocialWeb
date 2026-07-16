@@ -16,33 +16,60 @@ import TOLogo from "../assets/Client Logos/TO_logo.jpeg";
 
 
 export const principles = [
-  "Listen first",
-  "Design with feeling",
-  "Stay close"
+  "Full-service creative and digital agency",
+  "Strategic thinking, compelling content and impactful digital experiences",
+  "Visibility, engagement and long-term brand value"
+];
+
+export const approachSteps = [
+  "Strategy",
+  "Create",
+  "Launch"
 ];
 
 export const processSteps = [
-  "Listen",
-  "Understand",
-  "Shape",
-  "Care"
+  "Discover",
+  "Strategize",
+  "Create",
+  "Launch",
+  "Optimise"
 ];
 
 export const services = [
   {
-    name: "Conceptualisation",
-    description: "We listen closely before shaping the direction.",
-    note: "Voice, mood, references and the quiet instincts behind the brand.",
+    name: "Social Media Management",
+    description: "Day-to-day planning, publishing and care for a consistent brand presence.",
+    note: "A steady rhythm across platforms.",
   },
   {
     name: "Content Creation",
-    description: "Photography, reels and visual storytelling made around your pace.",
-    note: "Planned with room for the spontaneous parts that make it feel real.",
+    description: "Ideas, visuals and storytelling shaped for the way people actually scroll.",
+    note: "Built for visibility and recall.",
   },
   {
-    name: "Social Media Management",
-    description: "Gentle consistency, daily care and a voice that feels like you.",
-    note: "A steady rhythm of posting, checking in, refining and responding.",
+    name: "Creative Strategy",
+    description: "Clear direction before the work goes live, from positioning to campaign thinking.",
+    note: "The thinking behind the content.",
+  },
+  {
+    name: "Branding & Graphic Design",
+    description: "Visual systems, campaign graphics and branded assets that feel cohesive.",
+    note: "Designed to look like one brand.",
+  },
+  {
+    name: "Photography",
+    description: "Brand, product and lifestyle imagery planned around the story you want to tell.",
+    note: "Shot with purpose and mood.",
+  },
+  {
+    name: "Website Content",
+    description: "Copy and content direction for websites that need to feel clear and considered.",
+    note: "Words that support the experience.",
+  },
+  {
+    name: "Moral Support",
+    description: "A creative partner in the messy middle, helping brands stay steady and moving.",
+    note: "Because good work needs care too.",
   },
 ];
 

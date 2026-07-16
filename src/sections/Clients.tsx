@@ -7,9 +7,9 @@ export default function Clients() {
   const duplicatedClients = [...clients, ...clients, ...clients];
 
   return (
-    <SectionShell className="py-24 bg-[var(--purple-soft)] border-y border-[var(--purple-mid)] overflow-hidden">
+    <SectionShell id="testimonials" className="py-24 bg-[var(--purple-soft)] border-y border-[var(--purple-mid)] overflow-hidden">
       <h2 className="text-center text-[var(--purple)] text-sm font-medium uppercase tracking-[0.2em] mb-12 opacity-70">
-        Brands We Care For
+        Testimonials
       </h2>
       
       <div className="flex overflow-hidden w-full relative">

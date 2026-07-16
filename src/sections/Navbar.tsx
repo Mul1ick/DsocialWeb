@@ -1,11 +1,12 @@
 // src/sections/Navbar.tsx
 import { ArrowUpRight } from "lucide-react";
+import logo from "../assets/Dsocial_logo_web.png";
 import { useScrollState } from "../hooks/useScrollState";
 
 const navItems = [
-  { label: "Work", href: "#work" },
   { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
+  { label: "Approach", href: "#approach" },
+  { label: "Process", href: "#process" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -16,17 +17,16 @@ export default function Navbar() {
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${hasScrolled ? "bg-white/70 backdrop-blur-md border-b border-[var(--purple-wash)] py-3 shadow-sm" : "bg-transparent py-6"}`}>
       <div className="max-w-[1280px] mx-auto px-6 lg:px-12 grid grid-cols-2 md:grid-cols-3 items-center">
         
-        {/* You can replace this text with your InteractiveLogo component if you prefer the animated dot! */}
-        <div className="font-medium text-xl tracking-tight text-[var(--purple-deep)]">
-          d.social
-        </div>
+        <a href="#" aria-label="Dsocial home" className="w-fit">
+          <img src={logo} alt="Dsocial" className="h-9 md:h-10 w-auto object-contain" />
+        </a>
 
-        <nav className="hidden md:flex justify-center gap-8" aria-label="Primary navigation">
+        <nav className="hidden md:flex justify-center gap-7 lg:gap-9" aria-label="Primary navigation">
           {navItems.map((item) => (
             <a 
               key={item.href} 
               href={item.href}
-              className="text-sm font-medium tracking-wide text-[var(--secondary)] hover:text-[var(--accent)] transition-colors duration-200"
+              className="whitespace-nowrap text-sm font-medium tracking-wide text-[var(--secondary)] hover:text-[var(--accent)] transition-colors duration-200"
             >
               {item.label}
             </a>

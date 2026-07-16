@@ -1,53 +1,67 @@
 // src/sections/Services.tsx
-import { ArrowUpRight, Sparkles, Camera, Smartphone } from "lucide-react";
+import { Camera, ChevronDown, HandHeart, Layout, Palette, PenLine, Smartphone, Sparkles } from "lucide-react";
+import { useState } from "react";
 import Reveal from "../components/Reveal";
 import SectionShell from "../components/SectionShell";
 import { services } from "../lib/content"; 
 
-const icons = [Sparkles, Camera, Smartphone];
+const icons = [Smartphone, Camera, Sparkles, Palette, Layout, PenLine, HandHeart];
 
 export default function Services() {
+  const [openService, setOpenService] = useState(services[0].name);
+
   return (
     <SectionShell id="services" className="py-32 relative z-10">
       <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
         <Reveal>
           <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
             <h2 className="text-[clamp(42px,5vw,64px)] leading-[1.1] font-light tracking-tight text-[var(--purple-deep)] max-w-[700px] m-0">
-              Creative support that feels close, not outsourced.
+              What we Do
             </h2>
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
           {services.map((service, index) => {
             const Icon = icons[index];
+            const isOpen = openService === service.name;
             
             return (
               <Reveal key={service.name} className="h-full">
-                <div className="group relative h-full min-h-[420px] p-8 flex flex-col justify-between bg-white/40 backdrop-blur-sm border border-white/60 rounded-xl soft-lift cursor-pointer overflow-hidden">
-                  
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  onClick={() => setOpenService(isOpen ? "" : service.name)}
+                  className="group text-left relative h-full min-h-[230px] w-full p-6 flex flex-col justify-between bg-white/45 backdrop-blur-sm border border-white/60 rounded-xl soft-lift cursor-pointer overflow-hidden"
+                >
                   <div>
-                    <div className="w-14 h-14 rounded-full border border-[var(--purple-mid)] flex items-center justify-center text-[var(--accent)] mb-8 group-hover:bg-[var(--accent)] group-hover:text-white transition-all duration-300">
+                    <div className="w-12 h-12 rounded-full border border-[var(--purple-mid)] flex items-center justify-center text-[var(--accent)] mb-7 group-hover:bg-[var(--accent)] group-hover:text-white transition-all duration-300">
                       <Icon size={24} strokeWidth={1.5} />
                     </div>
-                    <h3 className="text-2xl font-light text-[var(--primary)] mb-4 group-hover:text-[var(--accent)] transition-colors duration-300">
+                    <h3 className="text-xl md:text-2xl font-light text-[var(--primary)] m-0 group-hover:text-[var(--accent)] transition-colors duration-300">
                       {service.name}
                     </h3>
-                    <p className="text-[var(--secondary)] font-light leading-relaxed">
-                      {service.description}
-                    </p>
                   </div>
 
-                  <div className="mt-12 pt-6 border-t border-[var(--purple-wash)] flex items-end justify-between">
-                    <p className="text-sm text-[var(--purple)] opacity-70 max-w-[75%] leading-relaxed">
-                      {service.note}
-                    </p>
-                    <div className="w-10 h-10 rounded-full bg-[var(--purple-soft)] flex items-center justify-center text-[var(--purple)] group-hover:bg-[var(--purple)] group-hover:text-white transition-all duration-300">
-                      <ArrowUpRight size={18} strokeWidth={1.5} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  <div className="mt-8">
+                    <div className="flex items-center justify-between gap-4 border-t border-[var(--purple-wash)] pt-4">
+                      <span className="text-xs uppercase tracking-widest text-[var(--purple)] opacity-70">
+                        {isOpen ? "Hide" : "Details"}
+                      </span>
+                      <ChevronDown
+                        size={18}
+                        strokeWidth={1.5}
+                        className={`text-[var(--purple)] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                      />
+                    </div>
+
+                    <div className={`grid transition-all duration-300 ${isOpen ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0"}`}>
+                      <p className="overflow-hidden text-sm text-[var(--secondary)] font-light leading-relaxed m-0">
+                      {service.description}
+                      </p>
                     </div>
                   </div>
-                  
-                </div>
+                </button>
               </Reveal>
             );
           })}
