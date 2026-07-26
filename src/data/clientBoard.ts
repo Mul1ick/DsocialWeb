@@ -1,3 +1,14 @@
+export interface ClientCategory {
+  id: string;
+  title: string;
+  note: string;
+  colour: "yellow" | "pink" | "blue" | "green";
+  rotation: number;
+  x: string;
+  y: string;
+  brands: string[];
+}
+
 export const clientBoard: ClientCategory[] = [
   {
     id: "interiors",
