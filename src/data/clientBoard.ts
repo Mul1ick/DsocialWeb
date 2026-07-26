@@ -1,0 +1,113 @@
+export const clientBoard: ClientCategory[] = [
+  {
+    id: "interiors",
+    title: "interiors",
+    note: "Need wider shots",
+    colour: "yellow",
+    rotation: -8,
+    x: "12%",
+    y: "14%",
+    brands: ["Brand 1", "Brand 2", "Brand 3", "Brand 4"],
+  },
+
+  {
+    id: "home",
+    title: "home décor",
+    note: "Client Approved",
+    colour: "pink",
+    rotation: 6,
+    x: "31%",
+    y: "9%",
+    brands: [
+      "Brand 1",
+      "Brand 2",
+      "Brand 3",
+      "Brand 4",
+      "Brand 5",
+      "Brand 6",
+    ],
+  },
+
+  {
+    id: "beauty",
+    title: "beauty",
+    note: "Need UGC",
+    colour: "green",
+    rotation: -10,
+    x: "58%",
+    y: "16%",
+    brands: ["Brand 1", "Brand 2", "Brand 3"],
+  },
+
+  {
+    id: "events",
+    title: "events",
+    note: "Launch Week",
+    colour: "blue",
+    rotation: 8,
+    x: "18%",
+    y: "37%",
+    brands: ["Brand 1", "Brand 2", "Brand 3", "Brand 4"],
+  },
+
+  {
+    id: "fashion",
+    title: "fashion",
+    note: "Trending Audio",
+    colour: "yellow",
+    rotation: -5,
+    x: "41%",
+    y: "34%",
+    brands: [
+      "Brand 1",
+      "Brand 2",
+      "Brand 3",
+      "Brand 4",
+      "Brand 5",
+    ],
+  },
+
+  {
+    id: "food",
+    title: "food",
+    note: "Shoot Friday",
+    colour: "green",
+    rotation: 9,
+    x: "67%",
+    y: "40%",
+    brands: ["Brand 1", "Brand 2"],
+  },
+
+  {
+    id: "baby",
+    title: "baby",
+    note: "Soft Palette",
+    colour: "blue",
+    rotation: -7,
+    x: "16%",
+    y: "61%",
+    brands: ["Brand 1"],
+  },
+
+  {
+    id: "jewellery",
+    title: "jewellery",
+    note: "Premium Launch",
+    colour: "pink",
+    rotation: 4,
+    x: "38%",
+    y: "64%",
+    brands: ["Brand 1"],
+  },
+
+  {
+    id: "media",
+    title: "media",
+    note: "Publish Monday",
+    colour: "yellow",
+    rotation: -9,
+    x: "60%",
+    y: "62%",
+    brands: ["Brand 1"],
+  },
+];

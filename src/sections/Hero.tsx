@@ -5,7 +5,6 @@ import HeroWord from "../components/HeroWord";
 // import founderPhoto from "../assets/Founder_photo.jpg";
 import PhoneMockup from "../components/PhoneMockup";
 
-import { clients } from "../lib/content";
 
 
 

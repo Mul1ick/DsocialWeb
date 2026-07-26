@@ -1,6 +1,6 @@
 import SiteLayout from "../layouts/SiteLayout";
 import About from "../sections/About";
-import Clients from "../sections/Clients";
+import ClientsCanvas from "../sections/ClientCanvas";
 import CTA from "../sections/CTA";
 import FounderNote from "../sections/FounderNote";
 import Hero from "../sections/Hero";
@@ -16,6 +16,7 @@ export default function HomePage() {
     <SiteLayout>
       <Hero />
       <About />
+      <ClientsCanvas />
       <StudioMoments />
       <OurApproach />
       <Services />
@@ -23,7 +24,6 @@ export default function HomePage() {
       {/* <Philosophy /> */}
       <Process />
       <FounderNote />
-      <Clients />
       <CTA />
     </SiteLayout>
   );
