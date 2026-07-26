@@ -12,18 +12,7 @@ import { clients } from "../lib/content";
 export default function Hero() {
   return (
     <section id="top" className="min-h-[calc(100vh-80px)] flex items-center pt-24 pb-20 relative z-10 overflow-hidden">
-      <motion.div
-        className="absolute left-6 right-6 top-24 hidden lg:flex justify-between pointer-events-none opacity-50"
-        initial={{ opacity: 0, y: -12 }}
-        animate={{ opacity: 0.5, y: 0 }}
-        transition={{ duration: 0.8, delay: 1.1 }}
-      >
-        {clients.slice(0, 5).map((client) => (
-          <div key={client.name} className="h-12 w-24 rounded-full bg-white/50 border border-white/60 flex items-center justify-center px-5">
-            <img src={client.logo} alt="" className="max-h-6 max-w-full object-contain mix-blend-multiply opacity-60" />
-          </div>
-        ))}
-      </motion.div>
+      
 
       <div className="w-full max-w-[1280px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
