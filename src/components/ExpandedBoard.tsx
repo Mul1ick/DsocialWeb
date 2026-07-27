@@ -1,20 +1,28 @@
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ClientCategory } from "../data/clientBoard";
+import { CampaignCategory } from "../data/clientBoard";
+import BrandCarousel from "./BrandCarousel";
 
 interface Props {
-  category: ClientCategory | null;
+  category: CampaignCategory | null;
   onClose: () => void;
 }
 
-export default function ExpandedBoard({
-  category,
-  onClose,
-}: Props) {
+export default function ExpandedBoard({ category, onClose }: Props) {
+  useEffect(() => {
+    if (!category) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [category, onClose]);
+
   return (
     <AnimatePresence>
-
       {category && (
-
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -32,7 +40,6 @@ export default function ExpandedBoard({
           "
           onClick={onClose}
         >
-
           <motion.div
             layoutId={category.id}
             onClick={(e) => e.stopPropagation()}
@@ -49,9 +56,6 @@ export default function ExpandedBoard({
               overflow-hidden
             "
           >
-
-            {/* paper texture */}
-
             <div
               className="
                 absolute
@@ -61,8 +65,6 @@ export default function ExpandedBoard({
                 [background-size:12px_12px]
               "
             />
-
-            {/* folded corner */}
 
             <div
               className="
@@ -78,7 +80,6 @@ export default function ExpandedBoard({
             />
 
             <div className="relative z-10 p-12">
-
               <p
                 className="
                   uppercase
@@ -87,7 +88,7 @@ export default function ExpandedBoard({
                   text-neutral-400
                 "
               >
-                Category
+                Open Case
               </p>
 
               <h1
@@ -102,68 +103,27 @@ export default function ExpandedBoard({
                 {category.title}
               </h1>
 
+              <p className="mt-4 text-neutral-400 italic font-handwritten text-lg">
+                {category.note}
+              </p>
+
               <div className="mt-10 h-px bg-neutral-200" />
 
-              <div className="mt-10 grid grid-cols-2 gap-5">
-
-                {category.brands.map((brand, i) => (
-
-                  <motion.div
-                    key={brand}
-                    initial={{
-                      opacity: 0,
-                      y: 12,
-                    }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                    }}
-                    transition={{
-                      delay: i * 0.08,
-                    }}
-                    className="
-                      bg-white
-                      rounded-lg
-                      border
-                      border-neutral-200
-                      p-5
-                      shadow-sm
-                      flex
-                      items-center
-                      justify-between
-                    "
-                  >
-
-                    <span className="text-lg">
-                      {brand}
-                    </span>
-
-                    <div className="w-2 h-2 rounded-full bg-[#8B5A96]" />
-
-                  </motion.div>
-
-                ))}
-
-              </div>
+              <BrandCarousel brands={category.brands} />
 
               <p
                 className="
                   mt-12
                   italic
-                  text-neutral-400
+                  text-[var(--accent)]
                 "
               >
                 reviewed ✓
               </p>
-
             </div>
-
           </motion.div>
-
         </motion.div>
-
       )}
-
     </AnimatePresence>
   );
 }

@@ -1,46 +1,36 @@
-export const boardAssets = [
+export interface BoardAsset {
+  type: "tape" | "clip" | "polaroid";
+  x: string;
+  y: string;
+  rotate?: number;
+  width?: number;
+  z?: number;
+  logo?: string;
+}
+
+export const boardAssets: BoardAsset[] = [
   {
-    src: "/board/paperclip.png",
+    type: "clip",
     x: "19%",
     y: "16%",
     rotate: -18,
     width: 42,
     z: 20,
   },
-
   {
-    src: "/board/paperclip2.png",
+    type: "clip",
     x: "74%",
     y: "67%",
     rotate: 12,
     width: 46,
     z: 20,
   },
-
   {
-    src: "/board/masking.png",
+    type: "tape",
     x: "58%",
     y: "47%",
     rotate: -8,
     width: 120,
     z: 30,
-  },
-
-  {
-    src: "/board/polaroid.png",
-    x: "67%",
-    y: "12%",
-    rotate: 7,
-    width: 155,
-    z: 2,
-  },
-
-  {
-    src: "/board/polaroid.png",
-    x: "12%",
-    y: "58%",
-    rotate: -8,
-    width: 145,
-    z: 2,
   },
 ];

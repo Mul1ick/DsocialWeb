@@ -1,124 +1,192 @@
-export interface ClientCategory {
+import { clients } from "../lib/content";
+
+export interface CampaignBrand {
+  name: string;
+  logo: string;
+}
+
+export interface CampaignCategory {
   id: string;
   title: string;
   note: string;
-  colour: "yellow" | "pink" | "blue" | "green";
-  rotation: number;
-  x: string;
-  y: string;
-  brands: string[];
+  sticky: {
+    x: string;
+    y: string;
+    rotate: number;
+    colour: "purple" | "white";
+    size: number;
+  };
+  photo?: {
+    dx: number;
+    dy: number;
+    rotate: number;
+    width: number;
+  };
+  tape?: {
+    dx: number;
+    dy: number;
+    rotate: number;
+    width: number;
+  };
+  clip?: {
+    dx: number;
+    dy: number;
+    rotate: number;
+    size: number;
+  };
+  brands: CampaignBrand[];
+  connections?: string[];
 }
 
-export const clientBoard: ClientCategory[] = [
+function brandsForCategory(categoryId: string): CampaignBrand[] {
+  return clients
+    .filter((client) => client.category === categoryId)
+    .map(({ name, logo }) => ({ name, logo }));
+}
+
+export const campaignBoard: CampaignCategory[] = [
   {
     id: "interiors",
-    title: "interiors",
+    title: "Interiors",
     note: "Need wider shots",
-    colour: "yellow",
-    rotation: -8,
-    x: "12%",
-    y: "14%",
-    brands: ["Brand 1", "Brand 2", "Brand 3", "Brand 4"],
+    sticky: {
+      x: "8%",
+      y: "10%",
+      rotate: -7,
+      colour: "purple",
+      size: 180,
+    },
+    photo: { dx: 90, dy: -45, rotate: 8, width: 120 },
+    tape: { dx: 65, dy: -18, rotate: -8, width: 65 },
+    brands: brandsForCategory("interiors"),
+    connections: ["home", "events"],
   },
-
   {
     id: "home",
-    title: "home décor",
-    note: "Client Approved",
-    colour: "pink",
-    rotation: 6,
-    x: "31%",
-    y: "9%",
-    brands: [
-      "Brand 1",
-      "Brand 2",
-      "Brand 3",
-      "Brand 4",
-      "Brand 5",
-      "Brand 6",
-    ],
+    title: "Home Décor",
+    note: "Client approved",
+    sticky: {
+      x: "35%",
+      y: "8%",
+      rotate: 4,
+      colour: "white",
+      size: 190,
+    },
+    photo: { dx: -80, dy: 85, rotate: -6, width: 120 },
+    clip: { dx: 138, dy: -12, rotate: 18, size: 34 },
+    brands: brandsForCategory("home"),
+    connections: ["interiors", "beauty"],
   },
-
   {
     id: "beauty",
-    title: "beauty",
+    title: "Beauty",
     note: "Need UGC",
-    colour: "green",
-    rotation: -10,
-    x: "58%",
-    y: "16%",
-    brands: ["Brand 1", "Brand 2", "Brand 3"],
+    sticky: {
+      x: "68%",
+      y: "13%",
+      rotate: -5,
+      colour: "purple",
+      size: 170,
+    },
+    photo: { dx: -60, dy: 92, rotate: -9, width: 110 },
+    tape: { dx: 55, dy: -12, rotate: 9, width: 60 },
+    brands: brandsForCategory("beauty"),
+    connections: ["home", "fashion"],
   },
-
   {
     id: "events",
-    title: "events",
-    note: "Launch Week",
-    colour: "blue",
-    rotation: 8,
-    x: "18%",
-    y: "37%",
-    brands: ["Brand 1", "Brand 2", "Brand 3", "Brand 4"],
+    title: "Events",
+    note: "Launch week",
+    sticky: {
+      x: "15%",
+      y: "40%",
+      rotate: 5,
+      colour: "white",
+      size: 180,
+    },
+    photo: { dx: 90, dy: 80, rotate: 6, width: 120 },
+    brands: brandsForCategory("events"),
+    connections: ["interiors", "media"],
   },
-
   {
     id: "fashion",
-    title: "fashion",
-    note: "Trending Audio",
-    colour: "yellow",
-    rotation: -5,
-    x: "41%",
-    y: "34%",
-    brands: [
-      "Brand 1",
-      "Brand 2",
-      "Brand 3",
-      "Brand 4",
-      "Brand 5",
-    ],
+    title: "Fashion",
+    note: "Trending audio",
+    sticky: {
+      x: "44%",
+      y: "37%",
+      rotate: -4,
+      colour: "purple",
+      size: 190,
+    },
+    photo: { dx: -90, dy: -50, rotate: -7, width: 130 },
+    tape: { dx: 70, dy: -15, rotate: -10, width: 60 },
+    clip: { dx: -18, dy: 150, rotate: -14, size: 36 },
+    brands: brandsForCategory("fashion"),
+    connections: ["beauty", "jewellery"],
   },
-
   {
     id: "food",
-    title: "food",
+    title: "Food",
     note: "Shoot Friday",
-    colour: "green",
-    rotation: 9,
-    x: "67%",
-    y: "40%",
-    brands: ["Brand 1", "Brand 2"],
+    sticky: {
+      x: "73%",
+      y: "41%",
+      rotate: 8,
+      colour: "white",
+      size: 170,
+    },
+    photo: { dx: -85, dy: 65, rotate: -5, width: 120 },
+    brands: brandsForCategory("food"),
+    connections: ["events"],
   },
-
   {
     id: "baby",
-    title: "baby",
-    note: "Soft Palette",
-    colour: "blue",
-    rotation: -7,
-    x: "16%",
-    y: "61%",
-    brands: ["Brand 1"],
+    title: "Baby",
+    note: "Soft palette",
+    sticky: {
+      x: "12%",
+      y: "70%",
+      rotate: -8,
+      colour: "purple",
+      size: 150,
+    },
+    brands: brandsForCategory("baby"),
+    connections: ["home"],
   },
-
   {
     id: "jewellery",
-    title: "jewellery",
-    note: "Premium Launch",
-    colour: "pink",
-    rotation: 4,
-    x: "38%",
-    y: "64%",
-    brands: ["Brand 1"],
+    title: "Jewellery",
+    note: "Premium launch",
+    sticky: {
+      x: "42%",
+      y: "70%",
+      rotate: 6,
+      colour: "white",
+      size: 150,
+    },
+    brands: brandsForCategory("jewellery"),
+    connections: ["fashion", "beauty"],
   },
-
   {
     id: "media",
-    title: "media",
+    title: "Media",
     note: "Publish Monday",
-    colour: "yellow",
-    rotation: -9,
-    x: "60%",
-    y: "62%",
-    brands: ["Brand 1"],
+    sticky: {
+      x: "69%",
+      y: "72%",
+      rotate: -6,
+      colour: "purple",
+      size: 150,
+    },
+    photo: { dx: 70, dy: -60, rotate: 6, width: 110 },
+    brands: brandsForCategory("media"),
+    connections: ["events", "food"],
   },
 ];
+
+/** @deprecated Use campaignBoard instead */
+export type ClientCategory = CampaignCategory;
+
+/** @deprecated Use campaignBoard instead */
+export const clientBoard = campaignBoard;

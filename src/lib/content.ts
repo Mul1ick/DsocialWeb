@@ -1,74 +1,108 @@
 // src/lib/content.ts
 
-// Import client logos
-import dkLogo from "../assets/Client Logos/D&K_logo.JPG";
-import divineSpaceDesignLogo from "../assets/Client Logos/DivineSpaceDesign_logo.jpeg";
-import gildedLogo from "../assets/Client Logos/Gilded_logo.jpeg";
-import aquellaLogo from "../assets/Client Logos/aquella_logo.JPG";
-import NJPLogo from "../assets/Client Logos/NJP_logo.jpeg";
-import PistyleLogo from "../assets/Client Logos/Pistyle_logo.JPG";
-import PolkaLogo from "../assets/Client Logos/Polka_logo.JPG";
-import rearrangeKidsLogo from "../assets/Client Logos/rearrange_kids_logo.JPG";
-import rearrangeLogo from "../assets/Client Logos/rearrange_logo.jpeg";
-import shagunLogo from "../assets/Client Logos/shagun_logo.JPG";
-import SPLogo from "../assets/Client Logos/SP_logo.JPG";
-import TOLogo from "../assets/Client Logos/TO_logo.jpeg";
+import dkLogo from "../assets/Client Logos/DK.png";
+import divineSpaceDesignLogo from "../assets/Client Logos/Divine_space.png";
+import gildedLogo from "../assets/Client Logos/Gilded.png";
+import aquellaLogo from "../assets/Client Logos/aquella.png";
+import NJPLogo from "../assets/Client Logos/njp.png";
+import PistyleLogo from "../assets/Client Logos/Pistyle.png";
+import PolkaLogo from "../assets/Client Logos/polka.png";
+import rearrangeKidsLogo from "../assets/Client Logos/rearrange_kids.png";
+import rearrangeLogo from "../assets/Client Logos/rearrange_home.png";
+import shagunLogo from "../assets/Client Logos/shagun.png";
+import SPLogo from "../assets/Client Logos/sp.png";
+import TOLogo from "../assets/Client Logos/TO.png";
+import altheaLogo from "../assets/Client Logos/althea.png";
+import avaniLogo from "../assets/Client Logos/avani.png";
+import bikaneriLogo from "../assets/Client Logos/Bikaneri.png";
+import dynaconsLogo from "../assets/Client Logos/Dynacons.png";
+import eightLogo from "../assets/Client Logos/eight.png";
+import jsmLogo from "../assets/Client Logos/jsm.png";
+import lokaLogo from "../assets/Client Logos/loka.png";
+import nubyLogo from "../assets/Client Logos/nuby.png";
+import pluralLogo from "../assets/Client Logos/plural.png";
+import rachnaLogo from "../assets/Client Logos/rachna.png";
+import rageLogo from "../assets/Client Logos/rage.png";
+import renuSarafLogo from "../assets/Client Logos/renu_saraf.png";
+import rotaryLogo from "../assets/Client Logos/rotary.png";
+import smfLogo from "../assets/Client Logos/smf.png";
+import ssLogo from "../assets/Client Logos/SS_logo.png";
+import tokoytoriLogo from "../assets/Client Logos/tokoytori.png";
 
+export type ClientCategoryId =
+  | "interiors"
+  | "home"
+  | "beauty"
+  | "events"
+  | "fashion"
+  | "food"
+  | "baby"
+  | "jewellery"
+  | "media";
+
+export interface ClientBrand {
+  name: string;
+  logo: string;
+  category: ClientCategoryId;
+}
 
 export const principles = [
   "Full-service creative and digital agency",
   "Strategic thinking, compelling content and impactful digital experiences",
-  "Visibility, engagement and long-term brand value"
+  "Visibility, engagement and long-term brand value",
 ];
 
-export const approachSteps = [
-  "Strategy",
-  "Create",
-  "Launch"
-];
+export const approachSteps = ["Strategy", "Create", "Launch"];
 
 export const processSteps = [
   "Discover",
   "Strategize",
   "Create",
   "Launch",
-  "Optimise"
+  "Optimise",
 ];
 
 export const services = [
   {
     name: "Social Media Management",
-    description: "Day-to-day planning, publishing and care for a consistent brand presence.",
+    description:
+      "Day-to-day planning, publishing and care for a consistent brand presence.",
     note: "A steady rhythm across platforms.",
   },
   {
     name: "Content Creation",
-    description: "Ideas, visuals and storytelling shaped for the way people actually scroll.",
+    description:
+      "Ideas, visuals and storytelling shaped for the way people actually scroll.",
     note: "Built for visibility and recall.",
   },
   {
     name: "Creative Strategy",
-    description: "Clear direction before the work goes live, from positioning to campaign thinking.",
+    description:
+      "Clear direction before the work goes live, from positioning to campaign thinking.",
     note: "The thinking behind the content.",
   },
   {
     name: "Branding & Graphic Design",
-    description: "Visual systems, campaign graphics and branded assets that feel cohesive.",
+    description:
+      "Visual systems, campaign graphics and branded assets that feel cohesive.",
     note: "Designed to look like one brand.",
   },
   {
     name: "Photography",
-    description: "Brand, product and lifestyle imagery planned around the story you want to tell.",
+    description:
+      "Brand, product and lifestyle imagery planned around the story you want to tell.",
     note: "Shot with purpose and mood.",
   },
   {
     name: "Website Content",
-    description: "Copy and content direction for websites that need to feel clear and considered.",
+    description:
+      "Copy and content direction for websites that need to feel clear and considered.",
     note: "Words that support the experience.",
   },
   {
     name: "Moral Support",
-    description: "A creative partner in the messy middle, helping brands stay steady and moving.",
+    description:
+      "A creative partner in the messy middle, helping brands stay steady and moving.",
     note: "Because good work needs care too.",
   },
 ];
@@ -100,17 +134,33 @@ export const work = [
   },
 ];
 
-export const clients = [
-  { name: "D&K", logo: dkLogo },
-  { name: "Divine Space Design", logo: divineSpaceDesignLogo },
-  { name: "Gilded", logo: gildedLogo },
-  { name: "Aquella", logo: aquellaLogo },
-  { name: "NJP", logo: NJPLogo },
-  { name: "Pistyle", logo: PistyleLogo },
-  { name: "Polka", logo: PolkaLogo },
-  { name: "Rearrange Kids", logo: rearrangeKidsLogo },
-  { name: "Rearrange", logo: rearrangeLogo },
-  { name: "Shagun", logo: shagunLogo },
-  { name: "Speciality", logo: SPLogo},
-  { name: "Treasured", logo: TOLogo },
+export const clients: ClientBrand[] = [
+  { name: "Divine Space Design", logo: divineSpaceDesignLogo, category: "interiors" },
+  { name: "Rearrange Home", logo: rearrangeLogo, category: "interiors" },
+  { name: "Loka", logo: lokaLogo, category: "interiors" },
+  { name: "Rachna", logo: rachnaLogo, category: "interiors" },
+  { name: "Gilded", logo: gildedLogo, category: "home" },
+  { name: "Plural", logo: pluralLogo, category: "home" },
+  { name: "Eight", logo: eightLogo, category: "home" },
+  { name: "D&K", logo: dkLogo, category: "home" },
+  { name: "Aquella", logo: aquellaLogo, category: "beauty" },
+  { name: "Althea", logo: altheaLogo, category: "beauty" },
+  { name: "Avani", logo: avaniLogo, category: "beauty" },
+  { name: "Renu Saraf", logo: renuSarafLogo, category: "beauty" },
+  { name: "Polka", logo: PolkaLogo, category: "fashion" },
+  { name: "Pistyle", logo: PistyleLogo, category: "fashion" },
+  { name: "Shagun", logo: shagunLogo, category: "fashion" },
+  { name: "Tokoytori", logo: tokoytoriLogo, category: "fashion" },
+  { name: "Bikaneri", logo: bikaneriLogo, category: "food" },
+  { name: "Nuby", logo: nubyLogo, category: "food" },
+  { name: "Rotary", logo: rotaryLogo, category: "events" },
+  { name: "SMF", logo: smfLogo, category: "events" },
+  { name: "NJP", logo: NJPLogo, category: "events" },
+  { name: "Rearrange Kids", logo: rearrangeKidsLogo, category: "baby" },
+  { name: "Treasured", logo: TOLogo, category: "jewellery" },
+  { name: "Rage", logo: rageLogo, category: "jewellery" },
+  { name: "Speciality", logo: SPLogo, category: "media" },
+  { name: "JSM", logo: jsmLogo, category: "media" },
+  { name: "Dynacons", logo: dynaconsLogo, category: "media" },
+  { name: "SS", logo: ssLogo, category: "media" },
 ];
