@@ -18,7 +18,7 @@ export default function Navbar() {
       <div className="max-w-[1280px] mx-auto px-6 lg:px-12 grid grid-cols-2 md:grid-cols-3 items-center">
         
         <a href="#" aria-label="Dsocial home" className="w-fit">
-          <img src={logo} alt="Dsocial" className="h-9 md:h-10 w-auto object-contain" />
+          <img src={logo} alt="Dsocial" className="h-14 md:h-18 w-auto object-contain" />
         </a>
 
         <nav className="hidden md:flex justify-center gap-7 lg:gap-9" aria-label="Primary navigation">

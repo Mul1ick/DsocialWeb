@@ -1,14 +1,15 @@
 import { useState } from "react";
-import StickyNote from "../components/StickyNote";
+import BoardCluster from "../components/BoardCluster";
+import { boardLayout } from "../data/boardLayout";
 import ExpandedBoard from "../components/ExpandedBoard";
 import SectionShell from "../components/SectionShell";
-import { clientBoard, ClientCategory } from "../data/clientBoard";
+import { ClientCategory } from "../data/clientBoard";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import AmbientNote from "../components/AmbientNote";
-import { decorativeNotes } from "../data/boardDecor"
+// import AmbientNote from "../components/AmbientNote";
+// import { decorativeNotes } from "../data/boardDecor"
 
 import BoardProp from "../components/BoardProps";
 import { boardAssets } from "../data/boardAssets";;
@@ -114,15 +115,51 @@ export default function ClientsCanvas() {
       >
         {/* paper texture */}
 
-        <div
-          className="
-          absolute
-          inset-0
-          opacity-[0.04]
-          bg-[radial-gradient(#000_0.7px,transparent_0.7px)]
-          [background-size:18px_18px]
-        "
-        />
+        {/* Felt board background */}
+
+{/* Felt / Fuzzy Background */}
+
+<div className="absolute inset-0 bg-[#E4DED3]" />
+
+<div
+  className="
+    absolute
+    inset-0
+    opacity-20
+    bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,.5)_0.6px,transparent_0.7px)]
+    [background-size:5px_5px]
+  "
+/>
+
+<div
+  className="
+    absolute
+    inset-0
+    opacity-15
+    bg-[radial-gradient(circle_at_80%_70%,rgba(0,0,0,.15)_0.6px,transparent_0.7px)]
+    [background-size:4px_4px]
+  "
+/>
+
+<div
+  className="
+    absolute
+    inset-0
+    opacity-20
+    bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,.08)_50%,transparent_100%)]
+  "
+/>
+
+<div
+  className="
+    absolute
+    inset-0
+    opacity-10
+    bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,.35)_1px,transparent_1px)]
+    [background-size:4px_4px]
+    mix-blend-overlay
+  "
+/>
 
         {/* random decorative arrows */}
 
@@ -159,12 +196,12 @@ export default function ClientsCanvas() {
         
 
         {/* All Categories */}
-        {decorativeNotes.map((note) => (
+        {/* {decorativeNotes.map((note) => (
   <AmbientNote
     key={note.text}
     {...note}
   />
-))}
+))} */}
 
 {boardAssets.map((asset, i) => (
     <BoardProp
@@ -173,14 +210,14 @@ export default function ClientsCanvas() {
     />
 ))}
 
-        {clientBoard.map((category) => (
-  <StickyNote
-    key={category.id}
-    category={category}
-    active={selected?.id === category.id}
-    onClick={() => setSelected(category)}
+        {boardLayout.map((cluster) => (
+  <BoardCluster
+    key={cluster.id}
+    cluster={cluster}
+    onClick={() => console.log(cluster.id)}
   />
 ))}
+
       </div>
       <ExpandedBoard
     category={selected}

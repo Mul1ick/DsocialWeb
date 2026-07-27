@@ -8,10 +8,10 @@ interface StickyProps {
 }
 
 const colours = {
-  yellow: "bg-[#FFF3A6]",
-  pink: "bg-[#FFD9E8]",
-  blue: "bg-[#DCEEFF]",
-  green: "bg-[#DDF6DD]",
+  yellow: "bg-[#F7F3FF]", // Soft Lavender
+  pink: "bg-white",       // White
+  blue: "bg-[#EFEAFE]",   // Pale Lilac
+  green: "bg-[#FCFCFC]",  // Off White
 };
 
 export default function StickyNote({

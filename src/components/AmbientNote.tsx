@@ -7,6 +7,11 @@ interface Props {
   width: number;
 }
 
+const colours = [
+  "#F4EEFF", // light lavender
+  "#FFFFFF", // white
+];
+
 export default function AmbientNote({
   text,
   colour,
