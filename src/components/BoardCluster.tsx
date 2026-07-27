@@ -88,10 +88,10 @@ export default function BoardCluster({ cluster, onClick }: Props) {
         left: cluster.sticky.x,
         top: cluster.sticky.y,
       }}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      // initial={{ opacity: 0, y: 40 }}
+      // whileInView={{ opacity: 1, y: 0 }}
+      // viewport={{ once: true }}
+      // transition={{ duration: 0.6 }}
     >
       {cluster.photo && evidenceLogo && (
         <motion.div

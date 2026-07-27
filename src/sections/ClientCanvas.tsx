@@ -32,7 +32,7 @@ export default function ClientsCanvas() {
         scrollTrigger: {
           trigger: boardRef.current,
           start: "top 70%",
-          toggleActions: "play none none reverse",
+          once:true,
         },
       });
     },
