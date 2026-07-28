@@ -1,13 +1,13 @@
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Observer } from "gsap/Observer";
 import { useGSAP } from "@gsap/react";
-import { BarChart2, CheckCircle2, Clapperboard, FileText, Image as ImageIcon, LineChart, Send } from "lucide-react";
+import { BarChart2, CheckCircle2, Clapperboard, FileText, Image as ImageIcon, LineChart, Play, Send } from "lucide-react";
 import founderPhoto from "../assets/Founder_photo.jpg";
 import { clients } from "../lib/content";
 
-// Only register ScrollTrigger
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, Observer);
 
 const journeySteps = [
   {
@@ -178,75 +178,112 @@ const journeySteps = [
 export default function OurApproach() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  
-  // Dedicated refs array fixes the TypeScript error entirely
   const panelsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useGSAP(
     () => {
       const track = trackRef.current;
       if (!track) return;
 
-      const stepsCount = journeySteps.length;
+      const totalSlides = journeySteps.length;
+      let currentIndex = 0;
+      let isAnimating = false;
+      let st: globalThis.ScrollTrigger;
 
-      // 1. Master Timeline: Zero-lag scrub + Instant directional snapping
-      const scrollTween = gsap.to(track, {
-        x: () => -(track.scrollWidth - window.innerWidth),
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          pin: true,
-          scrub: true, // FIX 1: Set to true (0 lag) so it never floats behind the scrollbar
-          snap: {
-            snapTo: 1 / (stepsCount - 1),
-            directional: true, // Forces a forward scroll to round UP to the next slide
-            duration: 0.4, // Fast, snappy transition
-            delay: 0, // FIX 2: Instantly takes over the millisecond the wheel stops
-            ease: "power2.out",
-          },
-          start: "top top",
-          // FIX 3: 1500px per slide creates a massive buffer, making it very hard to skip slides accidentally
-          end: () => `+=${stepsCount * 1500}`, 
-          invalidateOnRefresh: true,
-        },
-      });
-
-      // 2. Micro-Animations: Scale/Fade using containerAnimation
-      contentRefs.current.forEach((content, index) => {
-        if (!content || !panelsRef.current[index]) return;
-        
-        gsap.fromTo(
-          content,
-          { scale: 0.85, opacity: 0.2 },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: panelsRef.current[index], 
-              containerAnimation: scrollTween,
-              start: "left center+=25%",
-              end: "center center",
-              scrub: true,
-            },
+      // Helper to instantly snap approach panels into position horizontally
+      const resetPanelsTo = (index: number) => {
+        gsap.set(track, { x: -(index * window.innerWidth) });
+        panelsRef.current.forEach((p, i) => {
+          if (!p) return;
+          const content = p.querySelector(".panel-content");
+          if (i === index) {
+            if (content) gsap.set(content, { scale: 1, opacity: 1 });
+          } else {
+            if (content) gsap.set(content, { scale: 0.85, opacity: 0.2 });
           }
-        );
-
-        gsap.to(content, {
-          scale: 0.85,
-          opacity: 0.2,
-          duration: 1,
-          ease: "power2.in",
-          scrollTrigger: {
-            trigger: panelsRef.current[index],
-            containerAnimation: scrollTween,
-            start: "center center",
-            end: "right center-=25%",
-            scrub: true,
-          },
         });
+      };
+
+      // Core horizontal transition logic with strict dead zone lockout
+      const gotoPanel = (index: number) => {
+        isAnimating = true;
+        currentIndex = index;
+
+        const targetX = -(index * window.innerWidth);
+        const tl = gsap.timeline();
+
+        // Animate the track horizontally
+        tl.to(track, {
+          x: targetX,
+          duration: 1,
+          ease: "power3.inOut",
+        }, 0);
+
+        // Scale/fade content for depth illusion between steps
+        panelsRef.current.forEach((p, i) => {
+          const content = p?.querySelector(".panel-content");
+          if (!content) return;
+          if (i === index) {
+            tl.to(content, { scale: 1, opacity: 1, duration: 1, ease: "power3.out" }, 0);
+          } else {
+            tl.to(content, { scale: 0.85, opacity: 0.2, duration: 0.8 }, 0);
+          }
+        });
+
+        // 1.4s lockout (1s animation + 400ms buffer) to defeat trackpad inertia
+        setTimeout(() => {
+          isAnimating = false;
+        }, 1400);
+      };
+
+      // The Event Hijacker
+      const observer = Observer.create({
+        target: window,
+        type: "wheel,touch,pointer",
+        wheelSpeed: -1,
+        preventDefault: true,
+        tolerance: 30,
+        onUp: () => {
+          if (isAnimating) return;
+          if (currentIndex < totalSlides - 1) {
+            gotoPanel(currentIndex + 1);
+          } else {
+            observer.disable();
+            window.scrollTo(0, st.end + 50);
+          }
+        },
+        onDown: () => {
+          if (isAnimating) return;
+          if (currentIndex > 0) {
+            gotoPanel(currentIndex - 1);
+          } else {
+            observer.disable();
+            window.scrollTo(0, st.start - 50);
+          }
+        }
+      });
+      observer.disable();
+
+      // The Massive ScrollTrap
+      st = ScrollTrigger.create({
+        trigger: sectionRef.current,
+        pin: true,
+        start: "top top",
+        end: "+=3000",
+        onEnter: () => {
+          if (!observer.isEnabled) {
+            currentIndex = 0;
+            resetPanelsTo(0);
+            observer.enable();
+          }
+        },
+        onEnterBack: () => {
+          if (!observer.isEnabled) {
+            currentIndex = totalSlides - 1;
+            resetPanelsTo(currentIndex);
+            observer.enable();
+          }
+        }
       });
     },
     { scope: sectionRef }
@@ -258,7 +295,7 @@ export default function OurApproach() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(216,196,221,0.15),transparent_50%)] pointer-events-none" />
 
       {/* Persistent Section Header */}
-      <div className="absolute top-30 left-6 lg:left-12 z-20 mix-blend-multiply opacity-90 flex flex-col gap-2">
+      <div className="absolute top-10 left-6 lg:left-12 z-40 mix-blend-multiply opacity-90 flex flex-col gap-2 pointer-events-none">
         <p className="uppercase tracking-[0.35em] text-[10px] text-[var(--secondary)] font-medium">
           Our Approach
         </p>
@@ -267,29 +304,26 @@ export default function OurApproach() {
         </h2>
       </div>
 
+      {/* Horizontal Track Container */}
       <div
         ref={trackRef}
-        className="flex h-full w-max"
+        className="flex h-full w-max will-change-transform"
       >
         {journeySteps.map((step, index) => (
           <div
             key={step.id}
-            // TS Fix: explicit block with {} to return void
-            ref={(el) => { panelsRef.current[index] = el; }} 
-            className="w-screen h-full flex items-center justify-center relative shrink-0"
+            ref={(el) => { panelsRef.current[index] = el; }}
+            className="w-screen h-full flex items-center justify-center relative shrink-0 px-6 lg:px-12"
           >
-            <div 
-              // Using a dedicated ref array removes the need for querySelector
-              ref={(el) => { contentRefs.current[index] = el; }} 
-              className="w-full max-w-[1200px] px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center"
-            >
+            <div className="panel-content w-full max-w-[1200px] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+              
               <div className="flex flex-col">
                 <span className="text-[var(--accent)] text-lg md:text-xl font-light mb-4">
                   0{index + 1}
                 </span>
-                <h2 className="text-[clamp(42px,6vw,72px)] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight mb-6">
+                <h3 className="text-[clamp(42px,6vw,72px)] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight mb-6">
                   {step.title}
-                </h2>
+                </h3>
                 <p className="text-xl leading-relaxed text-[var(--secondary)] font-light max-w-[420px]">
                   {step.desc}
                 </p>
