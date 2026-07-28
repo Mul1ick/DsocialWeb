@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { BarChart2, CheckCircle2, Clapperboard, FileText, Image as ImageIcon, LineChart, Play, Send } from "lucide-react";
+import { BarChart2, CheckCircle2, Clapperboard, FileText, Image as ImageIcon, LineChart, Send } from "lucide-react";
 import founderPhoto from "../assets/Founder_photo.jpg";
 import { clients } from "../lib/content";
 
