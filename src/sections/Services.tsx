@@ -64,7 +64,7 @@ export default function Services() {
         isAnimating = true; // Lock the gate
         const currentPanel = panels[currentIndex];
         const nextPanel = panels[index];
-        const currentImg = imageRefs.current[currentIndex];
+        // const currentImg = imageRefs.current[currentIndex];
         const nextImg = imageRefs.current[index];
 
         const tl = gsap.timeline();
@@ -120,7 +120,7 @@ export default function Services() {
 
       // Start disabled so it doesn't hijack the page immediately on load
       observer.disable();
-      
+
       // The Massive ScrollTrap
       st = ScrollTrigger.create({
         trigger: sectionRef.current,
