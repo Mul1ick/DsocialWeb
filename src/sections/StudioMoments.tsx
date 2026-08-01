@@ -4,23 +4,20 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Heart, MessageCircle, BarChart2, Play } from "lucide-react";
 
-
 gsap.registerPlugin(ScrollTrigger);
 
-// Expanded to 10 items for a perfect 5-column, 2-row grid. 
-// You can easily add 5 more for a 3-row layout.
 const scatterData = [
-  { img: "public/BTS/BTS011.JPG", type: "photo", x: "-50vw", y: "-40vh", rotate: -15, scale: 1.2 },
-  { img: 'public/BTS/BTS013.JPG', type: "polaroid", x: "-20vw", y: "-60vh", rotate: 12, scale: 1.1 },
-  { img: 'public/BTS/IMG_173.JPG', type: "photo", x: "10vw", y: "-50vh", rotate: -5, scale: 1.3 },
-  { img: 'public/BTS/IMG_172.JPG', type: "reel", x: "40vw", y: "-30vh", rotate: 20, scale: 1.1 },
-  { img: 'public/BTS/IMG_400.JPG', type: "photo", x: "60vw", y: "-10vh", rotate: -25, scale: 1.4 },
+  { img: "public/BTS/BTS011.JPG", type: "photo" },
+  { img: 'public/BTS/BTS013.JPG', type: "polaroid" },
+  { img: 'public/BTS/IMG_173.JPG', type: "photo" },
+  { img: 'public/BTS/IMG_172.JPG', type: "reel" },
+  { img: 'public/BTS/IMG_400.JPG', type: "photo" },
   
-  { img: 'public/BTS/IMG_1295.JPG', type: "polaroid", x: "-60vw", y: "20vh", rotate: -20, scale: 1.2 },
-  { img: 'public/BTS/IMG_1702.JPG', type: "photo", x: "-30vw", y: "40vh", rotate: 15, scale: 1.3 },
-  { img: 'public/BTS/IMG_6325.JPG', type: "reel", x: "0vw", y: "50vh", rotate: -10, scale: 1.1 },
-  { img: 'public/BTS/IMG_6327.JPG', type: "polaroid", x: "30vw", y: "60vh", rotate: 25, scale: 1.2 },
-  { img: 'public/BTS/BTS011.JPG', type: "photo", x: "60vw", y: "40vh", rotate: -15, scale: 1.1 },
+  { img: 'public/BTS/IMG_1295.JPG', type: "polaroid" },
+  { img: 'public/BTS/IMG_1702.JPG', type: "photo" },
+  { img: 'public/BTS/IMG_6325.JPG', type: "reel" },
+  { img: 'public/BTS/IMG_6327.JPG', type: "polaroid" },
+  { img: 'public/BTS/BTS011.JPG', type: "photo" },
 ];
 
 export default function StudioMoments() {
@@ -28,45 +25,45 @@ export default function StudioMoments() {
 
   useGSAP(
     () => {
+      // We removed the separate pinning ScrollTrigger entirely! 
+      // Now it just scrolls naturally without trapping the user.
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top top",
-          end: "+=1200", 
-          pin: true, 
+          start: "top 75%", 
           toggleActions: "play none none reverse",
         },
       });
 
+      const topRow = scatterData.map((_, i) => `.moment-item-${i}`).slice(0, 5);
+      const bottomRow = scatterData.map((_, i) => `.moment-item-${i}`).slice(5, 10);
+
       tl.fromTo(
-        ".grid-wrapper",
-        { scale: 1.4 },
-        { scale: 1, duration: 2.5, ease: "power3.out" },
+        topRow,
+        { x: "100vw", opacity: 0 },
+        { 
+          x: 0, 
+          opacity: 1, 
+          duration: 1.8, 
+          stagger: 0.1, 
+          ease: "power3.out" 
+        },
         0
       );
 
-      scatterData.forEach((item, i) => {
-        tl.fromTo(
-          `.moment-item-${i}`,
-          {
-            x: item.x,
-            y: item.y,
-            rotation: item.rotate,
-            scale: item.scale,
-            opacity: 0,
-          },
-          {
-            x: 0,
-            y: 0,
-            rotation: 0,
-            scale: 1,
-            opacity: 1,
-            duration: 2.5, 
-            ease: "power3.out",
-          },
-          0
-        );
-      });
+      tl.fromTo(
+        bottomRow,
+        { x: "-100vw", opacity: 0 },
+        { 
+          x: 0, 
+          opacity: 1, 
+          duration: 1.8, 
+          stagger: 0.1, 
+          ease: "power3.out" 
+        },
+        0 
+      );
 
       tl.fromTo(
         ".micro-ui",
@@ -79,7 +76,7 @@ export default function StudioMoments() {
           duration: 0.8,
           ease: "back.out(1.5)",
         },
-        1.5 
+        1.0 
       );
     },
     { scope: sectionRef }
@@ -99,11 +96,8 @@ export default function StudioMoments() {
         </p>
       </div>
 
-      {/* Expanded to max-w-[1400px] to utilize the ultra-wide layout */}
       <div className="grid-wrapper w-full max-w-[1400px] px-6 lg:px-12 z-10 mx-auto">
-        
-        {/* Changed to grid-cols-5 for large screens, scaling down gracefully on mobile */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 lg:gap-5">
+        <div className="grid grid-cols-5 gap-3 md:gap-4 lg:gap-5">
           {scatterData.map((item, index) => (
             <div
               key={index}

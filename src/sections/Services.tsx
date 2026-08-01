@@ -3,9 +3,8 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Observer } from "gsap/Observer";
 import { useGSAP } from "@gsap/react";
-import { services } from "../lib/content";
+import { services, clients } from "../lib/content";
 import founderPhoto from "../assets/Founder_photo.jpg";
-import { clients } from "../lib/content";
 
 gsap.registerPlugin(ScrollTrigger, Observer);
 
@@ -29,10 +28,23 @@ const editorialVisuals = [
   clients[1]?.logo || founderPhoto,
 ];
 
+// Split the services into two distinct groups for the two panels
+const servicePanels = [
+  {
+    id: "panel-1",
+    items: services.slice(0, 4).map((service, i) => ({ ...service, originalIndex: i })),
+    gridClass: "lg:grid-cols-4", // 4 columns for the first panel
+  },
+  {
+    id: "panel-2",
+    items: services.slice(4, 7).map((service, i) => ({ ...service, originalIndex: i + 4 })),
+    gridClass: "lg:grid-cols-3", // 3 columns for the second panel
+  }
+];
+
 export default function Services() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const panelsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
 
   useGSAP(
     () => {
@@ -43,65 +55,62 @@ export default function Services() {
       let isAnimating = false;
       let st: globalThis.ScrollTrigger;
 
-      // Helper to instantly snap panels into the correct arrangement
       const resetPanelsTo = (index: number) => {
         panels.forEach((p, i) => {
           if (!p) return;
+          const images = p.querySelectorAll('.service-image');
+          
           if (i === index) {
             gsap.set(p, { yPercent: 0, opacity: 1, scale: 1, boxShadow: "0px 0px 0px rgba(0,0,0,0)" });
-            if (imageRefs.current[i]) gsap.set(imageRefs.current[i], { scale: 1 });
+            gsap.set(images, { scale: 1 });
           } else if (i < index) {
-            gsap.set(p, { yPercent: -10, opacity: 0, scale: 0.9 });
+            gsap.set(p, { yPercent: -10, opacity: 0, scale: 0.95 });
           } else {
             gsap.set(p, { yPercent: 100, opacity: 1, scale: 1, boxShadow: "0px -40px 100px rgba(75,41,79,0.08)" });
-            if (imageRefs.current[i]) gsap.set(imageRefs.current[i], { scale: 1.3 });
+            gsap.set(images, { scale: 1.15 });
           }
         });
       };
 
-      // The core transition logic with the Dead Zone lockout
       const gotoPanel = (index: number, direction: number) => {
-        isAnimating = true; // Lock the gate
+        isAnimating = true; 
         const currentPanel = panels[currentIndex];
         const nextPanel = panels[index];
-        // const currentImg = imageRefs.current[currentIndex];
-        const nextImg = imageRefs.current[index];
+        
+        // Grab all images in the incoming panel for a staggered reveal
+        const nextImages = nextPanel?.querySelectorAll('.service-image');
 
         const tl = gsap.timeline();
 
         if (direction === 1) {
           // Scrolling down: Bring next panel UP
           tl.fromTo(nextPanel, { yPercent: 100, boxShadow: "0px -40px 100px rgba(75,41,79,0.08)" }, { yPercent: 0, boxShadow: "0px 0px 0px rgba(0,0,0,0)", duration: 1, ease: "power3.inOut" }, 0);
-          if (nextImg) tl.fromTo(nextImg, { scale: 1.3 }, { scale: 1, duration: 1, ease: "power3.out" }, 0.2);
-          tl.to(currentPanel, { yPercent: -10, scale: 0.9, opacity: 0, duration: 1, ease: "power3.inOut" }, 0);
+          if (nextImages?.length) tl.fromTo(nextImages, { scale: 1.15 }, { scale: 1, duration: 1, ease: "power3.out", stagger: 0.05 }, 0.2);
+          tl.to(currentPanel, { yPercent: -10, scale: 0.95, opacity: 0, duration: 1, ease: "power3.inOut" }, 0);
         } else {
           // Scrolling up: Push current panel DOWN
           tl.to(currentPanel, { yPercent: 100, boxShadow: "0px -40px 100px rgba(75,41,79,0.08)", duration: 1, ease: "power3.inOut" }, 0);
-          tl.fromTo(nextPanel, { yPercent: -10, scale: 0.9, opacity: 0 }, { yPercent: 0, scale: 1, opacity: 1, duration: 1, ease: "power3.inOut" }, 0);
-          if (nextImg) tl.to(nextImg, { scale: 1, duration: 1, ease: "power3.out" }, 0);
+          tl.fromTo(nextPanel, { yPercent: -10, scale: 0.95, opacity: 0 }, { yPercent: 0, scale: 1, opacity: 1, duration: 1, ease: "power3.inOut" }, 0);
+          if (nextImages?.length) tl.fromTo(nextImages, { scale: 1.15 }, { scale: 1, duration: 1, ease: "power3.out", stagger: 0.05 }, 0);
         }
 
-        // STRICT DEAD ZONE: 1s for animation + 400ms buffer to absorb all inertia
         setTimeout(() => {
           currentIndex = index;
-          isAnimating = false; // Unlock the gate
+          isAnimating = false;
         }, 1400); 
       };
 
-      // The Event Hijacker
-      // The Event Hijacker
       const observer = Observer.create({
         target: window,
         type: "wheel,touch,pointer",
         wheelSpeed: -1,
         preventDefault: true, 
-        tolerance: 30, // Requires a deliberate flick
+        tolerance: 30, 
         onUp: () => {
           if (isAnimating) return; 
           if (currentIndex < panels.length - 1) {
             gotoPanel(currentIndex + 1, 1);
           } else {
-            // Reached the end. Disable trap and teleport past the trigger.
             observer.disable(); 
             window.scrollTo(0, st.end + 50); 
           }
@@ -111,22 +120,19 @@ export default function Services() {
           if (currentIndex > 0) {
             gotoPanel(currentIndex - 1, -1);
           } else {
-            // Reached the start. Disable trap and teleport past the trigger.
             observer.disable(); 
             window.scrollTo(0, st.start - 50); 
           }
         }
       });
 
-      // Start disabled so it doesn't hijack the page immediately on load
       observer.disable();
 
-      // The Massive ScrollTrap
       st = ScrollTrigger.create({
         trigger: sectionRef.current,
         pin: true,
         start: "top top",
-        end: "+=3000", // Massive buffer guarantees they can't blow past it natively
+        end: "+=1500", // Reduced buffer since there are only 2 transitions now
         onEnter: () => {
           if (!observer.isEnabled) {
             currentIndex = 0;
@@ -150,67 +156,70 @@ export default function Services() {
   return (
     <section ref={sectionRef} id="services" className="relative h-screen w-full overflow-hidden bg-[var(--bg)]">
       
-      {services.map((service, index) => (
+      {servicePanels.map((panel, panelIndex) => (
         <div
-          key={service.name}
-          ref={(el) => { panelsRef.current[index] = el; }}
-          className={`absolute inset-0 h-full w-full flex items-center justify-center px-6 lg:px-12 z-10 will-change-transform ${
-            index % 2 === 0 ? "bg-[#Faf7fb]" : "bg-[#FDFBF7]"
+          key={panel.id}
+          ref={(el) => { panelsRef.current[panelIndex] = el; }}
+          className={`absolute inset-0 h-full w-full flex flex-col justify-center px-6 lg:px-12 z-10 will-change-transform ${
+            panelIndex % 2 === 0 ? "bg-[#Faf7fb]" : "bg-[#FDFBF7]"
           }`}
-          style={{ zIndex: index }}
+          style={{ zIndex: panelIndex }}
         >
-          <div className="absolute left-6 lg:left-12 top-0 bottom-0 w-px bg-[var(--purple-wash)] opacity-50" />
-          <div className="absolute right-6 lg:right-12 top-0 bottom-0 w-px bg-[var(--purple-wash)] opacity-50" />
+          {/* Aesthetic border lines */}
+          <div className="absolute left-6 lg:left-12 top-0 bottom-0 w-px bg-[var(--purple-wash)] opacity-50 pointer-events-none" />
+          <div className="absolute right-6 lg:right-12 top-0 bottom-0 w-px bg-[var(--purple-wash)] opacity-50 pointer-events-none" />
 
+          {/* Section Indicator */}
           <div className="absolute top-10 left-10 lg:left-16 z-40">
             <p className="uppercase tracking-[0.35em] text-[10px] text-[var(--secondary)] font-medium">
-              What We Do — 0{index + 1}
+              What We Do — Part 0{panelIndex + 1}
             </p>
           </div>
 
-          <div className="w-full max-w-[1280px] mx-auto relative h-[80vh] flex flex-col md:flex-row items-center justify-between mt-10">
+          <div className="w-full max-w-[1400px] mx-auto relative mt-20 md:mt-24">
             
-            <div className="relative w-full md:w-3/5 flex flex-col justify-center h-full z-20 md:pr-10 pt-16 md:pt-0">
+            {/* Dynamic Grid Layout (4 cols vs 3 cols) */}
+            <div className={`grid grid-cols-1 md:grid-cols-2 ${panel.gridClass} gap-x-8 lg:gap-x-12 gap-y-16 h-full`}>
               
-              <h2 
-                className="text-[13vw] md:text-[8vw] lg:text-[7.5vw] leading-[0.85] font-light text-[var(--purple-deep)] tracking-tighter m-0 -ml-1 uppercase select-none relative z-20"
-                style={{ letterSpacing: "-0.04em" }}
-              >
-                {editorialHeadings[index]}
-              </h2>
+              {panel.items.map((service, index) => {
+                const absIndex = service.originalIndex;
+                return (
+                  <div key={service.name} className="flex flex-col h-full group">
+                    
+                    {/* Header Block */}
+                    <div className="mb-6 lg:mb-10">
+                      <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--accent)] mb-3">
+                        0{absIndex + 1}
+                      </p>
+                      <h2 
+                        className="text-3xl lg:text-4xl xl:text-[2.5rem] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight uppercase"
+                      >
+                        {editorialHeadings[absIndex]}
+                      </h2>
+                    </div>
 
-              <div className="absolute bottom-4 left-0 max-w-[380px] z-30">
-                <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--accent)] mb-3">
-                  Service 0{index + 1}
-                </p>
-                <p className="text-lg md:text-xl font-light text-[var(--primary)] leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
-            </div>
+                    {/* Image Block */}
+                    <div className="w-full aspect-[4/5] overflow-hidden bg-[var(--purple-soft)] rounded-sm shadow-md mb-6 relative">
+                      <div className="absolute inset-0 bg-[var(--purple-wash)] opacity-10 mix-blend-multiply z-10" />
+                      <img 
+                        src={editorialVisuals[absIndex]} 
+                        alt={service.name}
+                        className="service-image w-full h-full object-cover object-center mix-blend-multiply opacity-90 will-change-transform"
+                      />
+                    </div>
 
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[70vw] md:w-[40%] max-w-[480px] aspect-[3/4] z-10 hidden md:block">
-              <div className="absolute -inset-4 border border-[var(--purple-wash)] rounded-sm opacity-50" />
-              <div className="absolute -left-8 top-1/2 w-16 h-px bg-[var(--purple-wash)]" />
+                    {/* Description Block */}
+                    <div className="mt-auto pt-4 border-t border-[var(--purple-wash)]/60">
+                      <p className="text-sm md:text-base font-light text-[var(--primary)] leading-relaxed">
+                        {service.description}
+                      </p>
+                    </div>
+
+                  </div>
+                );
+              })}
               
-              <div className="w-full h-full rounded-sm overflow-hidden bg-[var(--purple-soft)] shadow-[0_30px_80px_rgba(75,41,79,0.12)]">
-                <img 
-                  ref={(el) => { imageRefs.current[index] = el; }}
-                  src={editorialVisuals[index]} 
-                  alt={service.name}
-                  className="w-full h-full object-cover object-center mix-blend-multiply opacity-90 will-change-transform"
-                />
-              </div>
             </div>
-
-            <div className="w-full aspect-[4/3] mt-12 rounded-sm overflow-hidden bg-[var(--purple-soft)] shadow-xl md:hidden relative z-10">
-               <img 
-                  src={editorialVisuals[index]} 
-                  alt={service.name}
-                  className="w-full h-full object-cover mix-blend-multiply opacity-90"
-                />
-            </div>
-
           </div>
         </div>
       ))}
