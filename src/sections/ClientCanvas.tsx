@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 
 const images = [
   "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=400&q=80",

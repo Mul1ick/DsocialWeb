@@ -181,7 +181,7 @@ export default function Services() {
             {/* Dynamic Grid Layout (4 cols vs 3 cols) */}
             <div className={`grid grid-cols-1 md:grid-cols-2 ${panel.gridClass} gap-x-8 lg:gap-x-12 gap-y-16 h-full`}>
               
-              {panel.items.map((service, index) => {
+              {panel.items.map((service) => {
                 const absIndex = service.originalIndex;
                 return (
                   <div key={service.name} className="flex flex-col h-full group">

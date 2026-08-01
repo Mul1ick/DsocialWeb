@@ -4,7 +4,7 @@ import ClientsCanvas from "../sections/ClientCanvas";
 import CTA from "../sections/CTA";
 import Testimonials from "../sections/Testimonial";
 import Hero from "../sections/Hero";
-import OurApproach from "../sections/OurApproach";
+// import OurApproach from "../sections/OurApproach";
 // import Philosophy from "../sections/Philosophy";
 // import Process from "../sections/Process";
 // import SelectedWork from "../sections/SelectedWork";
