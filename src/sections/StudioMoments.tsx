@@ -3,25 +3,24 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Heart, MessageCircle, BarChart2, Play } from "lucide-react";
-import founderPhoto from "../assets/Founder_photo.jpg";
-import { clients } from "../lib/content";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
 // Expanded to 10 items for a perfect 5-column, 2-row grid. 
 // You can easily add 5 more for a 3-row layout.
 const scatterData = [
-  { img: clients[1].logo, type: "photo", x: "-50vw", y: "-40vh", rotate: -15, scale: 1.2 },
-  { img: clients[2].logo, type: "polaroid", x: "-20vw", y: "-60vh", rotate: 12, scale: 1.1 },
-  { img: clients[3].logo, type: "photo", x: "10vw", y: "-50vh", rotate: -5, scale: 1.3 },
-  { img: founderPhoto, type: "reel", x: "40vw", y: "-30vh", rotate: 20, scale: 1.1 },
-  { img: clients[5].logo, type: "photo", x: "60vw", y: "-10vh", rotate: -25, scale: 1.4 },
+  { img: "public/BTS/BTS011.JPG", type: "photo", x: "-50vw", y: "-40vh", rotate: -15, scale: 1.2 },
+  { img: 'public/BTS/BTS013.JPG', type: "polaroid", x: "-20vw", y: "-60vh", rotate: 12, scale: 1.1 },
+  { img: 'public/BTS/IMG_173.JPG', type: "photo", x: "10vw", y: "-50vh", rotate: -5, scale: 1.3 },
+  { img: 'public/BTS/IMG_172.JPG', type: "reel", x: "40vw", y: "-30vh", rotate: 20, scale: 1.1 },
+  { img: 'public/BTS/IMG_400.JPG', type: "photo", x: "60vw", y: "-10vh", rotate: -25, scale: 1.4 },
   
-  { img: clients[6].logo, type: "polaroid", x: "-60vw", y: "20vh", rotate: -20, scale: 1.2 },
-  { img: clients[7].logo, type: "photo", x: "-30vw", y: "40vh", rotate: 15, scale: 1.3 },
-  { img: clients[8].logo, type: "reel", x: "0vw", y: "50vh", rotate: -10, scale: 1.1 },
-  { img: clients[9].logo, type: "polaroid", x: "30vw", y: "60vh", rotate: 25, scale: 1.2 },
-  { img: clients[10]?.logo || clients[0].logo, type: "photo", x: "60vw", y: "40vh", rotate: -15, scale: 1.1 },
+  { img: 'public/BTS/IMG_1295.JPG', type: "polaroid", x: "-60vw", y: "20vh", rotate: -20, scale: 1.2 },
+  { img: 'public/BTS/IMG_1702.JPG', type: "photo", x: "-30vw", y: "40vh", rotate: 15, scale: 1.3 },
+  { img: 'public/BTS/IMG_6325.JPG', type: "reel", x: "0vw", y: "50vh", rotate: -10, scale: 1.1 },
+  { img: 'public/BTS/IMG_6327.JPG', type: "polaroid", x: "30vw", y: "60vh", rotate: 25, scale: 1.2 },
+  { img: 'public/BTS/BTS011.JPG', type: "photo", x: "60vw", y: "40vh", rotate: -15, scale: 1.1 },
 ];
 
 export default function StudioMoments() {

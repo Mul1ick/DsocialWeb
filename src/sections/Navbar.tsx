@@ -4,9 +4,9 @@ import logo from "../assets/Dsocial_logo_web.png";
 import { useScrollState } from "../hooks/useScrollState";
 
 const navItems = [
-  { label: "Services", href: "#services" },
+  {label: "About Us", href: "#about"},
   { label: "Approach", href: "#approach" },
-  { label: "Process", href: "#process" },
+  { label: "Services", href: "#services" },
   { label: "Contact", href: "#contact" },
 ];
 

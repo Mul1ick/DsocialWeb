@@ -2,7 +2,7 @@ import SiteLayout from "../layouts/SiteLayout";
 import About from "../sections/About";
 import ClientsCanvas from "../sections/ClientCanvas";
 import CTA from "../sections/CTA";
-import FounderNote from "../sections/FounderNote";
+import Testimonials from "../sections/Testimonial";
 import Hero from "../sections/Hero";
 import OurApproach from "../sections/OurApproach";
 // import Philosophy from "../sections/Philosophy";
@@ -18,12 +18,12 @@ export default function HomePage() {
       <About />
       <ClientsCanvas />
       <StudioMoments />
-      <OurApproach />
+      {/* <OurApproach /> */}
       <Services />
       {/* <SelectedWork /> */}
       {/* <Philosophy /> */}
       {/* <Process />/ */}
-      <FounderNote />
+      <Testimonials />
       <CTA />
     </SiteLayout>
   );

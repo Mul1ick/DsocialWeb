@@ -135,19 +135,19 @@ export default function PhoneMockup() {
           <div className="absolute inset-0 rounded-[42px] overflow-hidden bg-neutral-900">
             {/* PLACE YOUR REEL HERE */}
 
-            {/*
+
             <video
-                src="/videos/bus-reel.mp4"
+                src="/board/IMG_3374_compressed.mp4"
                 autoPlay
                 muted
                 loop
                 playsInline
                 className="absolute inset-0 h-full w-full object-cover"
             />
-            */}
+
 
             {/* Placeholder */}
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-800">
+            {/* <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-800">
               <div className="text-center">
                 <div className="text-5xl mb-4">🎬</div>
 
@@ -159,7 +159,7 @@ export default function PhoneMockup() {
                   Drop your MP4 here
                 </p>
               </div>
-            </div>
+            </div> */}
 
             {/* Glass Reflection */}
             <motion.div

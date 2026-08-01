@@ -1,175 +1,139 @@
-import { useState, useRef } from "react";
-import BoardCluster from "../components/BoardCluster";
-import { campaignBoard, CampaignCategory } from "../data/clientBoard";
-import ExpandedBoard from "../components/ExpandedBoard";
-import SectionShell from "../components/SectionShell";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import AmbientNote from "../components/AmbientNote";
-import { decorativeNotes } from "../data/boardDecor";
-import BoardProp from "../components/BoardProps";
-import { boardAssets } from "../data/boardAssets";
-import BoardStrings from "../components/BoardStrings";
+import React from 'react';
 
-gsap.registerPlugin(ScrollTrigger);
+const images = [
+  "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=400&q=80",
+  "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=400&q=80",
+  "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=400&q=80",
+  "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=400&q=80",
+  "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=400&q=80",
+  "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&w=400&q=80",
+  "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=400&q=80",
+  "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=400&q=80",
+  "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=400&q=80",
+];
 
-export default function ClientsCanvas() {
-  const [selected, setSelected] = useState<CampaignCategory | null>(null);
-  const boardRef = useRef<HTMLDivElement>(null);
+const caseFiles = [
+  { id: 1, title: 'Interiors', brands: 4, img: images[0], hasTape: true, rotation: '-rotate-1', pinX: '50%', note: { text: 'Moodboards\nConcepts', pos: '-left-10 top-12', rot: '-rotate-3' } },
+  { id: 2, title: 'Home Décor', brands: 4, img: images[1], hasClip: true, rotation: 'rotate-1', pinX: '60%', imgRot: 'rotate-12', imgOffset: '-right-20 -top-2' },
+  { id: 3, title: 'Beauty', brands: 4, img: images[2], hasTape: false, rotation: '-rotate-2', pinX: '40%', note: { text: 'Approved ♡', pos: '-right-6 -top-4', rot: 'rotate-3' }, imgRot: 'rotate-6', imgOffset: '-right-16 top-4' },
+  { id: 4, title: 'Events', brands: 3, img: images[3], hasTape: false, rotation: 'rotate-0', pinX: '30%', note: { text: 'Revisions\nin progress', pos: '-left-12 top-10', rot: '-rotate-2' }, imgRot: 'rotate-6', imgOffset: '-right-20 top-2' },
+  { id: 5, title: 'Fashion', brands: 4, img: images[4], hasClip: true, hasTape: true, rotation: '-rotate-1', pinX: '50%', specialNote: true, imgRot: '-rotate-6', imgOffset: '-right-16 -top-4' },
+  { id: 6, title: 'Food', brands: 2, img: images[5], hasTape: false, rotation: 'rotate-2', pinX: '45%', note: { text: 'Shoot Friday', pos: '-right-6 -bottom-6', rot: 'rotate-2' }, imgRot: 'rotate-12', imgOffset: '-right-24 top-0' },
+  { id: 7, title: 'Baby', brands: 1, img: images[6], hasClip: true, rotation: '-rotate-2', pinX: '35%', imgRot: 'rotate-6', imgOffset: '-right-20 top-4' },
+  { id: 8, title: 'Jewellery', brands: 2, img: images[7], hasTape: true, tapePos: '-top-3 left-1/2', rotation: 'rotate-1', pinX: '45%', hasPalette: true, imgRot: '-rotate-3', imgOffset: '-right-16 -top-2' },
+  { id: 9, title: 'Media', brands: 4, img: images[8], hasTape: false, rotation: 'rotate-0', pinX: '50%', note: { text: 'V14 ☆', pos: '-right-4 -top-2', rot: '-rotate-3' }, imgRot: 'rotate-12', imgOffset: '-right-24 top-2' },
+];
 
-  useGSAP(
-    () => {
-      const cards = gsap.utils.toArray<HTMLElement>(".client-cluster");
-
-      gsap.from(cards, {
-        y: 40,
-        opacity: 0,
-        scale: 0.9,
-        duration: 0.9,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: boardRef.current,
-          start: "top 70%",
-          once:true,
-        },
-      });
-    },
-    { scope: boardRef },
-  );
-
+export default function ClientCanvas() {
   return (
-    <SectionShell id="clients" className="relative py-36 overflow-hidden">
-      <div
-        className="
-          absolute
-          inset-0
-          bg-gradient-to-br
-          from-[#F8F4EF]
-          via-[#FBF9F5]
-          to-[#F3EEE8]
-        "
-      />
+    // The "Wall" Background
+    <section className="min-h-screen w-full relative flex items-center justify-center overflow-hidden font-sans bg-[var(--bg)] py-20 px-4 md:px-12">
+      
+      {/* The Framed Board Container */}
+      <div className="relative w-full max-w-[1400px] flex items-center justify-center rounded-[2rem] shadow-[0_30px_60px_rgba(0,0,0,0.15)]">
+        
+        {/* The Felt Board Image (stretches to fill the container, acting as the frame) */}
+        <img 
+          src="/board/felt-beige.png" // Update this path if it's imported from assets
+          alt="Felt Board Background" 
+          className="absolute inset-0 w-full h-full object-fill z-0 pointer-events-none rounded-[2rem]"
+        />
 
-      <div
-        className="
-          absolute
-          inset-0
-          bg-[radial-gradient(circle_at_center,transparent_30%,rgba(139,90,150,0.06))]
-        "
-      />
+        {/* Inner Padding container to keep cards off the wooden frame */}
+        <div className="relative z-10 w-full px-12 py-20 md:px-24 md:py-28 xl:px-32 xl:py-36 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-12 gap-x-16 lg:gap-x-24 place-items-center scale-[0.85] xl:scale-100 origin-center">
+          
+          {caseFiles.map((item) => (
+            <div key={item.id} className={`relative w-[260px] h-[220px] ${item.rotation}`}>
+              
+              {/* Background Image / Polaroid Layer */}
+              <div className={`absolute ${item.imgOffset || '-right-20 -top-2'} w-[180px] h-[200px] bg-white p-2 pb-6 shadow-[2px_8px_16px_rgba(0,0,0,0.15)] ${item.imgRot || 'rotate-6'} z-0 transition-transform hover:scale-105 hover:rotate-0 duration-300`}>
+                <div className="w-full h-full bg-gray-200 overflow-hidden">
+                  <img src={item.img} alt={item.title} className="w-full h-full object-cover" />
+                </div>
+                {item.hasTape && (
+                  <div className="absolute -top-2 -left-3 w-16 h-5 bg-[#bdaec6] opacity-80 -rotate-12 shadow-sm mix-blend-multiply" />
+                )}
+              </div>
 
-      <div className="relative z-20 max-w-7xl mx-auto text-center mb-20 px-6">
-        <p className="uppercase tracking-[0.35em] text-xs text-neutral-500 mb-4">
-          Case Files
-        </p>
+              {/* Main White Card Layer */}
+              <div className="absolute inset-0 bg-[#fbfaf8] shadow-[0_12px_24px_rgba(0,0,0,0.08)] border border-[#e5e5e5] p-6 flex flex-col justify-between z-10">
+                
+                {/* Push Pin */}
+                <div 
+                  className="absolute -top-2 w-4 h-4 rounded-full shadow-sm z-30"
+                  style={{
+                    left: item.pinX,
+                    background: 'radial-gradient(circle at 30% 30%, #a68453, #5c4322)',
+                    boxShadow: '2px 4px 5px rgba(0,0,0,0.25), inset -1px -1px 3px rgba(0,0,0,0.4)'
+                  }}
+                />
 
-        <h2 className="text-[clamp(42px,6vw,72px)] font-light text-[#2B1C2F]">
-          The Campaign Board
-        </h2>
+                {/* Tape on main card */}
+                {item.hasTape && (
+                  <div className={`absolute w-16 h-5 bg-[#bdaec6] opacity-80 shadow-sm mix-blend-multiply z-20 ${item.tapePos || '-top-2 -left-4 -rotate-12'}`} />
+                )}
 
-        <p className="mt-6 text-neutral-500 max-w-xl mx-auto leading-8">
-          Clues, categories, and the brands we&apos;ve helped crack the code on.
-          Every campaign starts with organised chaos.
-        </p>
+                {/* Paperclip */}
+                {item.hasClip && (
+                  <div className="absolute -top-4 right-6 w-4 h-12 border-[2px] border-[#c0a062] rounded-full z-30 rotate-3 shadow-[1px_2px_3px_rgba(0,0,0,0.15)]" style={{ clipPath: 'inset(0 0 20% 0)' }}>
+                    <div className="absolute top-1 left-1 w-1 h-8 border-[2px] border-[#c0a062] rounded-full" />
+                  </div>
+                )}
+
+                <div className="mt-2">
+                  <div className="flex items-center gap-4 border-b border-[#d4d4d4] pb-2 mb-4">
+                    <span className="text-[9px] tracking-[0.2em] uppercase text-[#7a7a7a] font-medium">
+                      Case File 0{item.id}
+                    </span>
+                  </div>
+                  <h2 className="font-serif text-3xl text-[#3b2745] tracking-tight leading-none mt-2">
+                    {item.title}
+                  </h2>
+                </div>
+
+                <div className="flex justify-between items-center border-b border-[#d4d4d4] pb-3">
+                  <span className="text-[9px] tracking-widest uppercase text-[#7a7a7a] font-medium">
+                    {item.brands} Active Brand{item.brands > 1 ? 's' : ''}
+                  </span>
+                  <span className="text-[#3b2745] text-sm">→</span>
+                </div>
+              </div>
+
+              {/* Post-it Notes Layer */}
+              {item.note && (
+                <div className={`absolute z-40 bg-[#c6b6d3] px-3 py-2 shadow-[2px_4px_8px_rgba(0,0,0,0.1)] whitespace-pre-line font-[cursive] text-[#2c1d33] text-xs ${item.note.pos} ${item.note.rot}`}>
+                  <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-8 h-3 bg-white/30 backdrop-blur-sm -rotate-3 mix-blend-screen" />
+                  {item.note.text}
+                </div>
+              )}
+
+              {/* Special Large Note */}
+              {item.specialNote && (
+                <div className="absolute -bottom-12 right-2 z-40 bg-[#f7f6f3] border-l-2 border-l-[#d4d4d4] px-4 py-3 shadow-[2px_6px_12px_rgba(0,0,0,0.1)] rotate-3">
+                   <div className="space-y-2 font-[cursive] text-[#2c1d33] text-sm leading-snug">
+                     <p>More BTS</p>
+                     <p>coming soon! ♡</p>
+                   </div>
+                   <div className="absolute inset-0 pointer-events-none opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(transparent, transparent 20px, #3b2745 21px)'}} />
+                </div>
+              )}
+
+              {/* Color Palette */}
+              {item.hasPalette && (
+                <div className="absolute -bottom-8 right-2 z-40 bg-[#f7f6f3] p-2.5 shadow-[2px_4px_10px_rgba(0,0,0,0.1)] -rotate-3 flex flex-col gap-1.5">
+                  <span className="font-[cursive] text-[10px] text-[#3b2745]">Palette</span>
+                  <div className="flex gap-1.5">
+                    <div className="w-3.5 h-3.5 rounded-full bg-[#b2a4bf]" />
+                    <div className="w-3.5 h-3.5 rounded-full bg-[#755c82]" />
+                    <div className="w-3.5 h-3.5 rounded-full bg-[#463053]" />
+                    <div className="w-3.5 h-3.5 rounded-full bg-[#d6c7b8]" />
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-
-      <div
-        ref={boardRef}
-        className="
-          relative
-          mx-auto
-          w-full
-          max-w-[1180px]
-          min-h-[760px]
-          rounded-[40px]
-          border-2
-          border-[#D4CEC3]
-          bg-[#FDFBF7]
-          shadow-[0_40px_120px_rgba(0,0,0,.08)]
-          overflow-hidden
-        "
-      >
-        <div className="absolute inset-0 bg-[#E4DED3]" />
-
-        <div
-          className="
-            absolute
-            inset-0
-            opacity-20
-            bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,.5)_0.6px,transparent_0.7px)]
-            [background-size:5px_5px]
-          "
-        />
-
-        <div
-          className="
-            absolute
-            inset-0
-            opacity-15
-            bg-[radial-gradient(circle_at_80%_70%,rgba(0,0,0,.15)_0.6px,transparent_0.7px)]
-            [background-size:4px_4px]
-          "
-        />
-
-        <div
-          className="
-            absolute
-            inset-0
-            opacity-20
-            bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,.08)_50%,transparent_100%)]
-          "
-        />
-
-        <div
-          className="
-            absolute
-            inset-0
-            opacity-10
-            bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,.35)_1px,transparent_1px)]
-            [background-size:4px_4px]
-            mix-blend-overlay
-          "
-        />
-
-        <p
-          className="
-            absolute
-            top-5
-            right-8
-            z-[6]
-            text-[10px]
-            uppercase
-            tracking-[0.3em]
-            text-neutral-400/60
-            select-none
-            pointer-events-none
-          "
-        >
-          DS-CASE-2026
-        </p>
-
-        <BoardStrings categories={campaignBoard} boardRef={boardRef} />
-
-        {decorativeNotes.map((note) => (
-          <AmbientNote key={note.text} {...note} />
-        ))}
-
-        {boardAssets.map((asset, i) => (
-          <BoardProp key={i} {...asset} />
-        ))}
-
-        {campaignBoard.map((cluster) => (
-          <BoardCluster
-            key={cluster.id}
-            cluster={cluster}
-            onClick={() => setSelected(cluster)}
-          />
-        ))}
-      </div>
-
-      <ExpandedBoard category={selected} onClose={() => setSelected(null)} />
-    </SectionShell>
+    </section>
   );
 }
