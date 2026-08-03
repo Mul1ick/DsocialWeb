@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+}
+
 :root {
   /* The Soft Boutique Palette */
   --bg: #Faf7fb; /* Very soft, warm lilac-white */
