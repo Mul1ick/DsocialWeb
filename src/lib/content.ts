@@ -15,7 +15,7 @@ import TOLogo from "../assets/Client Logos/TO.png";
 import altheaLogo from "../assets/Client Logos/althea.png";
 import avaniLogo from "../assets/Client Logos/avani.png";
 import bikaneriLogo from "../assets/Client Logos/Bikaneri.png";
-import dynaconsLogo from "../assets/Client Logos/Dynacons.png";
+// import dynaconsLogo from "../assets/Client Logos/Dynacons.png";
 import eightLogo from "../assets/Client Logos/eight.png";
 import jsmLogo from "../assets/Client Logos/jsm.png";
 import lokaLogo from "../assets/Client Logos/loka.png";
