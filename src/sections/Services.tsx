@@ -154,32 +154,31 @@ export default function Services() {
   );
 
   return (
-    <section ref={sectionRef} id="services" className="relative h-screen w-full overflow-hidden bg-[var(--bg)]">
+    <section ref={sectionRef} className="relative h-screen w-full overflow-hidden bg-[var(--bg)] font-sans">
       
       {servicePanels.map((panel, panelIndex) => (
         <div
           key={panel.id}
-          ref={(el) => { panelsRef.current[panelIndex] = el; }}
-          className={`absolute inset-0 h-full w-full flex flex-col justify-center px-6 lg:px-12 z-10 will-change-transform ${
-            panelIndex % 2 === 0 ? "bg-[#Faf7fb]" : "bg-[#FDFBF7]"
-          }`}
-          style={{ zIndex: panelIndex }}
+          ref={(el) => {
+            panelsRef.current[panelIndex] = el;
+          }}
+          className="absolute inset-0 w-full h-full bg-[var(--bg)] will-change-transform flex flex-col items-center justify-start pt-16 md:pt-20 px-4 md:px-12"
         >
-          {/* Aesthetic border lines */}
-          <div className="absolute left-6 lg:left-12 top-0 bottom-0 w-px bg-[var(--purple-wash)] opacity-50 pointer-events-none" />
-          <div className="absolute right-6 lg:right-12 top-0 bottom-0 w-px bg-[var(--purple-wash)] opacity-50 pointer-events-none" />
-
-          {/* Section Indicator */}
-          <div className="absolute top-10 left-10 lg:left-16 z-40">
-            <p className="uppercase tracking-[0.35em] text-[10px] text-[var(--secondary)] font-medium">
+          
+          {/* THE HEADER: Normal document flow, centered at the top */}
+          <div className="w-full max-w-[1400px] mx-auto mb-10 md:mb-16 flex flex-col items-center justify-center text-center shrink-0">
+            <p className="uppercase tracking-[0.35em] text-[11px] text-[var(--secondary)] font-medium mb-3">
               What We Do — Part 0{panelIndex + 1}
             </p>
+            <h2 className="text-[clamp(36px,5vw,64px)] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight m-0">
+              Our Services.
+            </h2>
           </div>
 
-          <div className="w-full max-w-[1400px] mx-auto relative mt-20 md:mt-24">
+          <div className="w-full max-w-[1400px] mx-auto relative flex-grow pb-12 md:pb-20">
             
             {/* Dynamic Grid Layout (4 cols vs 3 cols) */}
-            <div className={`grid grid-cols-1 md:grid-cols-2 ${panel.gridClass} gap-x-8 lg:gap-x-12 gap-y-16 h-full`}>
+            <div className={`grid grid-cols-1 md:grid-cols-2 ${panel.gridClass} gap-x-8 lg:gap-x-12 gap-y-16 h-full items-start`}>
               
               {panel.items.map((service) => {
                 const absIndex = service.originalIndex;
@@ -191,15 +190,13 @@ export default function Services() {
                       <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--accent)] mb-3">
                         0{absIndex + 1}
                       </p>
-                      <h2 
-                        className="text-3xl lg:text-4xl xl:text-[2.5rem] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight uppercase"
-                      >
+                      <h2 className="text-3xl lg:text-4xl xl:text-[2.5rem] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight uppercase">
                         {editorialHeadings[absIndex]}
                       </h2>
                     </div>
 
                     {/* Image Block */}
-                    <div className="w-full aspect-[4/5] overflow-hidden bg-[var(--purple-soft)] rounded-sm shadow-md mb-6 relative">
+                    <div className="w-full aspect-[4/5] overflow-hidden bg-[var(--purple-soft)] rounded-sm shadow-md mb-6 relative shrink-0">
                       <div className="absolute inset-0 bg-[var(--purple-wash)] opacity-10 mix-blend-multiply z-10" />
                       <img 
                         src={editorialVisuals[absIndex]} 

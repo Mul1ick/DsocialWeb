@@ -86,16 +86,21 @@ export default function StudioMoments() {
     <section
       ref={sectionRef}
       id="studio"
-      className="relative min-h-screen w-full overflow-hidden bg-[#Faf7fb] flex items-center justify-center py-10 border-y border-[var(--purple-wash)]"
+      className="relative min-h-screen w-full overflow-hidden bg-[#Faf7fb] flex flex-col items-center justify-start py-20 border-y border-[var(--purple-wash)]"
     >
       <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(139,90,150,0.04))]" />
 
-      <div className="absolute top-8 left-1/2 -translate-x-1/2 z-20 text-center pointer-events-none mix-blend-multiply opacity-50">
-        <p className="uppercase tracking-[0.3em] text-[10px] text-[var(--secondary)] mb-2 font-medium">
+      {/* 2. THE HEADER: Sits at the top, centered, with mb-12 to push the grid down */}
+      <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12 mb-12 flex flex-col items-center justify-center text-center z-20">
+        <p className="uppercase tracking-[0.35em] text-[11px] text-[var(--secondary)] font-medium mb-3">
           Behind the Scenes
         </p>
+        <h2 className="text-[clamp(36px,5vw,64px)] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight m-0">
+          Studio Moments.
+        </h2>
       </div>
 
+      {/* 3. THE GRID: Flows naturally underneath */}
       <div className="grid-wrapper w-full max-w-[1400px] px-6 lg:px-12 z-10 mx-auto">
         <div className="grid grid-cols-5 gap-3 md:gap-4 lg:gap-5">
           {scatterData.map((item, index) => (

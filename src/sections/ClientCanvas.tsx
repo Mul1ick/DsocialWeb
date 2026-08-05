@@ -36,12 +36,22 @@ export default function ClientCanvas() {
 
   return (
     // The "Wall" Background
-    <section className="min-h-screen w-full relative flex items-center justify-center overflow-hidden font-sans bg-[var(--bg)] py-20 px-4 md:px-12">
+    <section className="min-h-screen w-full relative flex flex-col items-center justify-start font-sans bg-[var(--bg)] py-20 px-4 md:px-12">
       
-      {/* The Framed Board Container */}
+      {/* 2. THE HEADER: Sits at the top, spans full width, content centered */}
+      <div className="w-full max-w-[1400px] mb-12 flex flex-col items-center justify-center text-center">
+        <p className="uppercase tracking-[0.35em] text-[11px] text-[var(--secondary)] font-medium mb-3">
+          Case Files & Brands
+        </p>
+        <h2 className="text-[clamp(36px,5vw,64px)] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight m-0">
+          The Campaign Board.
+        </h2>
+      </div>
+
+      {/* 3. THE BOARD: Sits directly underneath the header */}
       <div className="relative w-full max-w-[1400px] flex items-center justify-center rounded-[2rem] shadow-[0_30px_60px_rgba(0,0,0,0.15)]">
         
-        {/* The Felt Board Image (stretches to fill the container, acting as the frame) */}
+        {/* Felt board background image */}
         <img 
           src="/board/felt-beige.png" 
           alt="Felt Board Background" 
