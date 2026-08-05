@@ -11,8 +11,7 @@ const stats = [
 ];
 
 export default function About() {
-  // 2. SWAP THIS VARIABLE ONCE IMPORTED
-  // Change `founderPhoto` to `teamPhoto` to see your new image.
+  
   const teamImageSrc = teamPhoto; 
 
   return (
