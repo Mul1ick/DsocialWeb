@@ -1,8 +1,12 @@
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { motion, useMotionValue, useSpring, useInView } from "framer-motion";
+import { useRef, useEffect } from "react";
 
 export default function PhoneMockup() {
   const phoneRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Tracks if the phone container is visible in the viewport
+  const isInView = useInView(phoneRef, { amount: 0.3 });
 
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);
@@ -16,6 +20,18 @@ export default function PhoneMockup() {
     stiffness: 140,
     damping: 18,
   });
+
+  // Play or pause the video based on visibility
+  useEffect(() => {
+    if (!videoRef.current) return;
+
+    if (isInView) {
+      // The catch block prevents console errors if the browser blocks unmuted autoplay
+      videoRef.current.play().catch((err) => console.warn("Autoplay blocked:", err));
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isInView]);
 
   function handleMove(e: React.MouseEvent<HTMLDivElement>) {
     const rect = phoneRef.current?.getBoundingClientRect();
@@ -133,33 +149,14 @@ export default function PhoneMockup() {
 
           {/* Screen */}
           <div className="absolute inset-0 rounded-[42px] overflow-hidden bg-neutral-900">
-            {/* PLACE YOUR REEL HERE */}
-
-
+            {/* VIDEO WITH REF */}
             <video
-                src="/board/IMG_3374_compressed.mp4"
-                autoPlay
-                muted
+                ref={videoRef}
+                src="/board/IMG_3555.MP4"
                 loop
                 playsInline
                 className="absolute inset-0 h-full w-full object-cover"
             />
-
-
-            {/* Placeholder */}
-            {/* <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-800">
-              <div className="text-center">
-                <div className="text-5xl mb-4">🎬</div>
-
-                <p className="text-white text-lg font-medium">
-                  Reel Placeholder
-                </p>
-
-                <p className="text-neutral-400 text-sm mt-2">
-                  Drop your MP4 here
-                </p>
-              </div>
-            </div> */}
 
             {/* Glass Reflection */}
             <motion.div

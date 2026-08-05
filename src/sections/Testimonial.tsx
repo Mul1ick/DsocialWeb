@@ -13,22 +13,50 @@ const testimonials = [
   },
   {
     id: 2,
-    text: `"They don't just create content; they build cultural moments. The kind of care and strategic depth they bring is rare. They feel like an in-house team that understands our exact aesthetic and target audience."`,
-    author: "David Chen, CMO, Lumina",
-    logoAlt: "Lumina",
+    text: `"DSocial transformed our brand presence completely. Their creative strategy and content were exceptional. My brand’s reach doubled within a month of organic content. Their ability to create impactful content made the entire process seamless."`,
+    author: "Rhea Chatterjee, Founder, Rearrange Home",
+    logoAlt: "Rearrange",
     image: null,
   },
   {
     id: 3,
-    text: `"Visually stunning and highly converting. We saw our engagement metrics triple in the first month alone. The attention to detail on shoot days is incredible, capturing the raw, authentic elements we needed."`,
-    author: "Elena Rodriguez, Director, Maison & Co.",
+    text: `"Working with DSocial felt like having an in-house marketing team. Our engagement tripled within the first month itself, and it was unbelievable. Their strategic approach and creative execution truly helped us connect better with our audience and build a stronger brand presence."`,
+    author: "Jhanvi Shah, CEO, Tokyo Tori",
     logoAlt: "Maison",
     image: null,
   },
   {
     id: 4,
-    text: `"Our community growth skyrocketed. They understand social algorithms and human psychology perfectly, turning our complex ideas into highly digestible, beautiful content systems that scale."`,
-    author: "Marcus Thorne, Head of Growth, Vitality",
+    text: `"DSocial is the creative partner every brand needs. Their ability to bring ideas to life with precision and creativity makes every collaboration effortless. I’d highly recommend them. I can confidently trust them to deliver exceptional work every single time."`,
+    author: "Nirmiti Jhaveri, Director, Nirmiti Jhaveri Productions",
+    logoAlt: "Vitality",
+    image: null,
+  },
+  {
+    id: 5,
+    text: `"Our social media inquiries grew by nearly 45% within two months of partnering with DSocial. Their creative direction, attention to detail, and data-driven approach made a measurable difference to our business."`,
+    author: "Rachna Kumar, Rachna Kumar",
+    logoAlt: "Vitality",
+    image: null,
+  },
+  {
+    id: 6,
+    text: `"Within the first quarter, our profile visits increased by 120%, and we saw a noticeable rise in qualified inquiries through social media. DSocial's combination of creativity and strategy produced results that went beyond our expectations."`,
+    author: "Niharika Saraf, Polka House Interior Design",
+    logoAlt: "Vitality",
+    image: null,
+  },
+  {
+    id: 7,
+    text: `"DSocial helped us take our campaign visibility to the next level, achieving over a 5x increase in campaign reach compared to our previous initiatives. Their creative strategy, timely execution, and ability to capture audience attention helped us create campaigns that truly stood out."`,
+    author: "Vedant Shah, Plural Restaurant",
+    logoAlt: "Vitality",
+    image: null,
+  },
+  {
+    id: 8,
+    text: `"Partnering with DSocial helped us turn our social media presence into a stronger business driver. Within a few months, we saw a 35% increase in sales generated through digital channels. Their strategic approach, creative execution, and understanding of our audience made a significant impact on our growth."`,
+    author: "Founder, Bikaner Jewellery",
     logoAlt: "Vitality",
     image: null,
   },
@@ -36,16 +64,16 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <SectionShell id="testimonials" className="py-32 relative z-10 border-t border-[var(--purple-wash)] overflow-hidden bg-[#F2EFE8]">
+    <SectionShell id="testimonials" className="py-32 relative z-10 border-t border-[var(--purple-wash)] overflow-hidden bg-[var(--bg)]">
       
       {/* Section Header */}
       <div className="max-w-[1280px] mx-auto px-6 lg:px-12 mb-16 md:mb-20">
         <Reveal>
-          <p className="uppercase tracking-[0.35em] text-[10px] text-[#5a5a5a] font-medium mb-3">
+          <p className="uppercase tracking-[0.35em] text-[10px] text-[var(--secondary)] font-medium mb-3">
             Client Voices
           </p>
-          <h2 className="text-[clamp(36px,5vw,64px)] leading-[1.05] font-light text-[#2c1d33] tracking-tight m-0">
-            The people behind the work.
+          <h2 className="text-[clamp(36px,5vw,64px)] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight m-0">
+            Testimonials
           </h2>
         </Reveal>
       </div>
@@ -54,8 +82,8 @@ export default function Testimonials() {
       <div className="relative w-full flex items-center group">
         
         {/* Edge Fade Gradients for smooth entrance/exit */}
-        <div className="absolute left-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-r from-[#F2EFE8] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-l from-[#F2EFE8] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-r from-[var(--bg)] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-l from-[var(--bg)] to-transparent z-10 pointer-events-none" />
         
         {/* The Scrolling Track */}
         <div className="flex w-max animate-infinite-scroll hover:[animation-play-state:paused]">
@@ -69,7 +97,7 @@ export default function Testimonials() {
                 >
                   
                   {/* 1. The Feed Screenshot Container */}
-                  <div className="w-full aspect-[2/3] bg-[#d8d3c9] overflow-hidden mb-6 relative">
+                  <div className="w-full aspect-[2/3] bg-[var(--purple-wash)] overflow-hidden mb-6 relative rounded-sm">
                     {testimonial.image ? (
                       <img 
                         src={testimonial.image} 
@@ -77,25 +105,25 @@ export default function Testimonials() {
                         className="w-full h-full object-cover" 
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-[#a8a39a] text-sm uppercase tracking-widest">
+                      <div className="w-full h-full flex items-center justify-center text-[var(--secondary)] text-sm uppercase tracking-widest opacity-60">
                         [Feed Screenshot]
                       </div>
                     )}
                   </div>
 
                   {/* 2. The Testimonial Text */}
-                  <p className="text-[15px] md:text-base text-[#2c1d33] font-normal leading-relaxed mb-6">
+                  <p className="text-[15px] md:text-base text-[var(--primary)] font-normal leading-relaxed mb-6">
                     {testimonial.text}
                   </p>
 
                   {/* 3. The Author */}
-                  <p className="text-sm md:text-[15px] font-bold text-[#2c1d33] mb-4">
+                  <p className="text-sm md:text-[15px] font-medium text-[var(--purple-deep)] mb-4">
                     - {testimonial.author}
                   </p>
 
                   {/* 4. The Brand Logo Placeholder */}
                   <div className="mt-auto h-12 flex items-center">
-                    <div className="h-8 md:h-10 text-3xl font-serif tracking-widest text-[#2c1d33] opacity-80">
+                    <div className="h-8 md:h-10 text-3xl font-serif tracking-widest text-[var(--purple-deep)] opacity-80">
                       {testimonial.logoAlt}
                     </div>
                   </div>
