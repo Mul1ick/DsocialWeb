@@ -28,17 +28,26 @@ const editorialVisuals = [
   clients[1]?.logo || founderPhoto,
 ];
 
-// Split the services into two distinct groups for the two panels
+// Use an 8-column grid to ensure identical sizing and perfect centering
 const servicePanels = [
   {
     id: "panel-1",
-    items: services.slice(0, 4).map((service, i) => ({ ...service, originalIndex: i })),
-    gridClass: "lg:grid-cols-4", // 4 columns for the first panel
+    items: services.slice(0, 4).map((service, i) => ({ 
+      ...service, 
+      originalIndex: i,
+      itemClass: "lg:col-span-2" // 4 items x 2 cols = 8 cols
+    })),
+    gridClass: "lg:grid-cols-8",
   },
   {
     id: "panel-2",
-    items: services.slice(4, 7).map((service, i) => ({ ...service, originalIndex: i + 4 })),
-    gridClass: "lg:grid-cols-3", // 3 columns for the second panel
+    items: services.slice(4, 7).map((service, i) => ({ 
+      ...service, 
+      originalIndex: i + 4,
+      // Start the first item in column 2 to perfectly center the 3 cards (leaves col 1 and 8 empty)
+      itemClass: i === 0 ? "lg:col-span-2 lg:col-start-2" : "lg:col-span-2"
+    })),
+    gridClass: "lg:grid-cols-8", 
   }
 ];
 
@@ -77,18 +86,15 @@ export default function Services() {
         const currentPanel = panels[currentIndex];
         const nextPanel = panels[index];
         
-        // Grab all images in the incoming panel for a staggered reveal
         const nextImages = nextPanel?.querySelectorAll('.service-image');
 
         const tl = gsap.timeline();
 
         if (direction === 1) {
-          // Scrolling down: Bring next panel UP
           tl.fromTo(nextPanel, { yPercent: 100, boxShadow: "0px -40px 100px rgba(75,41,79,0.08)" }, { yPercent: 0, boxShadow: "0px 0px 0px rgba(0,0,0,0)", duration: 1, ease: "power3.inOut" }, 0);
           if (nextImages?.length) tl.fromTo(nextImages, { scale: 1.15 }, { scale: 1, duration: 1, ease: "power3.out", stagger: 0.05 }, 0.2);
           tl.to(currentPanel, { yPercent: -10, scale: 0.95, opacity: 0, duration: 1, ease: "power3.inOut" }, 0);
         } else {
-          // Scrolling up: Push current panel DOWN
           tl.to(currentPanel, { yPercent: 100, boxShadow: "0px -40px 100px rgba(75,41,79,0.08)", duration: 1, ease: "power3.inOut" }, 0);
           tl.fromTo(nextPanel, { yPercent: -10, scale: 0.95, opacity: 0 }, { yPercent: 0, scale: 1, opacity: 1, duration: 1, ease: "power3.inOut" }, 0);
           if (nextImages?.length) tl.fromTo(nextImages, { scale: 1.15 }, { scale: 1, duration: 1, ease: "power3.out", stagger: 0.05 }, 0);
@@ -132,7 +138,7 @@ export default function Services() {
         trigger: sectionRef.current,
         pin: true,
         start: "top top",
-        end: "+=1500", // Reduced buffer since there are only 2 transitions now
+        end: "+=1500", 
         onEnter: () => {
           if (!observer.isEnabled) {
             currentIndex = 0;
@@ -154,7 +160,7 @@ export default function Services() {
   );
 
   return (
-    <section ref={sectionRef} className="relative h-screen w-full overflow-hidden bg-[var(--bg)] font-sans">
+    <section ref={sectionRef} className="relative h-[100dvh] w-full overflow-hidden bg-[var(--bg)] font-sans">
       
       {servicePanels.map((panel, panelIndex) => (
         <div
@@ -162,41 +168,41 @@ export default function Services() {
           ref={(el) => {
             panelsRef.current[panelIndex] = el;
           }}
-          className="absolute inset-0 w-full h-full bg-[var(--bg)] will-change-transform flex flex-col items-center justify-start pt-16 md:pt-20 px-4 md:px-12"
+          className="absolute inset-0 w-full h-full bg-[var(--bg)] will-change-transform flex flex-col items-center justify-start pt-12 lg:pt-16 px-4 md:px-10"
         >
           
-          {/* THE HEADER: Normal document flow, centered at the top */}
-          <div className="w-full max-w-[1400px] mx-auto mb-10 md:mb-16 flex flex-col items-center justify-center text-center shrink-0">
-            <p className="uppercase tracking-[0.35em] text-[11px] text-[var(--secondary)] font-medium mb-3">
+          {/* Main Section Header */}
+          <div className="w-full max-w-[1400px] mx-auto mb-6 lg:mb-10 flex flex-col items-center justify-center text-center shrink-0">
+            <p className="uppercase tracking-[0.35em] text-[10px] text-[var(--secondary)] font-medium mb-2">
               What We Do — Part 0{panelIndex + 1}
             </p>
-            <h2 className="text-[clamp(36px,5vw,64px)] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight m-0">
+            <h2 className="text-[clamp(32px,4vw,56px)] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight m-0">
               Our Services.
             </h2>
           </div>
 
-          <div className="w-full max-w-[1400px] mx-auto relative flex-grow pb-12 md:pb-20">
+          <div className="w-full max-w-[1400px] mx-auto relative flex-grow pb-8">
             
-            {/* Dynamic Grid Layout (4 cols vs 3 cols) */}
-            <div className={`grid grid-cols-1 md:grid-cols-2 ${panel.gridClass} gap-x-8 lg:gap-x-12 gap-y-16 h-full items-start`}>
+            <div className={`grid grid-cols-1 md:grid-cols-2 ${panel.gridClass} gap-x-6 lg:gap-x-10 gap-y-8 h-full items-start`}>
               
               {panel.items.map((service) => {
                 const absIndex = service.originalIndex;
                 return (
-                  <div key={service.name} className="flex flex-col h-full group">
+                  <div key={service.name} className={`flex flex-col h-full group ${service.itemClass}`}>
                     
-                    {/* Header Block */}
-                    <div className="mb-6 lg:mb-10">
-                      <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--accent)] mb-3">
+                    {/* Fixed minimum height to keep all images aligned regardless of text lines */}
+                    <div className="mb-4 lg:mb-5 min-h-[90px] xl:min-h-[110px] flex flex-col justify-start">
+                      <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--accent)] mb-2">
                         0{absIndex + 1}
                       </p>
-                      <h2 className="text-3xl lg:text-4xl xl:text-[2.5rem] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight uppercase">
+                      {/* Scaled text size down slightly to prevent crowding */}
+                      <h2 className="text-xl lg:text-2xl xl:text-3xl leading-[1.1] font-light text-[var(--purple-deep)] tracking-tight uppercase">
                         {editorialHeadings[absIndex]}
                       </h2>
                     </div>
 
-                    {/* Image Block */}
-                    <div className="w-full aspect-[4/5] overflow-hidden bg-[var(--purple-soft)] rounded-sm shadow-md mb-6 relative shrink-0">
+                    {/* Changed to aspect-square to prevent vertical blowout on laptops */}
+                    <div className="w-full aspect-square overflow-hidden bg-[var(--purple-soft)] rounded-sm shadow-md mb-4 lg:mb-5 relative shrink-0">
                       <div className="absolute inset-0 bg-[var(--purple-wash)] opacity-10 mix-blend-multiply z-10" />
                       <img 
                         src={editorialVisuals[absIndex]} 
@@ -207,7 +213,8 @@ export default function Services() {
 
                     {/* Description Block */}
                     <div className="mt-auto pt-4 border-t border-[var(--purple-wash)]/60">
-                      <p className="text-sm md:text-base font-light text-[var(--primary)] leading-relaxed">
+                      {/* Scaled description text down slightly to fit */}
+                      <p className="text-xs lg:text-sm font-light text-[var(--primary)] leading-relaxed">
                         {service.description}
                       </p>
                     </div>
