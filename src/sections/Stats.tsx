@@ -1,4 +1,3 @@
-import React from "react";
 
 /**
  * Bento grid replicating the reference screenshot layout.
