@@ -160,7 +160,7 @@ export default function Services() {
   );
 
   return (
-    <section ref={sectionRef} className="relative h-[100dvh] w-full overflow-hidden bg-[var(--bg)] font-sans">
+    <section id = "services" ref={sectionRef} className="relative h-[100dvh] w-full overflow-hidden bg-[var(--bg)] font-sans">
       
       {servicePanels.map((panel, panelIndex) => (
         <div
@@ -177,7 +177,7 @@ export default function Services() {
               What We Do — Part 0{panelIndex + 1}
             </p>
             <h2 className="text-[clamp(32px,4vw,56px)] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight m-0">
-              Our Services.
+              Our Services
             </h2>
           </div>
 

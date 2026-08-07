@@ -6,7 +6,7 @@ import teamPhoto from "../assets/team.JPG";
 
 const stats = [
   { value: "5+", label: "Years building presence" },
-  { value: "12+", label: "Brands across industries" },
+  { value: "29+", label: "Brands across industries" },
   { value: "360°", label: "Creative & digital care" },
 ];
 
@@ -23,8 +23,8 @@ export default function About() {
           <div className="inline-block bg-[var(--purple-soft)] text-[var(--purple)] px-5 py-2 rounded-full text-xs font-medium uppercase tracking-widest w-fit mb-8 border border-[var(--purple-mid)]">
             The Ethos
           </div>
-          <h2 className="text-[clamp(36px,5vw,56px)] leading-[1.1] font-light text-[var(--purple-deep)] tracking-tight mb-8">
-            Who we are
+          <h2 className="text-[clamp(36px,5vw,56px)] leading-[1.1] font-bold text-[var(--purple-deep)] tracking-tight mb-8">
+            Who are we
           </h2>
           <p className="text-xl leading-relaxed text-[var(--secondary)] font-light mb-5">
             A boutique creative studio for brands with big ambitions! We hold a special place in our hearts for small businesses, independent founders and most of all, dreamers - because we understand that every milestone matters!

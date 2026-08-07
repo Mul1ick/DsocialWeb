@@ -10,6 +10,7 @@ import Hero from "../sections/Hero";
 // import SelectedWork from "../sections/SelectedWork";
 import Services from "../sections/Services";
 import StudioMoments from "../sections/StudioMoments";
+import Stats from "../sections/Stats";
 
 export default function HomePage() {
   return (
@@ -18,6 +19,7 @@ export default function HomePage() {
       <About />
       <ClientsCanvas />
       <StudioMoments />
+      <Stats />
       {/* <OurApproach /> */}
       <Services />
       {/* <SelectedWork /> */}

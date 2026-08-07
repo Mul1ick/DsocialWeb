@@ -3,15 +3,15 @@ import ExpandedBoard from '../components/ExpandedBoard';
 import { campaignBoard } from '../data/clientBoard';
 
 const images = [
-  "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=400&q=80",
+  "/board/polaroids/interiors.jpg",
+  "/board/polaroids/home.jpg",
+  "/board/polaroids/beauty.png",
+  "/board/polaroids/events.jpg",
+  "/board/polaroids/fashion.jpg",
+  "/board/polaroids/food.jpg",
+  "/board/polaroids/baby.jpg",
+  "/board/polaroids/jewellery.jpg",
+  "/board/polaroids/media.jpg",
 ];
 
 const caseFiles = [
@@ -36,15 +36,15 @@ export default function ClientCanvas() {
 
   return (
     // The "Wall" Background
-    <section className="min-h-screen w-full relative flex flex-col items-center justify-start font-sans bg-[var(--bg)] py-20 px-4 md:px-12">
+    <section id ="board" className="min-h-screen w-full relative flex flex-col items-center justify-start font-sans bg-[var(--bg)] py-20 px-4 md:px-12">
       
       {/* 2. THE HEADER: Sits at the top, spans full width, content centered */}
       <div className="w-full max-w-[1400px] mb-12 flex flex-col items-center justify-center text-center">
         <p className="uppercase tracking-[0.35em] text-[11px] text-[var(--secondary)] font-medium mb-3">
-          Case Files & Brands
+          Our Brands
         </p>
-        <h2 className="text-[clamp(36px,5vw,64px)] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight m-0">
-          The Campaign Board.
+        <h2 className="text-[clamp(36px,5vw,64px)] leading-[1.05] font-bold text-[var(--purple-deep)] tracking-tight m-0">
+          The Client Board
         </h2>
       </div>
 

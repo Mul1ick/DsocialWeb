@@ -19,7 +19,7 @@ export default function OurApproach() {
               Our Approach
             </p>
             <h2 className="text-[clamp(42px,6vw,72px)] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight m-0">
-              How we bring ideas to life.
+              How we bring ideas to life
             </h2>
           </div>
         </Reveal>
