@@ -7,17 +7,17 @@ import { Heart, MessageCircle, BarChart2, Play } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger);
 
 const scatterData = [
-  { img: "public/BTS/BTS011.JPG", type: "photo" },
-  { img: 'public/BTS/BTS013.JPG', type: "polaroid" },
-  { img: 'public/BTS/IMG_173.JPG', type: "photo" },
-  { img: 'public/BTS/IMG_172.JPG', type: "reel" },
-  { img: 'public/BTS/IMG_400.JPG', type: "photo" },
+  { img: "/bts/1.jpg", type: "photo" },
+  { img: "/bts/2.jpg", type: "polaroid" },
+  { img: "/bts/3.jpg", type: "photo" },
+  { img: "/bts/4.jpg", type: "reel" },
+  { img: "/bts/5.jpg", type: "photo" },
   
-  { img: 'public/BTS/IMG_1295.JPG', type: "polaroid" },
-  { img: 'public/BTS/IMG_1702.JPG', type: "photo" },
-  { img: 'public/BTS/IMG_6325.JPG', type: "reel" },
-  { img: 'public/BTS/IMG_6327.JPG', type: "polaroid" },
-  { img: 'public/BTS/BTS011.JPG', type: "photo" },
+  { img: "/bts/6.jpg", type: "polaroid" },
+  { img: "/bts/7.jpg", type: "photo" },
+  { img: "/bts/8.jpg", type: "reel" },
+  { img: "/bts/9.jpg", type: "polaroid" },
+  { img: "/bts/10.jpg", type: "photo" },
 ];
 
 export default function StudioMoments() {
@@ -95,7 +95,7 @@ export default function StudioMoments() {
         <p className="uppercase tracking-[0.35em] text-[11px] text-[var(--secondary)] font-medium mb-3">
           Behind the Scenes
         </p>
-        <h2 className="text-[clamp(36px,5vw,64px)] leading-[1.05] font-bold text-[var(--purple-deep)] tracking-tight m-0">
+        <h2 className="text-[clamp(36px,5vw,64px)] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight m-0">
           Studio Moments
         </h2>
       </div>
