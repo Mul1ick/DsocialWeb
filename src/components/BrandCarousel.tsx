@@ -60,7 +60,7 @@ export default function BrandCarousel({ brands }: Props) {
 
   return (
     <div className="mt-10">
-      <div className="relative flex items-center justify-center min-h-[300px]">
+      <div className="relative flex items-center justify-center min-h-[400px]">
         <button
           type="button"
           onClick={goPrev}
@@ -70,7 +70,8 @@ export default function BrandCarousel({ brands }: Props) {
           <ChevronLeft size={20} strokeWidth={1.5} />
         </button>
 
-        <div className="w-full max-w-[420px] overflow-hidden px-14">
+        {/* UPDATED: Increased max width from 420px to 560px */}
+        <div className="w-full max-w-[560px] overflow-hidden px-14">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={brand.name}
@@ -107,11 +108,12 @@ export default function BrandCarousel({ brands }: Props) {
               />
 
               <div className="relative flex flex-col items-center gap-6">
-                <div className="flex h-36 w-full items-center justify-center">
+                {/* UPDATED: Increased container height to h-64 */}
+                <div className="flex h-64 w-full items-center justify-center">
                   <img
                     src={brand.logo}
                     alt={brand.name}
-                    className="max-h-28 max-w-full object-contain mix-blend-multiply"
+                    className="max-h-56 max-w-full object-contain mix-blend-multiply"
                     draggable={false}
                   />
                 </div>

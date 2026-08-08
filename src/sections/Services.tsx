@@ -64,24 +64,24 @@ export default function Services() {
                 className="flex flex-col items-center text-center group cursor-default"
               >
                 {/* Icon Container with subtle hover background */}
-                <div className="w-32 h-32 mb-6 flex justify-center items-center relative rounded-full transition-all duration-300 group-hover:bg-[#EAE6F3]/50 group-hover:-translate-y-1">
+                <div className="w-40 h-40 mb-6 flex justify-center items-center relative rounded-full transition-all duration-300 group-hover:bg-[#EAE6F3]/50 group-hover:-translate-y-1">
                   {/* Added a safety check in case an image isn't uploaded in the CMS yet */}
                   {service.icon && (
                     <img 
                       src={urlFor(service.icon).url()} 
                       alt={`${service.title.replace('\n', ' ')} Icon`} 
-                      className="w-[85%] h-[85%] object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-105" 
+                      className="w-full h-full object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-105" 
                     />
                   )}
                 </div>
                 
                 {/* Title */}
-                <h3 className="text-[22px] font-semibold text-[var(--purple-deep)] mb-3 whitespace-pre-line leading-tight">
+                <h3 className="text-[22px] font-['Poppins'] text-[var(--purple-deep)] mb-3 whitespace-pre-line leading-tight">
                   {service.title}
                 </h3>
                 
                 {/* Subtitle */}
-                <p className="text-[15px] text-neutral-500 whitespace-pre-line leading-relaxed max-w-[220px]">
+                <p className="text-[15px]  text-neutral-500 whitespace-pre-line leading-relaxed max-w-[220px]">
                   {service.subtitle}
                 </p>
               </div>

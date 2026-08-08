@@ -1,60 +1,61 @@
-// import React from "react";
+import { useEffect, useState } from "react";
 import Reveal from "../components/Reveal";
 import SectionShell from "../components/SectionShell";
+import { sanityClient, urlFor } from "../lib/sanity";
 
-const testimonials = [
+// Fallback data so the site renders cleanly if Sanity is empty
+const fallbackTestimonials = [
   {
-    id: 1,
+    _id: "1",
     text: `"From strategy to execution, DSocial made every step seamless. Their creativity and understanding of our vision made all the difference. They consistently brought fresh ideas while staying true to our brand, making every campaign feel thoughtful and impactful."`,
     author: "Megha Agrawal, Founder, Avani Nepal",
     logoAlt: "Avani",
-    // Replace with the path to your actual feed screenshot (e.g., "/images/avani-grid.jpg")
     image: null, 
   },
   {
-    id: 2,
+    _id: "2",
     text: `"DSocial transformed our brand presence completely. Their creative strategy and content were exceptional. My brand’s reach doubled within a month of organic content. Their ability to create impactful content made the entire process seamless."`,
     author: "Rhea Chatterjee, Founder, Rearrange Home",
     logoAlt: "Rearrange",
     image: null,
   },
   {
-    id: 3,
+    _id: "3",
     text: `"Working with DSocial felt like having an in-house marketing team. Our engagement tripled within the first month itself, and it was unbelievable. Their strategic approach and creative execution truly helped us connect better with our audience and build a stronger brand presence."`,
     author: "Jhanvi Shah, CEO, Tokyo Tori",
     logoAlt: "Maison",
     image: null,
   },
   {
-    id: 4,
+    _id: "4",
     text: `"DSocial is the creative partner every brand needs. Their ability to bring ideas to life with precision and creativity makes every collaboration effortless. I’d highly recommend them. I can confidently trust them to deliver exceptional work every single time."`,
     author: "Nirmiti Jhaveri, Director, Nirmiti Jhaveri Productions",
     logoAlt: "Vitality",
     image: null,
   },
   {
-    id: 5,
+    _id: "5",
     text: `"Our social media inquiries grew by nearly 45% within two months of partnering with DSocial. Their creative direction, attention to detail, and data-driven approach made a measurable difference to our business."`,
     author: "Rachna Kumar, Rachna Kumar",
     logoAlt: "Vitality",
     image: null,
   },
   {
-    id: 6,
+    _id: "6",
     text: `"Within the first quarter, our profile visits increased by 120%, and we saw a noticeable rise in qualified inquiries through social media. DSocial's combination of creativity and strategy produced results that went beyond our expectations."`,
     author: "Niharika Saraf, Polka House Interior Design",
     logoAlt: "Vitality",
     image: null,
   },
   {
-    id: 7,
+    _id: "7",
     text: `"DSocial helped us take our campaign visibility to the next level, achieving over a 5x increase in campaign reach compared to our previous initiatives. Their creative strategy, timely execution, and ability to capture audience attention helped us create campaigns that truly stood out."`,
     author: "Vedant Shah, Plural Restaurant",
     logoAlt: "Vitality",
     image: null,
   },
   {
-    id: 8,
+    _id: "8",
     text: `"Partnering with DSocial helped us turn our social media presence into a stronger business driver. Within a few months, we saw a 35% increase in sales generated through digital channels. Their strategic approach, creative execution, and understanding of our audience made a significant impact on our growth."`,
     author: "Founder, Bikaner Jewellery",
     logoAlt: "Vitality",
@@ -63,6 +64,20 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
+  const [testimonials, setTestimonials] = useState<any[]>(fallbackTestimonials);
+
+  useEffect(() => {
+    sanityClient
+      .fetch(`*[_type == "testimonial"] | order(order asc)`)
+      .then((res) => {
+        // Only overwrite the fallback if Sanity actually returns data
+        if (res && res.length > 0) {
+          setTestimonials(res);
+        }
+      })
+      .catch((err) => console.error("Error fetching testimonials:", err));
+  }, []);
+
   return (
     <SectionShell id="testimonials" className="py-32 relative z-10 border-t border-[var(--purple-wash)] overflow-hidden bg-[var(--bg)]">
       
@@ -92,7 +107,7 @@ export default function Testimonials() {
             <div key={arrayIndex} className="flex gap-8 md:gap-12 px-4 md:px-6">
               {testimonials.map((testimonial) => (
                 <div 
-                  key={`${arrayIndex}-${testimonial.id}`}
+                  key={`${arrayIndex}-${testimonial._id || testimonial.author}`}
                   className="w-[320px] md:w-[380px] shrink-0 flex flex-col transition-transform duration-300 hover:-translate-y-1"
                 >
                   
@@ -100,7 +115,8 @@ export default function Testimonials() {
                   <div className="w-full aspect-[2/3] bg-[var(--purple-wash)] overflow-hidden mb-6 relative rounded-sm">
                     {testimonial.image ? (
                       <img 
-                        src={testimonial.image} 
+                        // Safely handle both Sanity image objects and fallback static URLs
+                        src={testimonial.image?.asset ? urlFor(testimonial.image).url() : testimonial.image} 
                         alt={`${testimonial.logoAlt} Instagram Feed`} 
                         className="w-full h-full object-cover" 
                       />
@@ -123,9 +139,17 @@ export default function Testimonials() {
 
                   {/* 4. The Brand Logo Placeholder */}
                   <div className="mt-auto h-12 flex items-center">
-                    <div className="h-8 md:h-10 text-3xl font-serif tracking-widest text-[var(--purple-deep)] opacity-80">
-                      {testimonial.logoAlt}
-                    </div>
+                    {testimonial.brandLogo ? (
+                      <img 
+                        src={testimonial.brandLogo?.asset ? urlFor(testimonial.brandLogo).url() : testimonial.brandLogo} 
+                        alt={`${testimonial.logoAlt} Logo`}
+                        className="h-8 md:h-10 w-auto object-contain object-left opacity-80 mix-blend-multiply" 
+                      />
+                    ) : (
+                      <div className="h-8 md:h-10 text-3xl font-serif tracking-widest text-[var(--purple-deep)] opacity-80">
+                        {testimonial.logoAlt}
+                      </div>
+                    )}
                   </div>
 
                 </div>

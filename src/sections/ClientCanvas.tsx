@@ -21,7 +21,7 @@ const caseFiles = [
   { id: 4, categoryId: 'events', title: 'Events', brands: 3, img: images[3], hasTape: false, rotation: 'rotate-0', pinX: '30%', note: { text: 'Revisions\nin progress', pos: '-left-12 top-10', rot: '-rotate-2' }, imgRot: 'rotate-6', imgOffset: '-right-20 top-2' },
   { id: 5, categoryId: 'fashion', title: 'Fashion', brands: 4, img: images[4], hasClip: true, hasTape: true, rotation: '-rotate-1', pinX: '50%', specialNote: true, imgRot: '-rotate-6', imgOffset: '-right-16 -top-4' },
   { id: 6, categoryId: 'food', title: 'Food', brands: 2, img: images[5], hasTape: false, rotation: 'rotate-2', pinX: '45%', note: { text: 'Shoot Friday', pos: '-right-6 -bottom-6', rot: 'rotate-2' }, imgRot: 'rotate-12', imgOffset: '-right-24 top-0' },
-  { id: 7, categoryId: 'baby', title: 'Baby', brands: 1, img: images[6], hasClip: true, rotation: '-rotate-2', pinX: '35%', imgRot: 'rotate-6', imgOffset: '-right-20 top-4' },
+  { id: 7, categoryId: 'kids and lifestyle', title: 'Baby', brands: 1, img: images[6], hasClip: true, rotation: '-rotate-2', pinX: '35%', imgRot: 'rotate-6', imgOffset: '-right-20 top-4' },
   { id: 8, categoryId: 'jewellery', title: 'Jewellery', brands: 2, img: images[7], hasTape: true, tapePos: '-top-3 left-1/2', rotation: 'rotate-1', pinX: '45%', hasPalette: true, imgRot: '-rotate-3', imgOffset: '-right-16 -top-2' },
   { id: 9, categoryId: 'media', title: 'Media', brands: 4, img: images[8], hasTape: false, rotation: 'rotate-0', pinX: '50%', note: { text: 'V14 ☆', pos: '-right-4 -top-2', rot: '-rotate-3' }, imgRot: 'rotate-12', imgOffset: '-right-24 top-2' },
 ];

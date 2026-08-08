@@ -1,33 +1,41 @@
-import { useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Heart, MessageCircle, BarChart2, Play } from "lucide-react";
+import { sanityClient, urlFor } from "../lib/sanity";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const scatterData = [
-  { img: "/bts/1.jpg", type: "photo" },
-  { img: "/bts/2.jpg", type: "polaroid" },
-  { img: "/bts/3.jpg", type: "photo" },
-  { img: "/bts/4.jpg", type: "reel" },
-  { img: "/bts/5.jpg", type: "photo" },
-  
-  { img: "/bts/6.jpg", type: "polaroid" },
-  { img: "/bts/7.jpg", type: "photo" },
-  { img: "/bts/8.jpg", type: "reel" },
-  { img: "/bts/9.jpg", type: "polaroid" },
-  { img: "/bts/10.jpg", type: "photo" },
+const fallbackScatterData = [
+  { _id: "1", img: "/bts/1.jpg", type: "photo" },
+  { _id: "2", img: "/bts/2.jpg", type: "polaroid" },
+  { _id: "3", img: "/bts/3.jpg", type: "photo" },
+  { _id: "4", img: "/bts/4.jpg", type: "reel" },
+  { _id: "5", img: "/bts/5.jpg", type: "photo" },
+  { _id: "6", img: "/bts/6.jpg", type: "polaroid" },
+  { _id: "7", img: "/bts/7.jpg", type: "photo" },
+  { _id: "8", img: "/bts/8.jpg", type: "reel" },
+  { _id: "9", img: "/bts/9.jpg", type: "polaroid" },
+  { _id: "10", img: "/bts/10.jpg", type: "photo" },
 ];
 
 export default function StudioMoments() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [moments, setMoments] = useState<any[]>(fallbackScatterData);
+
+  useEffect(() => {
+    sanityClient
+      .fetch(`*[_type == "studioMoment"] | order(order asc)[0...10]`)
+      .then((res) => {
+        if (res && res.length > 0) {
+          setMoments(res);
+        }
+      })
+      .catch((err) => console.error("Error fetching studio moments:", err));
+  }, []);
 
   useGSAP(
     () => {
-      // We removed the separate pinning ScrollTrigger entirely! 
-      // Now it just scrolls naturally without trapping the user.
-
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -36,34 +44,38 @@ export default function StudioMoments() {
         },
       });
 
-      const topRow = scatterData.map((_, i) => `.moment-item-${i}`).slice(0, 5);
-      const bottomRow = scatterData.map((_, i) => `.moment-item-${i}`).slice(5, 10);
+      const topRow = moments.slice(0, 5).map((_, i) => `.moment-item-${i}`);
+      const bottomRow = moments.slice(5, 10).map((_, i) => `.moment-item-${i + 5}`);
 
-      tl.fromTo(
-        topRow,
-        { x: "100vw", opacity: 0 },
-        { 
-          x: 0, 
-          opacity: 1, 
-          duration: 1.8, 
-          stagger: 0.1, 
-          ease: "power3.out" 
-        },
-        0
-      );
+      if (topRow.length > 0) {
+        tl.fromTo(
+          topRow,
+          { x: "100vw", opacity: 0 },
+          { 
+            x: 0, 
+            opacity: 1, 
+            duration: 1.8, 
+            stagger: 0.1, 
+            ease: "power3.out" 
+          },
+          0
+        );
+      }
 
-      tl.fromTo(
-        bottomRow,
-        { x: "-100vw", opacity: 0 },
-        { 
-          x: 0, 
-          opacity: 1, 
-          duration: 1.8, 
-          stagger: 0.1, 
-          ease: "power3.out" 
-        },
-        0 
-      );
+      if (bottomRow.length > 0) {
+        tl.fromTo(
+          bottomRow,
+          { x: "-100vw", opacity: 0 },
+          { 
+            x: 0, 
+            opacity: 1, 
+            duration: 1.8, 
+            stagger: 0.1, 
+            ease: "power3.out" 
+          },
+          0 
+        );
+      }
 
       tl.fromTo(
         ".micro-ui",
@@ -79,7 +91,7 @@ export default function StudioMoments() {
         1.0 
       );
     },
-    { scope: sectionRef }
+    { scope: sectionRef, dependencies: [moments] }
   );
 
   return (
@@ -90,7 +102,7 @@ export default function StudioMoments() {
     >
       <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(139,90,150,0.04))]" />
 
-      {/* 2. THE HEADER: Sits at the top, centered, with mb-12 to push the grid down */}
+      {/* HEADER */}
       <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12 mb-12 flex flex-col items-center justify-center text-center z-20">
         <p className="uppercase tracking-[0.35em] text-[11px] text-[var(--secondary)] font-medium mb-3">
           Behind the Scenes
@@ -100,53 +112,29 @@ export default function StudioMoments() {
         </h2>
       </div>
 
-      {/* 3. THE GRID: Flows naturally underneath */}
+      {/* GRID */}
       <div className="grid-wrapper w-full max-w-[1400px] px-6 lg:px-12 z-10 mx-auto">
         <div className="grid grid-cols-5 gap-3 md:gap-4 lg:gap-5">
-          {scatterData.map((item, index) => (
-            <div
-              key={index}
-              className={`moment-item-${index} relative aspect-[4/5] rounded-xl overflow-hidden bg-white/40 soft-lift border border-white/60 shadow-[0_20px_40px_rgba(75,41,79,0.05)] ${
-                item.type === "polaroid" ? "p-2 pb-8 lg:p-3 lg:pb-12 bg-white" : ""
-              }`}
-            >
-              <div className={`relative h-full w-full overflow-hidden ${item.type === "polaroid" ? "rounded-lg" : ""}`}>
-                <img
-                  src={item.img}
-                  alt="Studio moment"
-                  className="absolute inset-0 h-full w-full object-cover mix-blend-multiply opacity-80"
-                />
+          {moments.map((item, index) => {
+            const imgSrc = item.image?.asset ? urlFor(item.image).url() : item.img;
+
+            return (
+              <div
+                key={item._id || index}
+                className={`moment-item-${index} relative aspect-[4/5] rounded-xl overflow-hidden bg-white/40 soft-lift border border-white/60 shadow-[0_20px_40px_rgba(75,41,79,0.05)] ${
+                  item.type === "polaroid" ? "p-2 pb-8 lg:p-3 lg:pb-12 bg-white" : ""
+                }`}
+              >
+                <div className={`relative h-full w-full overflow-hidden ${item.type === "polaroid" ? "rounded-lg" : ""}`}>
+                  <img
+                    src={imgSrc}
+                    alt={item.title || "Studio moment"}
+                    className="absolute inset-0 h-full w-full object-cover mix-blend-multiply opacity-80"
+                  />
+                </div>
               </div>
-
-              {item.type === "reel" && (
-                <div className="micro-ui absolute top-2 right-2 lg:top-3 lg:right-3 bg-black/40 backdrop-blur-md p-1.5 lg:p-2 rounded-full text-white">
-                  <Play size={12} fill="currentColor" />
-                </div>
-              )}
-
-              {item.type === "photo" && index % 2 === 0 && (
-                <div className="micro-ui absolute bottom-2 left-2 lg:bottom-3 lg:left-3 flex gap-1.5">
-                  <div className="flex items-center gap-1 bg-white/90 backdrop-blur-md px-2 py-1 lg:px-2.5 lg:py-1.5 rounded-full shadow-sm border border-white">
-                    <Heart size={10} className="text-[var(--accent)]" fill="currentColor" />
-                    <span className="text-[9px] lg:text-[10px] font-medium text-[var(--primary)]">1.2k</span>
-                  </div>
-                  <div className="flex items-center gap-1 bg-white/90 backdrop-blur-md p-1 lg:p-1.5 rounded-full shadow-sm border border-white text-[var(--secondary)]">
-                    <MessageCircle size={10} />
-                  </div>
-                </div>
-              )}
-
-              {item.type === "polaroid" && (
-                <div className="micro-ui absolute -right-2 top-6 lg:top-8 bg-white/95 backdrop-blur-md px-2 py-1 lg:px-3 lg:py-1.5 rounded-lg shadow-xl border border-[var(--purple-wash)] rotate-6 flex items-center gap-1.5">
-                  <BarChart2 size={10} className="text-[var(--accent)]" />
-                  <div>
-                    <p className="text-[6px] lg:text-[7px] uppercase tracking-wider text-[var(--secondary)]">Reach</p>
-                    <p className="text-[9px] lg:text-[10px] font-semibold text-[var(--primary)]">+142%</p>
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

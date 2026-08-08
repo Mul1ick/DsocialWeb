@@ -1,4 +1,3 @@
-
 /**
  * Bento grid replicating the reference screenshot layout.
  * Positions/sizes are defined as percentages of a 1600x905 reference
@@ -143,30 +142,51 @@ const CANVAS_ASPECT = 1600 / 905;
 
 export default function Stats() {
   return (
-    <div className="w-full min-h-screen flex items-center justify-center bg-[#e9e2f5] p-6">
-      <div
-        className="relative w-full max-w-[1600px]"
-        style={{ aspectRatio: CANVAS_ASPECT }}
-      >
-        {TILES.map((tile) => (
-          <div
-            key={tile.id}
-            className="absolute overflow-hidden rounded-2xl shadow-sm bg-white"
-            style={{
-              left: `${tile.left}%`,
-              top: `${tile.top}%`,
-              width: `${tile.width}%`,
-              height: `${tile.height}%`,
-            }}
-          >
-            <img
-              src={tile.src}
-              alt={tile.alt}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        ))}
+    <section 
+      id="stats"
+      className="relative w-full min-h-screen flex flex-col items-center justify-center bg-[#Faf7fb] py-24 border-t border-[var(--purple-wash)] overflow-hidden"
+    >
+      {/* Subtle background gradient overlay */}
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(139,90,150,0.04))]" />
+
+      <div className="relative z-10 w-full max-w-[1600px] px-6 lg:px-12 flex flex-col items-center">
+        
+        {/* Centered Title Section with Eyebrow Text */}
+        <div className="flex flex-col items-center text-center mb-16 w-full">
+          <p className="uppercase tracking-[0.35em] text-[10px] sm:text-[11px] text-[var(--secondary)] font-medium mb-3">
+            By The Numbers
+          </p>
+          <h2 className="font-['Poppins'] text-[clamp(36px,5vw,64px)] leading-[1.05] font-bold text-[var(--purple-deep)] tracking-tight m-0">
+            The Good Stuff
+          </h2>
+        </div>
+
+        {/* Your exact unchanged Grid Container */}
+        <div
+          className="relative w-full"
+          style={{ aspectRatio: CANVAS_ASPECT }}
+        >
+          {TILES.map((tile) => (
+            <div
+              key={tile.id}
+              className="absolute overflow-hidden rounded-2xl bg-white shadow-[0_8px_30px_rgba(75,41,79,0.04)]"
+              style={{
+                left: `${tile.left}%`,
+                top: `${tile.top}%`,
+                width: `${tile.width}%`,
+                height: `${tile.height}%`,
+              }}
+            >
+              <img
+                src={tile.src}
+                alt={tile.alt}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+        </div>
+
       </div>
-    </div>
+    </section>
   );
 }
