@@ -5,7 +5,7 @@ import { campaignBoard } from '../data/clientBoard';
 const images = [
   "/board/polaroids/interiors.jpg",
   "/board/polaroids/home.jpg",
-  "/board/polaroids/beauty.png",
+  "/board/polaroids/beauty.webp",
   "/board/polaroids/events.jpg",
   "/board/polaroids/fashion.jpg",
   "/board/polaroids/food.jpg",
@@ -52,7 +52,7 @@ export default function ClientCanvas() {
         
         {/* Felt board background image - Only shown on md+ to avoid stretching on horizontal scroll */}
         <img 
-          src="/board/felt-beige.png" 
+          src="/board/felt-beige.webp" 
           alt="Felt Board Background" 
           className="hidden md:block absolute inset-0 w-full h-full object-fill z-0 pointer-events-none rounded-[2rem]"
         />

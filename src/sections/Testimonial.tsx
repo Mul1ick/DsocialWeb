@@ -87,7 +87,7 @@ export default function Testimonials() {
           <p className="uppercase tracking-[0.35em] text-[10px] text-[var(--secondary)] font-medium mb-3">
             Client Voices
           </p>
-          <h2 className="text-[clamp(36px,5vw,64px)] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight m-0">
+          <h2 className="text-[clamp(36px,5vw,64px)] leading-[1.05] font-bold text-[var(--purple-deep)] tracking-tight m-0">
             Testimonials
           </h2>
         </Reveal>

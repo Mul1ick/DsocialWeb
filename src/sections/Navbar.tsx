@@ -5,10 +5,10 @@ import logo from "../assets/Dsocial_logo_web.png";
 import { useScrollState } from "../hooks/useScrollState";
 
 const navItems = [
-  { label: "About", href: "#about" },
-  { label: "Campaign Board", href: "#board" },
-  { label: "Studio", href: "#studio" },
-  { label: "Stats", href: "#stats" },
+  { label: "Who are we", href: "#about" },
+  { label: "Client Board", href: "#board" },
+  { label: "Studio Moments", href: "#studio" },
+  { label: "The Good Stuff", href: "#stats" },
   { label: "Services", href: "#services" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
