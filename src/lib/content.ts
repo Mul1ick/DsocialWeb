@@ -136,10 +136,10 @@ export const work = [
 ];
 
 export const clients: ClientBrand[] = [
-  { name: "Divine Space Design", logo: divineSpaceDesignLogo, category: "interiors", instagram: "https://instagram.com/divinespacedesign" },
+  { name: "Divine Space Design", logo: divineSpaceDesignLogo, category: "interiors", instagram: "https://www.instagram.com/divinespace_design/" },
   { name: "Rearrange Home", logo: rearrangeLogo, category: "home", instagram: "https://www.instagram.com/rearrangehome/" },
-  { name: "Loka", logo: lokaLogo, category: "fashion", instagram: "https://instagram.com/lokabyveena" },
-  { name: "Rachna", logo: rachnaLogo, category: "home", instagram: "https://instagram.com/rachnakumar" },
+  { name: "Loka", logo: lokaLogo, category: "fashion", instagram: "https://www.instagram.com/loka_byveerali/" },
+  { name: "Rachna", logo: rachnaLogo, category: "home", instagram: "https://www.instagram.com/rachnakumar29/" },
   { name: "Gilded", logo: gildedLogo, category: "home",instagram:"https://www.instagram.com/gildedgestures/" },
   { name: "Plural", logo: pluralLogo, category: "food", instagram: "https://www.instagram.com/pluralrestaurant" },
   { name: "Eight", logo: eightLogo, category: "fashion",instagram:"https://www.instagram.com/eight_india/" },

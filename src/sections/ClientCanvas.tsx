@@ -117,7 +117,7 @@ export default function ClientCanvas() {
                 <div className="mt-2">
                   <div className="flex items-center gap-4 border-b border-[#d4d4d4] pb-2 mb-4">
                     <span className="text-[8px] md:text-[9px] tracking-[0.2em] uppercase text-[#7a7a7a] font-medium">
-                      Case File 0{item.id}
+                      Client File 0{item.id}
                     </span>
                   </div>
                   <h2 className="font-serif text-2xl md:text-3xl text-[#3b2745] tracking-tight leading-none mt-2">
@@ -134,12 +134,12 @@ export default function ClientCanvas() {
               </div>
 
               {/* Post-it Notes Layer */}
-              {item.note && (
+              {/* {item.note && (
                 <div className={`absolute z-40 bg-[#c6b6d3] px-2 py-1 md:px-3 md:py-2 shadow-[2px_4px_8px_rgba(0,0,0,0.1)] whitespace-pre-line font-['Courier',_monospace] text-[#2c1d33] text-[10px] md:text-xs ${item.note.pos} ${item.note.rot}`}>
                   <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-6 h-2 md:w-8 md:h-3 bg-white/30 backdrop-blur-sm -rotate-3 mix-blend-screen" />
                   {item.note.text}
                 </div>
-              )}
+              )} */}
 
               {/* Special Large Note */}
               {item.specialNote && (

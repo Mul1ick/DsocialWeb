@@ -63,7 +63,7 @@ export default function ExpandedBoard({ category, onClose }: ExpandedBoardProps)
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 rounded-full bg-[#a68453] shadow-inner" />
                 <span className="text-xs uppercase tracking-widest text-[#7a7a7a] font-semibold">
-                  Case File: {category.title}
+                  Client File: {category.title}
                 </span>
               </div>
 

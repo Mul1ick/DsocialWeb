@@ -1,12 +1,14 @@
 import { ArrowUpRight } from "lucide-react";
-import Reveal from "../components/Reveal";
 import SectionShell from "../components/SectionShell";
 
 export default function CTA() {
   return (
     <SectionShell id="contact" className="py-24 md:py-32 relative z-10">
-      <Reveal className="max-w-[1100px] mx-auto px-6">
-        {/* Soft, frosted glass card using grid for 2-column layout */}
+      {/* 
+        TEST: We replaced <Reveal> with a standard <div>. 
+        If it shows up on mobile now, the Reveal component's viewport trigger is failing.
+      */}
+      <div className="max-w-[1100px] mx-auto px-6">
         <div className="bg-white/40 backdrop-blur-md border border-white/60 p-8 sm:p-12 md:p-16 rounded-3xl soft-lift grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center overflow-hidden">
           
           {/* Left Column: Text & CTA Button */}
@@ -31,8 +33,6 @@ export default function CTA() {
                 alt="Studio phone conversation" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              
-              {/* Playful sticker/badge overlay */}
               <div className="absolute top-3 right-3 bg-[var(--purple-soft)]/90 backdrop-blur-sm text-[var(--purple-deep)] text-xs font-medium px-3 py-1 rounded-full border border-white/60 shadow-sm font-['Courier',_monospace]">
                 ring ring! 📲
               </div>
@@ -40,7 +40,7 @@ export default function CTA() {
           </div>
 
         </div>
-      </Reveal>
+      </div>
     </SectionShell>
   );
 }

@@ -223,8 +223,9 @@ export default function Stats() {
       <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(139,90,150,0.04))]" />
 
       <div className="relative z-10 w-full max-w-[1600px] px-5 sm:px-6 lg:px-12 flex flex-col items-center">
-        {/* Centered Title Section with Eyebrow Text */}
-        <div className="flex flex-col items-center text-center mb-10 sm:mb-16 w-full">
+        
+        {/* Centered Title Section */}
+        <div className="flex flex-col items-center text-center mb-8 sm:mb-12 w-full">
           <p className="uppercase tracking-[0.35em] text-[10px] sm:text-[11px] text-[var(--secondary)] font-medium mb-3">
             By The Numbers
           </p>
@@ -233,34 +234,43 @@ export default function Stats() {
           </h2>
         </div>
 
-        {/* Mobile/tablet: 2-column bento, full-width tiles interleaved with pairs */}
-        <div className="flex md:hidden flex-col gap-3 sm:gap-4 w-full">
-          {MOBILE_ROWS.map((row, i) =>
-            row.kind === "full" ? (
-              <div
-                key={i}
-                className="w-full rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(75,41,79,0.04)]"
-                style={{ aspectRatio: tile(row.id).width / tile(row.id).height }}
-              >
-                <TileImage t={tile(row.id)} />
+        {/* Mobile/tablet: Images naturally dictate their own height, no extra background boxes */}
+        <div className="flex md:hidden flex-col gap-4 sm:gap-6 w-full">
+          {MOBILE_ROWS.map((row, i) => {
+            if (row.kind === "full") {
+              const t = tile(row.id);
+              return (
+                <img
+                  key={`mobile-full-${i}`}
+                  src={t.src}
+                  alt={t.alt}
+                  loading="lazy"
+                  // w-full and h-auto allows the image to precisely fit its own dimensions
+                  className="w-full h-auto rounded-xl sm:rounded-2xl shadow-[0_8px_30px_rgba(75,41,79,0.06)] bg-white"
+                />
+              );
+            }
+
+            return (
+              <div key={`mobile-pair-${i}`} className="grid grid-cols-2 gap-4 sm:gap-6 items-start">
+                {row.ids.map((id) => {
+                  const t = tile(id);
+                  return (
+                    <img
+                      key={`mobile-tile-${id}`}
+                      src={t.src}
+                      alt={t.alt}
+                      loading="lazy"
+                      className="w-full h-auto rounded-xl sm:rounded-2xl shadow-[0_8px_30px_rgba(75,41,79,0.06)] bg-white"
+                    />
+                  );
+                })}
               </div>
-            ) : (
-              <div key={i} className="grid grid-cols-2 gap-3 sm:gap-4">
-                {row.ids.map((id) => (
-                  <div
-                    key={id}
-                    className="w-full rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(75,41,79,0.04)]"
-                    style={{ height: row.height }}
-                  >
-                    <TileImage t={tile(id)} />
-                  </div>
-                ))}
-              </div>
-            )
-          )}
+            );
+          })}
         </div>
 
-        {/* Desktop/tablet: exact bento grid from the reference image */}
+        {/* Desktop/tablet: exact bento grid from the reference image remains untouched */}
         <div
           className="hidden md:block relative w-full"
           style={{ aspectRatio: CANVAS_ASPECT }}
