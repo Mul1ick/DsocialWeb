@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import Reveal from "../components/Reveal";
+// Remove Reveal import if you aren't using it elsewhere in this file
 import SectionShell from "../components/SectionShell";
-import { sanityClient, urlFor } from "../lib/sanity"; // Make sure this path matches your setup
+import { sanityClient, optimizeSanityImg } from "../lib/sanity"; // Swapped urlFor for optimizeSanityImg
 
-// Define the shape of your Sanity document
 interface SanityService {
   _id: string;
   title: string;
   subtitle: string;
-  icon: any; // The Sanity image object
+  icon: any; 
   order: number;
 }
 
@@ -19,7 +18,6 @@ export default function Services() {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        // Fetch documents of type 'service', ordered by the 'order' field we defined
         const data = await sanityClient.fetch(
           `*[_type == "service"] | order(order asc)`
         );
@@ -38,21 +36,18 @@ export default function Services() {
     <SectionShell id="services" className="py-24 bg-white relative z-10 border-t border-[var(--purple-wash)]">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
+        {/* FIX: Removed the <Reveal> wrapper here so the title always loads on mobile */}
         <div className="mb-16 text-center">
-          <Reveal>
-             <p className="uppercase tracking-[0.35em] text-[11px] text-[var(--secondary)] font-medium mb-2">
-              What We Do
-            </p>
-            <h2 className="text-[clamp(32px,4vw,56px)] leading-[1.05] font-bold text-[var(--purple-deep)] tracking-tight m-0">
-              Our Services.
-            </h2>
-          </Reveal>
+           <p className="uppercase tracking-[0.35em] text-[11px] text-[var(--secondary)] font-medium mb-2">
+            What We Do
+          </p>
+          <h2 className="text-[clamp(32px,4vw,56px)] leading-[1.05] font-bold text-[var(--purple-deep)] tracking-tight m-0">
+            Our Services.
+          </h2>
         </div>
 
         {/* 2x4 Grid Layout */}
         {isLoading ? (
-          // Optional: A simple loading skeleton to prevent layout shift
           <div className="flex justify-center text-[var(--purple-deep)]">
             Loading services...
           </div>
@@ -63,13 +58,16 @@ export default function Services() {
                 key={service._id} 
                 className="flex flex-col items-center text-center group cursor-default"
               >
-                {/* Icon Container with subtle hover background */}
+                {/* Icon Container */}
                 <div className="w-40 h-40 mb-6 flex justify-center items-center relative rounded-full transition-all duration-300 group-hover:bg-[#EAE6F3]/50 group-hover:-translate-y-1">
-                  {/* Added a safety check in case an image isn't uploaded in the CMS yet */}
                   {service.icon && (
                     <img 
-                      src={urlFor(service.icon).url()} 
+                      // Using the new optimization helper
+                      src={optimizeSanityImg(service.icon, 200)} 
                       alt={`${service.title.replace('\n', ' ')} Icon`} 
+                      // Added performance tags
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-105" 
                     />
                   )}

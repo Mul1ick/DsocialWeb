@@ -13,3 +13,14 @@ const builder = imageUrlBuilder(sanityClient);
 export function urlFor(source: any) {
   return builder.image(source);
 }
+
+export const optimizeSanityImg = (source: any, width = 800, quality = 80) => {
+  if (!source || !source.asset) return "";
+  
+  return urlFor(source)
+    .width(width)
+    .quality(quality)
+    .auto("format") // Serves WebP or AVIF depending on browser support
+    .fit("max")
+    .url();
+};
