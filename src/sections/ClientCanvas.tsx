@@ -14,8 +14,6 @@ const images = [
   "/board/polaroids/media.jpg",
 ];
 
-// Added responsive prefixes (md:) to rotations and extreme offsets 
-// so they fit neatly on mobile screens without breaking the viewport width.
 const caseFiles = [
   { id: 1, categoryId: 'interiors', title: 'Interiors', brands: 4, img: images[0], hasTape: true, rotation: 'md:-rotate-1', pinX: '50%', note: { text: 'Moodboards\nConcepts', pos: '-left-4 md:-left-10 top-12', rot: '-rotate-3' } },
   { id: 2, categoryId: 'home', title: 'Home Décor', brands: 4, img: images[1], hasClip: true, rotation: 'md:rotate-1', pinX: '60%', imgRot: 'rotate-12', imgOffset: '-right-8 md:-right-20 -top-2' },
@@ -36,11 +34,12 @@ export default function ClientCanvas() {
     : null;
 
   return (
-    <section id="board" className="min-h-screen w-full relative flex flex-col items-center justify-start font-sans bg-[var(--bg)] py-12 md:py-20 px-0 md:px-12 overflow-hidden">
+    // FIX: Changed min-h-screen to min-h-fit md:min-h-screen, and py-12 to py-8 md:py-20
+    <section id="board" className="min-h-fit md:min-h-screen w-full relative flex flex-col items-center justify-start font-sans bg-[var(--bg)] py-8 md:py-20 px-0 md:px-12 overflow-hidden">
       
       {/* 2. THE HEADER */}
-      <div className="w-full max-w-[1400px] mb-8 md:mb-12 flex flex-col items-center justify-center text-center px-4">
-        <p className="uppercase tracking-[0.35em] text-[10px] md:text-[11px] text-[var(--secondary)] font-medium mb-3">
+      <div className="w-full max-w-[1400px] mb-6 md:mb-12 flex flex-col items-center justify-center text-center px-4">
+        <p className="uppercase tracking-[0.35em] text-[10px] md:text-[11px] text-[var(--secondary)] font-medium mb-2 md:mb-3">
           Our Brands
         </p>
         <h2 className="text-[clamp(32px,5vw,64px)] leading-[1.05] font-bold text-[var(--purple-deep)] tracking-tight m-0">
@@ -63,7 +62,7 @@ export default function ClientCanvas() {
           Desktop: Grid layout with scaling.
         */}
         <div className="relative z-10 w-full 
-                        px-8 py-10 md:px-24 md:py-28 xl:px-32 xl:py-36 
+                        px-6 py-4 md:px-24 md:py-28 xl:px-32 xl:py-36 
                         flex md:grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 
                         gap-y-12 gap-x-12 md:gap-x-16 lg:gap-x-24 
                         md:place-items-center 
@@ -132,14 +131,6 @@ export default function ClientCanvas() {
                   <span className="text-[#3b2745] text-sm group-hover:translate-x-1 transition-transform">→</span>
                 </div>
               </div>
-
-              {/* Post-it Notes Layer */}
-              {/* {item.note && (
-                <div className={`absolute z-40 bg-[#c6b6d3] px-2 py-1 md:px-3 md:py-2 shadow-[2px_4px_8px_rgba(0,0,0,0.1)] whitespace-pre-line font-['Courier',_monospace] text-[#2c1d33] text-[10px] md:text-xs ${item.note.pos} ${item.note.rot}`}>
-                  <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-6 h-2 md:w-8 md:h-3 bg-white/30 backdrop-blur-sm -rotate-3 mix-blend-screen" />
-                  {item.note.text}
-                </div>
-              )} */}
 
               {/* Special Large Note */}
               {item.specialNote && (

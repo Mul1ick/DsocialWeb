@@ -118,9 +118,7 @@ export default function BrandCarousel({ brands }: Props) {
                   />
                   {/* Brand Name & Instagram Action Button */}
                 <div className="flex items-center gap-3">
-                  <p className="text-xl font-light text-[#2B2231] tracking-tight">
-                    {brand.name}
-                  </p>
+                  
 
                   {brand.instagram && (
                     <a
