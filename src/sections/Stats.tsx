@@ -39,7 +39,7 @@ const TILES: Tile[] = [
   // Left column
   {
     id: 1,
-    src: "/stats_images/1.png",
+    src: "/stats_images/1.webp",
     alt: "Placeholder 1",
     left: (207 / 1600) * 100,
     top: (48 / 905) * 100,
@@ -49,7 +49,7 @@ const TILES: Tile[] = [
   },
   {
     id: 2,
-    src: "/stats_images/2.png",
+    src: "/stats_images/2.webp",
     alt: "Placeholder 2",
     left: (207 / 1600) * 100,
     top: (489 / 905) * 100,
@@ -59,7 +59,7 @@ const TILES: Tile[] = [
   },
   {
     id: 3,
-    src: "/stats_images/3.png",
+    src: "/stats_images/3.webp",
     alt: "Placeholder 3",
     left: (207 / 1600) * 100,
     top: (717 / 905) * 100,
@@ -71,7 +71,7 @@ const TILES: Tile[] = [
   // Column 2 (narrow)
   {
     id: 4,
-    src: "/stats_images/4.png",
+    src: "/stats_images/4.webp",
     alt: "Placeholder 4",
     left: (533 / 1600) * 100,
     top: (48 / 905) * 100,
@@ -81,7 +81,7 @@ const TILES: Tile[] = [
   },
   {
     id: 10,
-    src: "/stats_images/8.png",
+    src: "/stats_images/8.webp",
     alt: "Placeholder 10",
     left: (533 / 1600) * 100,
     top: (592 / 905) * 100,
@@ -93,7 +93,7 @@ const TILES: Tile[] = [
   // Column 3 (wide)
   {
     id: 5,
-    src: "/stats_images/5.png",
+    src: "/stats_images/5.webp",
     alt: "Placeholder 5",
     left: (731 / 1600) * 100,
     top: (48 / 905) * 100,
@@ -103,7 +103,7 @@ const TILES: Tile[] = [
   },
   {
     id: 7,
-    src: "/stats_images/6.png",
+    src: "/stats_images/6.webp",
     alt: "Placeholder 7",
     left: (547 / 1600) * 100,
     top: (320 / 905) * 100,
@@ -113,7 +113,7 @@ const TILES: Tile[] = [
   },
   {
     id: 8,
-    src: "/stats_images/7.png",
+    src: "/stats_images/7.webp",
     alt: "Placeholder 8",
     left: (925 / 1600) * 100,
     top: (320 / 905) * 100,
@@ -123,7 +123,7 @@ const TILES: Tile[] = [
   },
   {
     id: 11,
-    src: "/stats_images/9.png",
+    src: "/stats_images/9.webp",
     alt: "Placeholder 11",
     left: (731 / 1600) * 100,
     top: (592 / 905) * 100,
@@ -135,7 +135,7 @@ const TILES: Tile[] = [
   // Right column
   {
     id: 6,
-    src: "/stats_images/10.png",
+    src: "/stats_images/10.webp",
     alt: "Placeholder 6",
     left: (1126 / 1600) * 100,
     top: (48 / 905) * 100,
@@ -145,7 +145,7 @@ const TILES: Tile[] = [
   },
   {
     id: 9,
-    src: "/stats_images/11.png",
+    src: "/stats_images/11.webp",
     alt: "Placeholder 9",
     left: (1126 / 1600) * 100,
     top: (320 / 905) * 100,
@@ -155,7 +155,7 @@ const TILES: Tile[] = [
   },
   {
     id: 12,
-    src: "/stats_images/12.png",
+    src: "/stats_images/12.webp",
     alt: "Placeholder 12",
     left: (1126 / 1600) * 100,
     top: (717 / 905) * 100,

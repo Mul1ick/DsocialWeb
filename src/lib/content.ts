@@ -1,33 +1,33 @@
 // src/lib/content.ts
 
-import dkLogo from "../assets/Client Logos/DK.png";
-import divineSpaceDesignLogo from "../assets/Client Logos/Divine_space.png";
-import gildedLogo from "../assets/Client Logos/Gilded.png";
-import aquellaLogo from "../assets/Client Logos/aquella.png";
-import NJPLogo from "../assets/Client Logos/njp.png";
-import PistyleLogo from "../assets/Client Logos/Pistyle.png";
-import PolkaLogo from "../assets/Client Logos/polka.png";
-import rearrangeKidsLogo from "../assets/Client Logos/rearrange_kids.png";
-import rearrangeLogo from "../assets/Client Logos/rearrange_home.png";
-import shagunLogo from "../assets/Client Logos/shagun.png";
-import SPLogo from "../assets/Client Logos/sp.png";
-import TOLogo from "../assets/Client Logos/TO.png";
-import altheaLogo from "../assets/Client Logos/althea.png";
-import avaniLogo from "../assets/Client Logos/avani.png";
-import bikaneriLogo from "../assets/Client Logos/Bikaneri.png";
-// import dynaconsLogo from "../assets/Client Logos/Dynacons.png";
-import eightLogo from "../assets/Client Logos/eight.png";
-import jsmLogo from "../assets/Client Logos/jsm.png";
-import lokaLogo from "../assets/Client Logos/loka.png";
-import nubyLogo from "../assets/Client Logos/nuby.png";
-import pluralLogo from "../assets/Client Logos/plural.png";
-import rachnaLogo from "../assets/Client Logos/rachna.png";
-import rageLogo from "../assets/Client Logos/rage.png";
-import renuSarafLogo from "../assets/Client Logos/renu_saraf.png";
-import rotaryLogo from "../assets/Client Logos/rotary.png";
-import smfLogo from "../assets/Client Logos/smf.png";
-import ssLogo from "../assets/Client Logos/SS_logo.png";
-import tokoytoriLogo from "../assets/Client Logos/tokoytori.png";
+import dkLogo from "../assets/Client Logos/DK.webp";
+import divineSpaceDesignLogo from "../assets/Client Logos/Divine_space.webp";
+import gildedLogo from "../assets/Client Logos/Gilded.webp";
+import aquellaLogo from "../assets/Client Logos/aquella.webp";
+import NJPLogo from "../assets/Client Logos/njp.webp";
+import PistyleLogo from "../assets/Client Logos/Pistyle.webp";
+import PolkaLogo from "../assets/Client Logos/polka.webp";
+import rearrangeKidsLogo from "../assets/Client Logos/rearrange_kids.webp";
+import rearrangeLogo from "../assets/Client Logos/rearrange_home.webp";
+import shagunLogo from "../assets/Client Logos/shagun.webp";
+import SPLogo from "../assets/Client Logos/sp.webp";
+import TOLogo from "../assets/Client Logos/TO.webp";
+import altheaLogo from "../assets/Client Logos/althea.webp";
+import avaniLogo from "../assets/Client Logos/avani.webp";
+import bikaneriLogo from "../assets/Client Logos/Bikaneri.webp";
+// import dynaconsLogo from "../assets/Client Logos/Dynacons.webp";
+import eightLogo from "../assets/Client Logos/eight.webp";
+import jsmLogo from "../assets/Client Logos/jsm.webp";
+import lokaLogo from "../assets/Client Logos/loka.webp";
+import nubyLogo from "../assets/Client Logos/nuby.webp";
+import pluralLogo from "../assets/Client Logos/plural.webp";
+import rachnaLogo from "../assets/Client Logos/rachna.webp";
+import rageLogo from "../assets/Client Logos/rage.webp";
+import renuSarafLogo from "../assets/Client Logos/renu_saraf.webp";
+import rotaryLogo from "../assets/Client Logos/rotary.webp";
+import smfLogo from "../assets/Client Logos/smf.webp";
+import ssLogo from "../assets/Client Logos/SS_logo.webp";
+import tokoytoriLogo from "../assets/Client Logos/tokoytori.webp";
 
 export type ClientCategoryId =
   | "interiors"
@@ -139,28 +139,28 @@ export const clients: ClientBrand[] = [
   { name: "Divine Space Design", logo: divineSpaceDesignLogo, category: "interiors", instagram: "https://www.instagram.com/divinespace_design/" },
   { name: "Rearrange Home", logo: rearrangeLogo, category: "home", instagram: "https://www.instagram.com/rearrangehome/" },
   { name: "Loka", logo: lokaLogo, category: "fashion", instagram: "https://www.instagram.com/loka_byveerali/" },
-  { name: "Rachna", logo: rachnaLogo, category: "home", instagram: "https://www.instagram.com/rachnakumar29/" },
-  { name: "Gilded", logo: gildedLogo, category: "home",instagram:"https://www.instagram.com/gildedgestures/" },
+  { name: "Rachna Kumar", logo: rachnaLogo, category: "home", instagram: "https://www.instagram.com/rachnakumar29/" },
+  { name: "Gilded Gestures", logo: gildedLogo, category: "home",instagram:"https://www.instagram.com/gildedgestures/" },
   { name: "Plural", logo: pluralLogo, category: "food", instagram: "https://www.instagram.com/pluralrestaurant" },
   { name: "Eight", logo: eightLogo, category: "fashion",instagram:"https://www.instagram.com/eight_india/" },
-  { name: "D&K", logo: dkLogo, category: "interiors",instagram:"https://www.instagram.com/dawsandkahlon_/" },
-  { name: "Aquella", logo: aquellaLogo, category: "home",instagram:"https://www.instagram.com/aquella.in/" },
-  { name: "Althea", logo: altheaLogo, category: "beauty",instagram:"https://www.instagram.com/altheawellnessco/" },
-  { name: "Avani", logo: avaniLogo, category: "beauty", instagram: "https://www.instagram.com/avaninepal/" },
+  { name: "Daws&Kahlon", logo: dkLogo, category: "interiors",instagram:"https://www.instagram.com/dawsandkahlon_/" },
+  { name: "Aquella.in", logo: aquellaLogo, category: "home",instagram:"https://www.instagram.com/aquella.in/" },
+  { name: "Althea wellness co", logo: altheaLogo, category: "beauty",instagram:"https://www.instagram.com/altheawellnessco/" },
+  { name: "Avani Nepal", logo: avaniLogo, category: "beauty", instagram: "https://www.instagram.com/avaninepal/" },
   { name: "Renu Saraf", logo: renuSarafLogo, category: "events", instagram:"https://www.instagram.com/renusaraf/" },
-  { name: "Polka", logo: PolkaLogo, category: "interiors",instagram:"https://www.instagram.com/polkahouseinteriordesign/" },
-  { name: "Pistyle", logo: PistyleLogo, category: "interiors" },
-  { name: "Shagun", logo: shagunLogo, category: "fashion",instagram:"https://www.instagram.com/shagunnagi_thelabel/" },
-  { name: "Tokoytori", logo: tokoytoriLogo, category: "fashion", instagram: "https://www.instagram.com/tokyotori_/" },
-  { name: "Bikaneri", logo: bikaneriLogo, category: "jewellery",instagram:"https://www.instagram.com/bikanerijewelsmumbaillp/" },
-  { name: "Nuby", logo: nubyLogo, category: "baby", instagram:"https://www.instagram.com/nuby.india/" },
-  { name: "Rotary", logo: rotaryLogo, category: "events",instagram:"https://www.instagram.com/rcofmumbaidivas/" },
-  { name: "SMF", logo: smfLogo, category: "fashion",instagram:"https://www.instagram.com/setmefree_fashion/" },
-  { name: "NJP", logo: NJPLogo, category: "media", instagram:"https://www.instagram.com/nirmitijhaveriproductions/" },
+  { name: "Polka House Interior Design", logo: PolkaLogo, category: "interiors",instagram:"https://www.instagram.com/polkahouseinteriordesign/" },
+  { name: "Pistyle.in", logo: PistyleLogo, category: "interiors" },
+  { name: "Shagun Nagi The label", logo: shagunLogo, category: "fashion",instagram:"https://www.instagram.com/shagunnagi_thelabel/" },
+  { name: "Tokyo tori", logo: tokoytoriLogo, category: "fashion", instagram: "https://www.instagram.com/tokyotori_/" },
+  { name: "Bikaneri Jewels", logo: bikaneriLogo, category: "jewellery",instagram:"https://www.instagram.com/bikanerijewelsmumbaillp/" },
+  { name: "Nuby india", logo: nubyLogo, category: "baby", instagram:"https://www.instagram.com/nuby.india/" },
+  { name: "Rotary club of Mumbai Divas", logo: rotaryLogo, category: "events",instagram:"https://www.instagram.com/rcofmumbaidivas/" },
+  { name: "Set Me Free fashion", logo: smfLogo, category: "fashion",instagram:"https://www.instagram.com/setmefree_fashion/" },
+  { name: "Nirmiti Jhaveri Productions", logo: NJPLogo, category: "media", instagram:"https://www.instagram.com/nirmitijhaveriproductions/" },
   { name: "Rearrange Kids", logo: rearrangeKidsLogo, category: "home", instagram:"https://www.instagram.com/rearrangehome_kids/" },
-  { name: "Treasured", logo: TOLogo, category: "home", instagram:"https://www.instagram.com/treasuredoccasions.co/" },
-  { name: "Rage", logo: rageLogo, category: "events", instagram:"https://www.instagram.com/ragecelebrations/" },
-  { name: "Speciality", logo: SPLogo, category: "food", instagram:"https://www.instagram.com/specialityexperiences/" },
-  { name: "JSM", logo: jsmLogo, category: "beauty",instagram:"https://www.instagram.com/jinal.shah.mehta/" },
-  { name: "SS", logo: ssLogo, category: "events",instagram:"https://www.instagram.com/saffronstringofficial/" },
+  { name: "Treasured Occasions", logo: TOLogo, category: "home", instagram:"https://www.instagram.com/treasuredoccasions.co/" },
+  { name: "Rage Celebrations", logo: rageLogo, category: "events", instagram:"https://www.instagram.com/ragecelebrations/" },
+  { name: "Speciality experiences", logo: SPLogo, category: "food", instagram:"https://www.instagram.com/specialityexperiences/" },
+  { name: "Jinal Shah Mehta", logo: jsmLogo, category: "beauty",instagram:"https://www.instagram.com/jinal.shah.mehta/" },
+  { name: "Saffron String", logo: ssLogo, category: "events",instagram:"https://www.instagram.com/saffronstringofficial/" },
 ];
