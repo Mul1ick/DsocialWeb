@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "../assets/Dsocial_logo_web.webp";
+import logo from "../assets/Dsocial_logo_web.png";
 import { useScrollState } from "../hooks/useScrollState";
 
 const navItems = [

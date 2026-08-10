@@ -7,16 +7,16 @@ import { sanityClient, urlFor } from "../lib/sanity";
 gsap.registerPlugin(ScrollTrigger);
 
 const fallbackScatterData = [
-  { _id: "1", img: "/bts/1.jpg", type: "photo" },
-  { _id: "2", img: "/bts/2.jpg", type: "polaroid" },
-  { _id: "3", img: "/bts/3.jpg", type: "photo" },
-  { _id: "4", img: "/bts/4.jpg", type: "reel" },
-  { _id: "5", img: "/bts/5.jpg", type: "photo" },
-  { _id: "6", img: "/bts/6.jpg", type: "polaroid" },
-  { _id: "7", img: "/bts/7.jpg", type: "photo" },
-  { _id: "8", img: "/bts/8.jpg", type: "reel" },
-  { _id: "9", img: "/bts/9.jpg", type: "polaroid" },
-  { _id: "10", img: "/bts/10.jpg", type: "photo" },
+  { _id: "1", img: "/bts/1.webp", type: "photo" },
+  { _id: "2", img: "/bts/2.webp", type: "polaroid" },
+  { _id: "3", img: "/bts/3.webp", type: "photo" },
+  { _id: "4", img: "/bts/4.webp", type: "reel" },
+  { _id: "5", img: "/bts/5.webp", type: "photo" },
+  { _id: "6", img: "/bts/6.webp", type: "polaroid" },
+  { _id: "7", img: "/bts/7.webp", type: "photo" },
+  { _id: "8", img: "/bts/8.webp", type: "reel" },
+  { _id: "9", img: "/bts/9.webp", type: "polaroid" },
+  { _id: "10", img: "/bts/10.webp", type: "photo" },
 ];
 
 export default function StudioMoments() {

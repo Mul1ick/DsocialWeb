@@ -3,8 +3,8 @@ import SectionShell from "../components/SectionShell";
 import { sanityClient, urlFor } from "../lib/sanity";
 
 // Static fallback image paths so photos render immediately if Sanity is loading/empty
-const FALLBACK_FOUNDER_IMG = "/board/polaroids/fashion.jpg"; // Replace with your static founder image path
-const FALLBACK_TEAM_IMG = "/bts/1.jpg"; // Replace with your static team image path
+const FALLBACK_FOUNDER_IMG = "/board/polaroids/fashion.webp"; // Replace with your static founder image path
+const FALLBACK_TEAM_IMG = "/bts/1.webp"; // Replace with your static team image path
 
 const fallbackStats = [
   { value: "5+", label: "Years building presence" },

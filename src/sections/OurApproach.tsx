@@ -1,7 +1,7 @@
 import Reveal from "../components/Reveal";
 import SectionShell from "../components/SectionShell";
 import { approachSteps } from "../lib/content";
-import founderPhoto from "../assets/Founder_photo.jpg";
+import founderPhoto from "../assets/Founder_photo.webp";
 
 const notes = [
   "Find the signal, voice and direction.",

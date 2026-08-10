@@ -29,7 +29,7 @@ export default function CTA() {
           <div className="md:col-span-5 flex justify-center items-center w-full">
             <div className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-full aspect-[4/5] rounded-2xl overflow-hidden border border-white/80 shadow-lg rotate-2 hover:rotate-0 transition-transform duration-500 group bg-white/50">
               <img 
-                src="/cta-phone.jpg" 
+                src="/cta-phone.webp" 
                 alt="Studio phone conversation" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />

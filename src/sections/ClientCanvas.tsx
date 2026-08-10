@@ -3,15 +3,15 @@ import ExpandedBoard from '../components/ExpandedBoard';
 import { campaignBoard } from '../data/clientBoard';
 
 const images = [
-  "/board/polaroids/interiors.jpg",
-  "/board/polaroids/home.jpg",
+  "/board/polaroids/interiors.webp",
+  "/board/polaroids/home.webp",
   "/board/polaroids/beauty.webp",
-  "/board/polaroids/events.jpg",
-  "/board/polaroids/fashion.jpg",
-  "/board/polaroids/food.jpg",
-  "/board/polaroids/baby.jpg",
-  "/board/polaroids/jewellery.jpg",
-  "/board/polaroids/media.jpg",
+  "/board/polaroids/events.webp",
+  "/board/polaroids/fashion.webp",
+  "/board/polaroids/food.webp",
+  "/board/polaroids/baby.webp",
+  "/board/polaroids/jewellery.webp",
+  "/board/polaroids/media.webp",
 ];
 
 const caseFiles = [
