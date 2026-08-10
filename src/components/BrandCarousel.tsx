@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion, PanInfo } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight,Instagram } from "lucide-react";
 import { CampaignBrand } from "../data/clientBoard";
 
 interface Props {
@@ -116,6 +116,25 @@ export default function BrandCarousel({ brands }: Props) {
                     className="max-h-56 max-w-full object-contain mix-blend-multiply"
                     draggable={false}
                   />
+                  {/* Brand Name & Instagram Action Button */}
+                <div className="flex items-center gap-3">
+                  <p className="text-xl font-light text-[#2B2231] tracking-tight">
+                    {brand.name}
+                  </p>
+
+                  {brand.instagram && (
+                    <a
+                      href={brand.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()} // Prevents drag events on carousel
+                      className="p-2 rounded-full bg-[var(--purple-soft)] text-[var(--purple)] hover:bg-[var(--purple)] hover:text-white transition-colors duration-200"
+                      aria-label={`Visit ${brand.name} on Instagram`}
+                    >
+                      <Instagram size={18} strokeWidth={1.8} />
+                    </a>
+                  )}
+                </div>
                 </div>
                 <p className="text-xl font-light text-[#2B2231] tracking-tight">
                   {brand.name}

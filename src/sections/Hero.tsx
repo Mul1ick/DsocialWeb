@@ -17,9 +17,9 @@ export default function Hero() {
         
         {/* Left: Soft Typography */}
         <div className="lg:col-span-7 flex flex-col z-20">
-          <h1 className="flex flex-col m-0 text-[clamp(64px,9vw,140px)] leading-[0.95] font-light text-[var(--purple-deep)] tracking-tight">
+          <h1 className="flex flex-col m-0 text-[clamp(64px,9vw,140px)] leading-[0.95]  font-light text-[var(--purple-deep)] tracking-tight">
             <HeroWord delay={0.1}>Dream.</HeroWord>
-<HeroWord className="ml-0 lg:ml-16 text-[var(--accent)] pb-4" delay={0.4}>Design.</HeroWord>
+<HeroWord className="ml-0 lg:ml-16 text-[var(--accent)] pb-5" delay={0.4}>Design.</HeroWord>
             <HeroWord delay={0.7}>Deliver.</HeroWord>
           </h1>
           

@@ -3,6 +3,7 @@ import { clients } from "../lib/content";
 export interface CampaignBrand {
   name: string;
   logo: string;
+  instagram?: string; // Added instagram field
 }
 
 export interface CampaignCategory {
@@ -41,7 +42,7 @@ export interface CampaignCategory {
 function brandsForCategory(categoryId: string): CampaignBrand[] {
   return clients
     .filter((client) => client.category === categoryId)
-    .map(({ name, logo }) => ({ name, logo }));
+    .map(({ name, logo, instagram }) => ({ name, logo , instagram}));
 }
 
 export const campaignBoard: CampaignCategory[] = [

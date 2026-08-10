@@ -7,9 +7,10 @@
  * match the original exactly.
  *
  * Mobile (below md): tiles reflow into a 2-column bento (full-width
- * "hero" tiles interleaved with half-width pairs) instead of one long
- * stretched column, so narrow screenshots don't get blown up to the
- * full screen width.
+ * "hero" tiles interleaved with half-width pairs). Paired tiles share
+ * a single fixed height (instead of each sizing itself off its own
+ * aspect ratio) so two tiles with different natural proportions don't
+ * leave a dead gap under the shorter one.
  *
  * Fit mode matters here: real photography tiles use object-cover
  * (fine to crop), but UI/screenshot tiles use object-contain with a
@@ -169,19 +170,22 @@ const tile = (id: number) => TILE_BY_ID.get(id)!;
 
 // Mobile layout: a deliberate 2-column bento, not a strict reflow of
 // the desktop grid. Full-width "row" entries act as breathers between
-// paired half-width tiles, which keeps narrow screenshots at a sane
-// width instead of stretching them edge-to-edge. Loosely preserves
-// the original top-to-bottom reading order.
-type MobileRow = { kind: "full"; id: number } | { kind: "pair"; ids: [number, number] };
+// paired half-width tiles. Loosely preserves the original top-to-bottom
+// reading order. Each pair gets a shared height (in the clamp() below)
+// so both tiles line up evenly instead of leaving a gap under whichever
+// one is naturally shorter.
+type MobileRow =
+  | { kind: "full"; id: number }
+  | { kind: "pair"; ids: [number, number]; height: string };
 
 const MOBILE_ROWS: MobileRow[] = [
   { kind: "full", id: 1 },
-  { kind: "pair", ids: [4, 6] },
+  { kind: "pair", ids: [4, 6], height: "clamp(170px, 46vw, 260px)" },
   { kind: "full", id: 5 },
   { kind: "full", id: 7 },
-  { kind: "pair", ids: [8, 9] },
+  { kind: "pair", ids: [8, 9], height: "clamp(170px, 46vw, 260px)" },
   { kind: "full", id: 2 },
-  { kind: "pair", ids: [10, 12] },
+  { kind: "pair", ids: [10, 12], height: "clamp(150px, 40vw, 230px)" },
   { kind: "full", id: 11 },
   { kind: "full", id: 3 },
 ];
@@ -230,30 +234,28 @@ export default function Stats() {
         </div>
 
         {/* Mobile/tablet: 2-column bento, full-width tiles interleaved with pairs */}
-        <div className="grid md:hidden grid-cols-2 gap-3 sm:gap-4 w-full">
+        <div className="flex md:hidden flex-col gap-3 sm:gap-4 w-full">
           {MOBILE_ROWS.map((row, i) =>
             row.kind === "full" ? (
               <div
                 key={i}
-                className="col-span-2 rounded-2xl shadow-[0_8px_30px_rgba(75,41,79,0.04)]"
+                className="w-full rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(75,41,79,0.04)]"
                 style={{ aspectRatio: tile(row.id).width / tile(row.id).height }}
               >
-                <div className="w-full h-full rounded-2xl overflow-hidden">
-                  <TileImage t={tile(row.id)} />
-                </div>
+                <TileImage t={tile(row.id)} />
               </div>
             ) : (
-              row.ids.map((id) => (
-                <div
-                  key={id}
-                  className="rounded-2xl shadow-[0_8px_30px_rgba(75,41,79,0.04)]"
-                  style={{ aspectRatio: tile(id).width / tile(id).height }}
-                >
-                  <div className="w-full h-full rounded-2xl overflow-hidden">
+              <div key={i} className="grid grid-cols-2 gap-3 sm:gap-4">
+                {row.ids.map((id) => (
+                  <div
+                    key={id}
+                    className="w-full rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(75,41,79,0.04)]"
+                    style={{ height: row.height }}
+                  >
                     <TileImage t={tile(id)} />
                   </div>
-                </div>
-              ))
+                ))}
+              </div>
             )
           )}
         </div>

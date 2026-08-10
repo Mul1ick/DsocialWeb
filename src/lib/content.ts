@@ -44,6 +44,7 @@ export interface ClientBrand {
   name: string;
   logo: string;
   category: ClientCategoryId;
+  instagram?: string;
 }
 
 export const principles = [
@@ -135,32 +136,31 @@ export const work = [
 ];
 
 export const clients: ClientBrand[] = [
-  { name: "Divine Space Design", logo: divineSpaceDesignLogo, category: "interiors" },
-  { name: "Rearrange Home", logo: rearrangeLogo, category: "home" },
-  { name: "Loka", logo: lokaLogo, category: "fashion" },
-  { name: "Rachna", logo: rachnaLogo, category: "home" },
-  { name: "Gilded", logo: gildedLogo, category: "home" },
-  { name: "Plural", logo: pluralLogo, category: "food" },
-  { name: "Eight", logo: eightLogo, category: "fashion" },
-  { name: "D&K", logo: dkLogo, category: "interiors" },
-  { name: "Aquella", logo: aquellaLogo, category: "home" },
-  { name: "Althea", logo: altheaLogo, category: "beauty" },
-  { name: "Avani", logo: avaniLogo, category: "beauty" },
-  { name: "Renu Saraf", logo: renuSarafLogo, category: "events" },
-  { name: "Polka", logo: PolkaLogo, category: "interiors" },
+  { name: "Divine Space Design", logo: divineSpaceDesignLogo, category: "interiors", instagram: "https://instagram.com/divinespacedesign" },
+  { name: "Rearrange Home", logo: rearrangeLogo, category: "home", instagram: "https://www.instagram.com/rearrangehome/" },
+  { name: "Loka", logo: lokaLogo, category: "fashion", instagram: "https://instagram.com/lokabyveena" },
+  { name: "Rachna", logo: rachnaLogo, category: "home", instagram: "https://instagram.com/rachnakumar" },
+  { name: "Gilded", logo: gildedLogo, category: "home",instagram:"https://www.instagram.com/gildedgestures/" },
+  { name: "Plural", logo: pluralLogo, category: "food", instagram: "https://www.instagram.com/pluralrestaurant" },
+  { name: "Eight", logo: eightLogo, category: "fashion",instagram:"https://www.instagram.com/eight_india/" },
+  { name: "D&K", logo: dkLogo, category: "interiors",instagram:"https://www.instagram.com/dawsandkahlon_/" },
+  { name: "Aquella", logo: aquellaLogo, category: "home",instagram:"https://www.instagram.com/aquella.in/" },
+  { name: "Althea", logo: altheaLogo, category: "beauty",instagram:"https://www.instagram.com/altheawellnessco/" },
+  { name: "Avani", logo: avaniLogo, category: "beauty", instagram: "https://www.instagram.com/avaninepal/" },
+  { name: "Renu Saraf", logo: renuSarafLogo, category: "events", instagram:"https://www.instagram.com/renusaraf/" },
+  { name: "Polka", logo: PolkaLogo, category: "interiors",instagram:"https://www.instagram.com/polkahouseinteriordesign/" },
   { name: "Pistyle", logo: PistyleLogo, category: "interiors" },
-  { name: "Shagun", logo: shagunLogo, category: "fashion" },
-  { name: "Tokoytori", logo: tokoytoriLogo, category: "fashion" },
-  { name: "Bikaneri", logo: bikaneriLogo, category: "jewellery" },
-  { name: "Nuby", logo: nubyLogo, category: "baby" },
-  { name: "Rotary", logo: rotaryLogo, category: "events" },
-  { name: "SMF", logo: smfLogo, category: "fashion" },
-  { name: "NJP", logo: NJPLogo, category: "media" },
-  { name: "Rearrange Kids", logo: rearrangeKidsLogo, category: "home" },
-  { name: "Treasured", logo: TOLogo, category: "home" },
-  { name: "Rage", logo: rageLogo, category: "events" },
-  { name: "Speciality", logo: SPLogo, category: "food" },
-  { name: "JSM", logo: jsmLogo, category: "beauty" },
-  // { name: "Dynacons", logo: dynaconsLogo, category: "media" },
-  { name: "SS", logo: ssLogo, category: "events" },
+  { name: "Shagun", logo: shagunLogo, category: "fashion",instagram:"https://www.instagram.com/shagunnagi_thelabel/" },
+  { name: "Tokoytori", logo: tokoytoriLogo, category: "fashion", instagram: "https://www.instagram.com/tokyotori_/" },
+  { name: "Bikaneri", logo: bikaneriLogo, category: "jewellery",instagram:"https://www.instagram.com/bikanerijewelsmumbaillp/" },
+  { name: "Nuby", logo: nubyLogo, category: "baby", instagram:"https://www.instagram.com/nuby.india/" },
+  { name: "Rotary", logo: rotaryLogo, category: "events",instagram:"https://www.instagram.com/rcofmumbaidivas/" },
+  { name: "SMF", logo: smfLogo, category: "fashion",instagram:"https://www.instagram.com/setmefree_fashion/" },
+  { name: "NJP", logo: NJPLogo, category: "media", instagram:"https://www.instagram.com/nirmitijhaveriproductions/" },
+  { name: "Rearrange Kids", logo: rearrangeKidsLogo, category: "home", instagram:"https://www.instagram.com/rearrangehome_kids/" },
+  { name: "Treasured", logo: TOLogo, category: "home", instagram:"https://www.instagram.com/treasuredoccasions.co/" },
+  { name: "Rage", logo: rageLogo, category: "events", instagram:"https://www.instagram.com/ragecelebrations/" },
+  { name: "Speciality", logo: SPLogo, category: "food", instagram:"https://www.instagram.com/specialityexperiences/" },
+  { name: "JSM", logo: jsmLogo, category: "beauty",instagram:"https://www.instagram.com/jinal.shah.mehta/" },
+  { name: "SS", logo: ssLogo, category: "events",instagram:"https://www.instagram.com/saffronstringofficial/" },
 ];
