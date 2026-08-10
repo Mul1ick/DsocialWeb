@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // Remove Reveal import if you aren't using it elsewhere in this file
 import SectionShell from "../components/SectionShell";
-import { sanityClient, optimizeSanityImg } from "../lib/sanity"; // Swapped urlFor for optimizeSanityImg
+import { sanityClient, optimizeSanityImg } from "../lib/sanity"; 
 
 interface SanityService {
   _id: string;
@@ -58,17 +58,18 @@ export default function Services() {
                 key={service._id} 
                 className="flex flex-col items-center text-center group cursor-default"
               >
-                {/* Icon Container */}
-                <div className="w-40 h-40 mb-6 flex justify-center items-center relative rounded-full transition-all duration-300 group-hover:bg-[#EAE6F3]/50 group-hover:-translate-y-1">
+                {/* Icon Container: Increased to w-48/h-48 and added overflow-hidden to contain the scale crop */}
+                <div className="w-48 h-48 mb-6 flex justify-center items-center relative rounded-full overflow-hidden transition-all duration-300 group-hover:bg-[#EAE6F3]/50 group-hover:-translate-y-1">
                   {service.icon && (
                     <img 
-                      // Using the new optimization helper
-                      src={optimizeSanityImg(service.icon, 200)} 
+                      // Bumped the resolution to 300 to maintain quality when scaled up
+                      src={optimizeSanityImg(service.icon, 300)} 
                       alt={`${service.title.replace('\n', ' ')} Icon`} 
-                      // Added performance tags
                       loading="lazy"
                       decoding="async"
-                      className="w-full h-full object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-105" 
+                      // scale-[1.25] acts as a visual crop for the padding. 
+                      // Hover animation dynamically pushes it to scale-[1.35]
+                      className="w-full h-full object-contain drop-shadow-sm scale-[1.25] transition-transform duration-300 group-hover:scale-[1.35]" 
                     />
                   )}
                 </div>
@@ -79,7 +80,7 @@ export default function Services() {
                 </h3>
                 
                 {/* Subtitle */}
-                <p className="text-[15px]  text-neutral-500 whitespace-pre-line leading-relaxed max-w-[220px]">
+                <p className="text-[15px] text-neutral-500 whitespace-pre-line leading-relaxed max-w-[220px]">
                   {service.subtitle}
                 </p>
               </div>

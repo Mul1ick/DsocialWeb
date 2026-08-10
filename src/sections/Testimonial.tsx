@@ -138,14 +138,15 @@ export default function Testimonials() {
                   </p>
 
                   {/* 4. The Brand Logo */}
-                  <div className="mt-auto h-30 md:h-36 flex items-center justify-start">
+                  {/* Fixed h-30 typo to valid standard tailwind heights (h-24/h-32) and added overflow-hidden */}
+                  <div className="mt-auto h-24 md:h-32 w-full max-w-[160px] md:max-w-[220px] flex items-center justify-start overflow-hidden">
                     {testimonial.brandLogo ? (
                       <img 
-                        src={testimonial.brandLogo?.asset ? urlFor(testimonial.brandLogo).url() : testimonial.brandLogo} 
+                        // Added .width(400) to request a higher-res image from Sanity so it doesn't blur when scaling
+                        src={testimonial.brandLogo?.asset ? urlFor(testimonial.brandLogo).width(400).url() : testimonial.brandLogo} 
                         alt={`${testimonial.logoAlt} Logo`}
-                        // Increased height to h-16/h-20 and added a generous max-width 
-                        // so both square emblems and wide typography logos scale nicely.
-                        className="h-24 md:h-28 w-auto max-w-[140px] md:max-w-[200px] object-contain object-left opacity-90 mix-blend-multiply" 
+                        // Added origin-left to anchor the scale, scale-[1.25] to visually crop, and h-full w-full
+                        className="w-full h-full object-contain object-left origin-left scale-[1.8] opacity-90 mix-blend-multiply" 
                       />
                     ) : (
                       <div className="text-2xl md:text-3xl font-serif tracking-widest text-[var(--purple-deep)] opacity-80">
