@@ -34,7 +34,7 @@ export default function Hero() {
             </p>
             <a 
               className="inline-flex items-center gap-2 mt-8 text-[var(--purple)] text-lg font-medium transition-opacity hover:opacity-60" 
-              href="mailto:hello@dsocial.studio"
+              href="mailto:dhvanidalal@dsocial.in"
             >
               Begin a Conversation
               <ArrowUpRight size={20} strokeWidth={1.5} />

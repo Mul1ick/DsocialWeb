@@ -46,7 +46,7 @@ export default function About() {
             {data?.eyebrow || "The Ethos"}
           </div>
           <h2 className="text-[clamp(32px,5vw,56px)] leading-[1.1] font-bold text-[var(--purple-deep)] tracking-tight mb-6 md:mb-8">
-            {data?.heading || "Who are we"}
+            {data?.heading || "Who are we?"}
           </h2>
           <p className="text-base md:text-xl leading-relaxed text-[var(--secondary)] font-light mb-4 md:mb-5">
             {data?.paragraph1 || "A boutique creative studio for brands with big ambitions! We hold a special place in our hearts for small businesses, independent founders and most of all, dreamers - because we understand that every milestone matters!"}

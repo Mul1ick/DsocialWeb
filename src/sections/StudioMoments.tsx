@@ -136,7 +136,7 @@ export default function StudioMoments() {
         <p className="uppercase tracking-[0.35em] text-[10px] md:text-[11px] text-[var(--secondary)] font-medium mb-2 md:mb-3">
           Behind the Scenes
         </p>
-        <h2 className="text-[clamp(32px,5vw,64px)] leading-[1.05] font-light text-[var(--purple-deep)] tracking-tight m-0">
+        <h2 className="text-[clamp(32px,5vw,64px)] leading-[1.05] font-bold text-[var(--purple-deep)] tracking-tight m-0">
           Studio Moments
         </h2>
       </div>

@@ -42,7 +42,7 @@ export default function Services() {
             What We Do
           </p>
           <h2 className="text-[clamp(32px,4vw,56px)] leading-[1.05] font-bold text-[var(--purple-deep)] tracking-tight m-0">
-            Our Services.
+            Our Services
           </h2>
         </div>
 

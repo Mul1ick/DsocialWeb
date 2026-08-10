@@ -22,7 +22,7 @@ export default function Footer() {
           <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="text-[var(--secondary)] hover:text-[var(--accent)] transition-colors w-fit">
             LinkedIn
           </a>
-          <a href="mailto:hello@dsocial.studio" className="text-[var(--secondary)] hover:text-[var(--accent)] transition-colors w-fit">
+          <a href="mailto:dhvanidalal@dsocial.in" className="text-[var(--secondary)] hover:text-[var(--accent)] transition-colors w-fit">
             Email Studio
           </a>
         </nav>

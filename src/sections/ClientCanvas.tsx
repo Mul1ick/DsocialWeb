@@ -144,7 +144,7 @@ export default function ClientCanvas() {
               )}
 
               {/* Color Palette */}
-              {item.hasPalette && (
+              {/* {item.hasPalette && (
                 <div className="absolute -bottom-6 md:-bottom-8 right-0 md:right-2 z-40 bg-[#f7f6f3] p-2 md:p-2.5 shadow-[2px_4px_10px_rgba(0,0,0,0.1)] -rotate-3 flex flex-col gap-1 md:gap-1.5">
                   <span className="font-['Courier',_monospace] text-[9px] md:text-[10px] text-[#3b2745]">Palette</span>
                   <div className="flex gap-1 md:gap-1.5">
@@ -154,7 +154,7 @@ export default function ClientCanvas() {
                     <div className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full bg-[#d6c7b8]" />
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
           ))}
         </div>

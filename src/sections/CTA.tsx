@@ -18,7 +18,7 @@ export default function CTA() {
             </h2>
             <a 
               className="inline-flex items-center gap-3 bg-[var(--purple)] text-white px-7 py-3.5 md:px-8 md:py-4 rounded-full text-base md:text-lg font-medium hover:bg-[var(--accent)] hover:-translate-y-1 transition-all duration-300 shadow-md hover:shadow-xl" 
-              href="mailto:hello@dsocial.studio"
+              href="mailto:dhvanidalal@dsocial.in"
             >
               Begin a Conversation
               <ArrowUpRight size={20} strokeWidth={2} aria-hidden="true" />

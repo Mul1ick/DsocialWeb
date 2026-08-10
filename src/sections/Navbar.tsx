@@ -48,7 +48,7 @@ export default function Navbar() {
           {/* Desktop CTA Button */}
           <a 
             className="hidden sm:flex items-center gap-2 bg-[var(--purple-soft)] text-[var(--purple)] px-5 py-2.5 rounded-full text-xs xl:text-sm font-medium hover:bg-[var(--purple)] hover:text-white transition-colors duration-300" 
-            href="mailto:hello@dsocial.studio"
+            href="mailto:dhvanidalal@dsocial.in"
           >
             Say Hello
             <ArrowUpRight size={16} strokeWidth={2} aria-hidden="true" />
@@ -93,7 +93,7 @@ export default function Navbar() {
               {/* Mobile Only CTA Button inside Drawer */}
               <a 
                 className="flex sm:hidden items-center justify-center gap-2 bg-[var(--purple)] text-white w-full py-3.5 rounded-full text-sm font-medium hover:bg-[var(--accent)] transition-colors mt-2" 
-                href="mailto:hello@dsocial.studio"
+                href="mailto:dhvanidalal@dsocial.in"
                 onClick={closeMobileMenu}
               >
                 Say Hello
