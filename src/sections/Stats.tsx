@@ -1,10 +1,23 @@
 /**
  * Bento grid replicating the reference screenshot layout.
- * Positions/sizes are defined as percentages of a 1600x905 reference
- * canvas, taken directly from the source image's pixel coordinates,
- * so the relative proportions and aspect ratios of every tile match
- * the original exactly. Swap the `src` values in `TILES` with your
- * real images whenever you're ready — everything else adapts.
+ *
+ * Desktop/tablet (md and up): tiles are absolutely positioned as
+ * percentages of a 1600x905 reference canvas, taken directly from the
+ * source image's pixel coordinates, so proportions and aspect ratios
+ * match the original exactly.
+ *
+ * Mobile (below md): tiles reflow into a 2-column bento (full-width
+ * "hero" tiles interleaved with half-width pairs) instead of one long
+ * stretched column, so narrow screenshots don't get blown up to the
+ * full screen width.
+ *
+ * Fit mode matters here: real photography tiles use object-cover
+ * (fine to crop), but UI/screenshot tiles use object-contain with a
+ * soft background so on-screen text and numbers never get cropped or
+ * distorted.
+ *
+ * Swap the `src` values in `TILES` with your real images whenever
+ * you're ready — everything else adapts.
  */
 
 interface Tile {
@@ -16,6 +29,9 @@ interface Tile {
   top: number;
   width: number;
   height: number;
+  // "cover" for real photography, "contain" for UI/screenshot tiles
+  // that have text or numbers that must never be cropped.
+  fit: "cover" | "contain";
 }
 
 const TILES: Tile[] = [
@@ -28,6 +44,7 @@ const TILES: Tile[] = [
     top: (48 / 905) * 100,
     width: (308 / 1600) * 100,
     height: (425 / 905) * 100,
+    fit: "cover",
   },
   {
     id: 2,
@@ -37,6 +54,7 @@ const TILES: Tile[] = [
     top: (489 / 905) * 100,
     width: (308 / 1600) * 100,
     height: (219 / 905) * 100,
+    fit: "contain",
   },
   {
     id: 3,
@@ -46,6 +64,7 @@ const TILES: Tile[] = [
     top: (717 / 905) * 100,
     width: (308 / 1600) * 100,
     height: (140 / 905) * 100,
+    fit: "contain",
   },
 
   // Column 2 (narrow)
@@ -57,6 +76,7 @@ const TILES: Tile[] = [
     top: (48 / 905) * 100,
     width: (184 / 1600) * 100,
     height: (257 / 905) * 100,
+    fit: "contain",
   },
   {
     id: 10,
@@ -66,6 +86,7 @@ const TILES: Tile[] = [
     top: (592 / 905) * 100,
     width: (184 / 1600) * 100,
     height: (265 / 905) * 100,
+    fit: "cover",
   },
 
   // Column 3 (wide)
@@ -77,6 +98,7 @@ const TILES: Tile[] = [
     top: (48 / 905) * 100,
     width: (379 / 1600) * 100,
     height: (257 / 905) * 100,
+    fit: "contain",
   },
   {
     id: 7,
@@ -86,6 +108,7 @@ const TILES: Tile[] = [
     top: (320 / 905) * 100,
     width: (364 / 1600) * 100,
     height: (257 / 905) * 100,
+    fit: "contain",
   },
   {
     id: 8,
@@ -95,6 +118,7 @@ const TILES: Tile[] = [
     top: (320 / 905) * 100,
     width: (185 / 1600) * 100,
     height: (257 / 905) * 100,
+    fit: "contain",
   },
   {
     id: 11,
@@ -104,6 +128,7 @@ const TILES: Tile[] = [
     top: (592 / 905) * 100,
     width: (379 / 1600) * 100,
     height: (265 / 905) * 100,
+    fit: "contain",
   },
 
   // Right column
@@ -115,6 +140,7 @@ const TILES: Tile[] = [
     top: (48 / 905) * 100,
     width: (262 / 1600) * 100,
     height: (257 / 905) * 100,
+    fit: "cover",
   },
   {
     id: 9,
@@ -124,6 +150,7 @@ const TILES: Tile[] = [
     top: (320 / 905) * 100,
     width: (262 / 1600) * 100,
     height: (363 / 905) * 100,
+    fit: "cover",
   },
   {
     id: 12,
@@ -133,59 +160,124 @@ const TILES: Tile[] = [
     top: (717 / 905) * 100,
     width: (262 / 1600) * 100,
     height: (140 / 905) * 100,
+    fit: "contain",
   },
 ];
 
+const TILE_BY_ID = new Map(TILES.map((t) => [t.id, t]));
+const tile = (id: number) => TILE_BY_ID.get(id)!;
+
+// Mobile layout: a deliberate 2-column bento, not a strict reflow of
+// the desktop grid. Full-width "row" entries act as breathers between
+// paired half-width tiles, which keeps narrow screenshots at a sane
+// width instead of stretching them edge-to-edge. Loosely preserves
+// the original top-to-bottom reading order.
+type MobileRow = { kind: "full"; id: number } | { kind: "pair"; ids: [number, number] };
+
+const MOBILE_ROWS: MobileRow[] = [
+  { kind: "full", id: 1 },
+  { kind: "pair", ids: [4, 6] },
+  { kind: "full", id: 5 },
+  { kind: "full", id: 7 },
+  { kind: "pair", ids: [8, 9] },
+  { kind: "full", id: 2 },
+  { kind: "pair", ids: [10, 12] },
+  { kind: "full", id: 11 },
+  { kind: "full", id: 3 },
+];
+
 // Reference canvas aspect ratio (width / height), used to keep the
-// grid's proportions locked as it scales to any container width.
+// desktop grid's proportions locked as it scales to any container width.
 const CANVAS_ASPECT = 1600 / 905;
+
+function TileImage({ t }: { t: Tile }) {
+  return (
+    <div
+      className={`w-full h-full overflow-hidden ${
+        t.fit === "contain" ? "bg-[#f3eef7]" : ""
+      }`}
+    >
+      <img
+        src={t.src}
+        alt={t.alt}
+        loading="lazy"
+        className={`w-full h-full ${
+          t.fit === "cover" ? "object-cover" : "object-contain"
+        }`}
+      />
+    </div>
+  );
+}
 
 export default function Stats() {
   return (
-    <section 
+    <section
       id="stats"
-      className="relative w-full min-h-screen flex flex-col items-center justify-center bg-[#Faf7fb] py-24 border-t border-[var(--purple-wash)] overflow-hidden"
+      className="relative w-full min-h-screen flex flex-col items-center justify-center bg-[#Faf7fb] py-16 sm:py-24 border-t border-[var(--purple-wash)] overflow-hidden"
     >
       {/* Subtle background gradient overlay */}
       <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(139,90,150,0.04))]" />
 
-      <div className="relative z-10 w-full max-w-[1600px] px-6 lg:px-12 flex flex-col items-center">
-        
+      <div className="relative z-10 w-full max-w-[1600px] px-5 sm:px-6 lg:px-12 flex flex-col items-center">
         {/* Centered Title Section with Eyebrow Text */}
-        <div className="flex flex-col items-center text-center mb-16 w-full">
+        <div className="flex flex-col items-center text-center mb-10 sm:mb-16 w-full">
           <p className="uppercase tracking-[0.35em] text-[10px] sm:text-[11px] text-[var(--secondary)] font-medium mb-3">
             By The Numbers
           </p>
-          <h2 className="font-['Poppins'] text-[clamp(36px,5vw,64px)] leading-[1.05] font-bold text-[var(--purple-deep)] tracking-tight m-0">
+          <h2 className="font-['Poppins'] text-[clamp(32px,8vw,64px)] leading-[1.05] font-bold text-[var(--purple-deep)] tracking-tight m-0">
             The Good Stuff
           </h2>
         </div>
 
-        {/* Your exact unchanged Grid Container */}
+        {/* Mobile/tablet: 2-column bento, full-width tiles interleaved with pairs */}
+        <div className="grid md:hidden grid-cols-2 gap-3 sm:gap-4 w-full">
+          {MOBILE_ROWS.map((row, i) =>
+            row.kind === "full" ? (
+              <div
+                key={i}
+                className="col-span-2 rounded-2xl shadow-[0_8px_30px_rgba(75,41,79,0.04)]"
+                style={{ aspectRatio: tile(row.id).width / tile(row.id).height }}
+              >
+                <div className="w-full h-full rounded-2xl overflow-hidden">
+                  <TileImage t={tile(row.id)} />
+                </div>
+              </div>
+            ) : (
+              row.ids.map((id) => (
+                <div
+                  key={id}
+                  className="rounded-2xl shadow-[0_8px_30px_rgba(75,41,79,0.04)]"
+                  style={{ aspectRatio: tile(id).width / tile(id).height }}
+                >
+                  <div className="w-full h-full rounded-2xl overflow-hidden">
+                    <TileImage t={tile(id)} />
+                  </div>
+                </div>
+              ))
+            )
+          )}
+        </div>
+
+        {/* Desktop/tablet: exact bento grid from the reference image */}
         <div
-          className="relative w-full"
+          className="hidden md:block relative w-full"
           style={{ aspectRatio: CANVAS_ASPECT }}
         >
-          {TILES.map((tile) => (
+          {TILES.map((t) => (
             <div
-              key={tile.id}
-              className="absolute overflow-hidden rounded-2xl bg-white shadow-[0_8px_30px_rgba(75,41,79,0.04)]"
+              key={t.id}
+              className="absolute overflow-hidden rounded-2xl shadow-[0_8px_30px_rgba(75,41,79,0.04)]"
               style={{
-                left: `${tile.left}%`,
-                top: `${tile.top}%`,
-                width: `${tile.width}%`,
-                height: `${tile.height}%`,
+                left: `${t.left}%`,
+                top: `${t.top}%`,
+                width: `${t.width}%`,
+                height: `${t.height}%`,
               }}
             >
-              <img
-                src={tile.src}
-                alt={tile.alt}
-                className="w-full h-full object-cover"
-              />
+              <TileImage t={t} />
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

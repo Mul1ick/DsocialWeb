@@ -137,16 +137,18 @@ export default function Testimonials() {
                     - {testimonial.author}
                   </p>
 
-                  {/* 4. The Brand Logo Placeholder */}
-                  <div className="mt-auto h-12 flex items-center">
+                  {/* 4. The Brand Logo */}
+                  <div className="mt-auto h-30 md:h-36 flex items-center justify-start">
                     {testimonial.brandLogo ? (
                       <img 
                         src={testimonial.brandLogo?.asset ? urlFor(testimonial.brandLogo).url() : testimonial.brandLogo} 
                         alt={`${testimonial.logoAlt} Logo`}
-                        className="h-8 md:h-10 w-auto object-contain object-left opacity-80 mix-blend-multiply" 
+                        // Increased height to h-16/h-20 and added a generous max-width 
+                        // so both square emblems and wide typography logos scale nicely.
+                        className="h-24 md:h-28 w-auto max-w-[140px] md:max-w-[200px] object-contain object-left opacity-90 mix-blend-multiply" 
                       />
                     ) : (
-                      <div className="h-8 md:h-10 text-3xl font-serif tracking-widest text-[var(--purple-deep)] opacity-80">
+                      <div className="text-2xl md:text-3xl font-serif tracking-widest text-[var(--purple-deep)] opacity-80">
                         {testimonial.logoAlt}
                       </div>
                     )}
