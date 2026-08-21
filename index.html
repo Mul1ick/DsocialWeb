@@ -26,11 +26,16 @@
     href="https://dsocial.in/"
   />
 
+  <link
+    rel="describedby"
+    type="text/markdown"
+    href="/llms.txt"
+  />
+
   <!-- Favicon -->
   <link
     rel="icon"
-    type="image/png"
-    href="/favicon.png"
+    href="/favicon.ico"
   />
 
   <!-- Open Graph -->
@@ -84,15 +89,138 @@
     content="https://dsocial.in/og-image.png"
   />
 
-  <!-- Organization Structured Data -->
+  <!-- Structured Data -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "DSocial",
-      "alternateName": "d.social",
-      "url": "https://dsocial.in/",
-      "logo": "https://dsocial.in/logo.png"
+      "@graph": [
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://dsocial.in/#organization",
+          "name": "DSocial",
+          "alternateName": "d.social",
+          "url": "https://dsocial.in/",
+          "logo": "https://dsocial.in/logo.png",
+          "image": "https://dsocial.in/og-image.png",
+          "description": "DSocial is a Mumbai-based social media and creative agency helping thoughtful brands build distinctive content, campaigns and digital identities.",
+          "email": "mailto:dhvanidalal@dsocial.in",
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Mumbai"
+            },
+            {
+              "@type": "Country",
+              "name": "India"
+            }
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Mumbai",
+            "addressCountry": "IN"
+          },
+          "founder": {
+            "@type": "Person",
+            "name": "Dhvani Dalal"
+          },
+          "knowsAbout": [
+            "Social media management",
+            "Content creation",
+            "Creative strategy",
+            "Branding",
+            "Graphic design",
+            "Photography",
+            "Website content"
+          ],
+          "serviceType": [
+            "Social Media Management",
+            "Content Creation",
+            "Creative Strategy",
+            "Branding and Graphic Design",
+            "Photography",
+            "Website Content"
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "DSocial services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Social Media Management",
+                  "description": "Day-to-day planning, publishing and care for a consistent brand presence."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Content Creation",
+                  "description": "Ideas, visuals and storytelling shaped for digital platforms."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Creative Strategy",
+                  "description": "Positioning, campaign thinking and launch direction before creative work goes live."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Branding and Graphic Design",
+                  "description": "Visual systems, campaign graphics and branded assets."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Photography",
+                  "description": "Brand, product and lifestyle imagery planned around a clear story."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Website Content",
+                  "description": "Copy and content direction for clear, considered websites."
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://dsocial.in/#website",
+          "url": "https://dsocial.in/",
+          "name": "DSocial",
+          "alternateName": "d.social",
+          "publisher": {
+            "@id": "https://dsocial.in/#organization"
+          },
+          "inLanguage": "en"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://dsocial.in/#webpage",
+          "url": "https://dsocial.in/",
+          "name": "DSocial — Social Media & Creative Agency in Mumbai",
+          "description": "DSocial is a social media and creative agency in Mumbai helping thoughtful brands build distinctive content, campaigns and digital identities.",
+          "isPartOf": {
+            "@id": "https://dsocial.in/#website"
+          },
+          "about": {
+            "@id": "https://dsocial.in/#organization"
+          },
+          "inLanguage": "en"
+        }
+      ]
     }
   </script>
 </head>
