@@ -31,6 +31,8 @@ export default function CTA() {
               <img 
                 src="/cta-phone.webp" 
                 alt="Studio phone conversation" 
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute top-3 right-3 bg-[var(--purple-soft)]/90 backdrop-blur-sm text-[var(--purple-deep)] text-xs font-medium px-3 py-1 rounded-full border border-white/60 shadow-sm font-['Courier',_monospace]">

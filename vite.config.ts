@@ -4,4 +4,16 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ["react", "react-dom"],
+          motion: ["framer-motion"],
+          sanity: ["@sanity/client", "@sanity/image-url"],
+          gsap: ["gsap", "@gsap/react"],
+        },
+      },
+    },
+  },
 });

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import SectionShell from "../components/SectionShell";
-import { sanityClient, urlFor } from "../lib/sanity";
+import { optimizeSanityImg, sanityClient } from "../lib/sanity";
 
 // Static fallback image paths so photos render immediately if Sanity is loading/empty
 const FALLBACK_FOUNDER_IMG = "/board/polaroids/fashion.webp"; // Replace with your static founder image path
@@ -28,12 +28,12 @@ export default function About() {
 
   // Resolve founder image URL safely
   const founderImgSrc = data?.founderImage?.asset
-    ? urlFor(data.founderImage).url()
+    ? optimizeSanityImg(data.founderImage, 720)
     : FALLBACK_FOUNDER_IMG;
 
   // Resolve team image URL safely
   const teamImgSrc = data?.teamImage?.asset
-    ? urlFor(data.teamImage).url()
+    ? optimizeSanityImg(data.teamImage, 720)
     : FALLBACK_TEAM_IMG;
 
   return (
@@ -70,6 +70,8 @@ export default function About() {
               <img
                 src={founderImgSrc}
                 alt={data?.founderName || "Dhvani Dalal"}
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 h-full w-full object-cover object-[50%_28%]"
               />
               <figcaption className="absolute left-2 right-2 bottom-2 sm:left-4 sm:right-4 sm:bottom-4 bg-[var(--bg)]/90 backdrop-blur-md border border-[var(--purple-wash)] rounded-lg p-2 sm:p-3">
@@ -87,6 +89,8 @@ export default function About() {
               <img
                 src={teamImgSrc}
                 alt={data?.teamTitle || "DSocial Team"}
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 h-full w-full object-cover object-center"
               />
               <figcaption className="absolute left-2 right-2 bottom-2 sm:left-4 sm:right-4 sm:bottom-4 bg-[var(--bg)]/90 backdrop-blur-md border border-[var(--purple-wash)] rounded-lg p-2 sm:p-3">

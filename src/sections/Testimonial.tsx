@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Reveal from "../components/Reveal";
 import SectionShell from "../components/SectionShell";
-import { sanityClient, urlFor } from "../lib/sanity";
+import { optimizeSanityImg, sanityClient } from "../lib/sanity";
 
 // Fallback data so the site renders cleanly if Sanity is empty
 const fallbackTestimonials = [
@@ -116,8 +116,10 @@ export default function Testimonials() {
                     {testimonial.image ? (
                       <img 
                         // Safely handle both Sanity image objects and fallback static URLs
-                        src={testimonial.image?.asset ? urlFor(testimonial.image).url() : testimonial.image} 
+                        src={testimonial.image?.asset ? optimizeSanityImg(testimonial.image, 520) : testimonial.image} 
                         alt={`${testimonial.logoAlt} Instagram Feed`} 
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover" 
                       />
                     ) : (
@@ -143,8 +145,10 @@ export default function Testimonials() {
                     {testimonial.brandLogo ? (
                       <img 
                         // Added .width(400) to request a higher-res image from Sanity so it doesn't blur when scaling
-                        src={testimonial.brandLogo?.asset ? urlFor(testimonial.brandLogo).width(400).url() : testimonial.brandLogo} 
+                        src={testimonial.brandLogo?.asset ? optimizeSanityImg(testimonial.brandLogo, 360) : testimonial.brandLogo} 
                         alt={`${testimonial.logoAlt} Logo`}
+                        loading="lazy"
+                        decoding="async"
                         // Added origin-left to anchor the scale, scale-[1.25] to visually crop, and h-full w-full
                         className="w-full h-full object-contain object-left origin-left scale-[1.8] opacity-90 mix-blend-multiply" 
                       />

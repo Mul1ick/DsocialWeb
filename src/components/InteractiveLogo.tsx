@@ -9,16 +9,24 @@ export default function InteractiveLogo() {
   const y = useSpring(dotY, { stiffness: 120, damping: 18, mass: 0.35 });
 
   useEffect(() => {
+    const logo = logoRef.current;
+    if (!logo) return;
+
+    // Cache the position
+    let rect = logo.getBoundingClientRect();
+    let centerX = rect.left + rect.width * 0.78;
+    let centerY = rect.top + rect.height * 0.34;
+
+    const onResize = () => {
+      rect = logo.getBoundingClientRect();
+      centerX = rect.left + rect.width * 0.78;
+      centerY = rect.top + rect.height * 0.34;
+    };
+    
+    window.addEventListener("resize", onResize);
+
     const onPointerMove = (event: PointerEvent) => {
-      const logo = logoRef.current;
-
-      if (!logo) {
-        return;
-      }
-
-      const rect = logo.getBoundingClientRect();
-      const centerX = rect.left + rect.width * 0.78;
-      const centerY = rect.top + rect.height * 0.34;
+      // Use cached variables instead of calling getBoundingClientRect() here!
       const distanceX = event.clientX - centerX;
       const distanceY = event.clientY - centerY;
       const distance = Math.hypot(distanceX, distanceY);
@@ -28,14 +36,16 @@ export default function InteractiveLogo() {
         dotY.set(0);
         return;
       }
-
       const strength = 1 - distance / 150;
       dotX.set((distanceX / Math.max(distance, 1)) * strength * 9);
       dotY.set((distanceY / Math.max(distance, 1)) * strength * 9);
     };
 
     window.addEventListener("pointermove", onPointerMove);
-    return () => window.removeEventListener("pointermove", onPointerMove);
+    return () => {
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("resize", onResize);
+    };
   }, [dotX, dotY]);
 
   return (

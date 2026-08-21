@@ -54,6 +54,8 @@ export default function ClientCanvas() {
         <img 
           src="/board/felt-beige.webp" 
           alt="Felt Board Background" 
+          loading="lazy"
+          decoding="async"
           className="hidden md:block absolute inset-0 w-full h-full object-fill z-0 pointer-events-none rounded-[2rem]"
         />
 
@@ -81,7 +83,7 @@ export default function ClientCanvas() {
               {/* Background Image / Polaroid Layer */}
               <div className={`absolute ${item.imgOffset || '-right-20 -top-2'} w-[160px] md:w-[180px] h-[180px] md:h-[200px] bg-white p-2 pb-6 shadow-[2px_8px_16px_rgba(0,0,0,0.15)] ${item.imgRot || 'rotate-6'} z-0 transition-transform group-hover:scale-105 group-hover:rotate-0 duration-300`}>
                 <div className="w-full h-full bg-gray-200 overflow-hidden">
-                  <img src={item.img} alt={item.title} className="w-full h-full object-cover" />
+                  <img src={item.img} alt={item.title} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 </div>
                 {item.hasTape && (
                   <div className="absolute -top-2 -left-3 w-12 md:w-16 h-4 md:h-5 bg-[#bdaec6] opacity-80 -rotate-12 shadow-sm mix-blend-multiply" />

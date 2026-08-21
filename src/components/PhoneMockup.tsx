@@ -36,24 +36,6 @@ export default function PhoneMockup() {
     }
   }, [isInView]);
 
-  // Automatically unmute audio on the user's first click anywhere on the page
-  useEffect(() => {
-    const handleFirstInteraction = () => {
-      if (videoRef.current && isInView) {
-        videoRef.current.muted = false;
-        setIsMuted(false);
-      }
-    };
-
-    window.addEventListener("click", handleFirstInteraction, { once: true });
-    window.addEventListener("touchstart", handleFirstInteraction, { once: true });
-
-    return () => {
-      window.removeEventListener("click", handleFirstInteraction);
-      window.removeEventListener("touchstart", handleFirstInteraction);
-    };
-  }, [isInView]);
-
   function handleMove(e: React.MouseEvent<HTMLDivElement>) {
     const rect = phoneRef.current?.getBoundingClientRect();
     if (!rect) return;
@@ -126,14 +108,17 @@ export default function PhoneMockup() {
           <div className="absolute inset-0 rounded-[42px] overflow-hidden bg-neutral-900">
             <video
               ref={videoRef}
-              src="/board/IMG_3555.MP4"
               autoPlay
               muted
               loop
               playsInline
-              preload="auto"
+              preload="metadata"
+              poster="/board/IMG_3555-poster.jpg"
               className="absolute inset-0 h-full w-full object-cover"
-            />
+            >
+              <source src="/board/IMG_3555.webm" type="video/webm" />
+              <source src="/board/IMG_3555.MP4" type="video/mp4" />
+            </video>
 
             {/* Sound Toggle Button */}
             <button

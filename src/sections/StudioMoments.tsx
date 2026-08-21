@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { sanityClient, urlFor } from "../lib/sanity";
+import { optimizeSanityImg, sanityClient } from "../lib/sanity";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -145,7 +145,7 @@ export default function StudioMoments() {
       <div className="grid-wrapper w-full max-w-[1400px] px-4 sm:px-6 lg:px-12 z-10 mx-auto">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 lg:gap-5">
           {moments.map((item, index) => {
-            const imgSrc = item.image?.asset ? urlFor(item.image).url() : item.img;
+            const imgSrc = item.image?.asset ? optimizeSanityImg(item.image, 560) : item.img;
 
             return (
               <div
@@ -164,6 +164,8 @@ export default function StudioMoments() {
                   <img
                     src={imgSrc}
                     alt={item.title || "Studio moment"}
+                    loading="lazy"
+                    decoding="async"
                     className="absolute inset-0 h-full w-full object-cover mix-blend-multiply opacity-80"
                   />
                 </div>

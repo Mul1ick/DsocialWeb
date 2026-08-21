@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState,useEffect } from "react";
 
 type HeroWordProps = {
   children: string;
@@ -12,26 +12,33 @@ export default function HeroWord({ children, className = "", delay }: HeroWordPr
   const refs = useRef<Array<HTMLSpanElement | null>>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
+  const rectsRef = useRef<{x: number, y: number}[]>([]);
+
+  useEffect(() => {
+    const updateRects = () => {
+      rectsRef.current = refs.current.map(node => {
+        if (!node) return { x: 0, y: 0 };
+        const rect = node.getBoundingClientRect();
+        return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+      });
+    };
+    updateRects();
+    window.addEventListener('resize', updateRects);
+    return () => window.removeEventListener('resize', updateRects);
+  }, []);
+
   const handlePointerMove = (event: React.PointerEvent<HTMLSpanElement>) => {
     let closestIndex = 0;
     let closestDistance = Number.POSITIVE_INFINITY;
 
-    refs.current.forEach((letter, index) => {
-      if (!letter) {
-        return;
-      }
-
-      const rect = letter.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const distance = Math.hypot(event.clientX - centerX, event.clientY - centerY);
-
+    // Use the cached rectsRef instead of getBoundingClientRect()
+    rectsRef.current.forEach((center, index) => {
+      const distance = Math.hypot(event.clientX - center.x, event.clientY - center.y);
       if (distance < closestDistance) {
         closestIndex = index;
         closestDistance = distance;
       }
     });
-
     setActiveIndex(closestDistance < 62 ? closestIndex : null);
   };
 

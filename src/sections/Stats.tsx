@@ -205,6 +205,7 @@ function TileImage({ t }: { t: Tile }) {
         src={t.src}
         alt={t.alt}
         loading="lazy"
+        decoding="async"
         className={`w-full h-full ${
           t.fit === "cover" ? "object-cover" : "object-contain"
         }`}
@@ -245,6 +246,7 @@ export default function Stats() {
                   src={t.src}
                   alt={t.alt}
                   loading="lazy"
+                  decoding="async"
                   // w-full and h-auto allows the image to precisely fit its own dimensions
                   className="w-full h-auto rounded-xl sm:rounded-2xl shadow-[0_8px_30px_rgba(75,41,79,0.06)] bg-white"
                 />
@@ -261,6 +263,7 @@ export default function Stats() {
                       src={t.src}
                       alt={t.alt}
                       loading="lazy"
+                      decoding="async"
                       className="w-full h-auto rounded-xl sm:rounded-2xl shadow-[0_8px_30px_rgba(75,41,79,0.06)] bg-white"
                     />
                   );
